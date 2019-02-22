@@ -1,0 +1,6 @@
+## Bloggy.
+
+### About.
+
+## License.
+MIT.
