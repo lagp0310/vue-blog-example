@@ -19,17 +19,15 @@ export default {
                 articleLink: '/articles/5bdst2jhdh2',
                 show: false,
                 title: 'Lorem ipsum dolor.',
-                captionText: 'Suspendisse potenti. Fusce mattis suscipit justo, eu pretium nisl convallis ac. Nam.',
                 articleImageSrc: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
                 likes: 45,
                 author: 'Me',
-                profileImageSrc: 'https://randomuser.me/api/portraits/men/85.jpg'
+                profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
             },
             {
                 articleLink: '/articles/6bdst2jhdh2',
                 show: false,
                 title: 'Cras eu leo.',
-                captionText: 'Sed sodales sollicitudin quam ut feugiat. Proin id magna eu sapien ultricies.',
                 articleImageSrc: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
                 likes: 45,
                 author: 'Me',
@@ -39,7 +37,6 @@ export default {
                 articleLink: '/articles/7bdst2jhdh2',
                 show: false,
                 title: 'Vestibulum in vulputate quam. Integer eget.',
-                captionText: 'Morbi dictum nunc mi, sit amet sollicitudin est ultricies nec. Orci varius.',
                 articleImageSrc: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
                 likes: 45,
                 author: 'Me',

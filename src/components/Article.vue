@@ -15,39 +15,32 @@
                                 <div class="text-xs-left grey--text">
                                     <v-avatar
                                     :tile="false"
-                                    :size="`40px`"
+                                    :size="`30px`"
                                     color="grey lighten-4"
                                     >
                                         <v-img :src="article.profileImageSrc" contain alt="avatar"></v-img>
                                     </v-avatar>
-                                    <!-- <v-icon>account_circle</v-icon> -->
                                     {{ article.author }}
                                 </div>
                             </div>
                         </v-card-title>
                         <v-card-actions>
-                            <v-btn color="v-btn--flat green--text text--darken-2"
-                            @click="showShare = !showShare">
-                                <v-icon>share</v-icon>&nbsp;
-                                Share
+                            <v-btn flat icon color="pink darken-1"
+                            @click="likeArticle = !likeArticle">
+                                <v-icon v-if="!likeArticle">mdi-heart-outline</v-icon>
+                                <v-icon v-if="likeArticle">mdi-heart</v-icon>
                             </v-btn>
-                            <router-link 
-                            tag="v-btn" 
-                            class="v-btn--flat primary--text text--darken-2" 
+                            <v-btn flat icon color="green darken-1"
+                            @click="showShare = !showShare">
+                                <v-icon>mdi-share-variant</v-icon>
+                            </v-btn>
+                            <v-btn flat icon color="grey darken-1"
                             :to="article.articleLink"
                             @click.native="scrollToTop()">
-                                Read More...
-                            </router-link>
-                            <v-spacer></v-spacer>
-                            <v-btn icon @click="article.show = !article.show">
-                                <v-icon>{{ article.show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
+                                <v-icon>mdi-dots-horizontal</v-icon>
                             </v-btn>
+                            <v-spacer></v-spacer>
                         </v-card-actions>
-                        <v-slide-y-transition>
-                            <v-card-text v-show="article.show">
-                                {{ article.captionText }}
-                            </v-card-text>
-                        </v-slide-y-transition>
                     </v-card>
                 </v-hover>
             </v-flex>
@@ -65,6 +58,7 @@ export default {
     },
     data: () => ({
         showShare: false,
+        likeArticle: false,
     }),
     methods: {
         scrollToTop() {

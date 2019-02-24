@@ -29,7 +29,9 @@
                         <v-layout row justify-center>
                             <v-btn round flat color="pink darken-1"
                             @click="incrementLikesCounter">
-                                <v-icon>favorite</v-icon>&nbsp;{{ comment.likes }}&nbsp;
+                                <v-icon v-if="!likeComment">mdi-heart-outline</v-icon>&nbsp;
+                                <v-icon v-if="likeComment">mdi-heart</v-icon>&nbsp;
+                                {{ comment.likes }}&nbsp;
                             </v-btn>
                             <v-btn round flat color="blue darken-1"
                             @click="addReplyFor(comment.commentId)">
@@ -55,14 +57,20 @@ export default {
     // For Recursive Components.
     name: 'Comment',
     data: () => ({
-        //
+        likeComment: false,
     }),
     methods: {
         goToHref(ref) {
             location.href = ref;
         },
         incrementLikesCounter() {
-            this.$props.comment.likes++;
+            if(this.likeComment) {
+                this.$props.comment.likes--;
+            } else {
+                this.$props.comment.likes++;
+            }
+
+            this.likeComment = !this.likeComment;
             this.$forceUpdate();
         },
         // TODO: Complete this.

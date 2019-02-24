@@ -53,7 +53,7 @@ const routes = [
                     name: 'Test',
                     lastname: 'Tested',
                     email: 'test@example.com',
-                    profileImageSrc: 'https://randomuser.me/api/portraits/men/85.jpg',
+                    profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg',
                     biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
                 },
                 title: 'Ut mattis dignissim convallis. Maecenas non magna imperdiet arcu accumsan pulvinar non.', 
@@ -100,7 +100,7 @@ const routes = [
                         user: {
                             name: 'Test',
                             lastname: 'Tested',
-                            profileImageSrc: 'https://randomuser.me/api/portraits/men/85.jpg'
+                            profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         commentId: '5bec34acd4',
                         postId: 567,
@@ -114,7 +114,7 @@ const routes = [
                         user: {
                             name: 'Test',
                             lastname: 'Tested',
-                            profileImageSrc: 'https://randomuser.me/api/portraits/men/85.jpg'
+                            profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         commentId: '5bec34acd2',
                         postId: 567,
@@ -126,7 +126,7 @@ const routes = [
                                 user: {
                                     name: 'User1',
                                     lastname: 'Replied',
-                                    profileImageSrc: 'https://randomuser.me/api/portraits/men/85.jpg'
+                                    profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                 },
                                 replyToId: '5bec34acd2',
                                 commentId: '5bec34ace2',
@@ -142,7 +142,7 @@ const routes = [
                                 user: {
                                     name: 'User2',
                                     lastname: 'Replied',
-                                    profileImageSrc: 'https://randomuser.me/api/portraits/men/85.jpg'
+                                    profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                 },
                                 replyToId: '5bec34acd2',
                                 commentId: '5bec34ace4',
@@ -155,7 +155,7 @@ const routes = [
                                         user: {
                                             name: 'User1',
                                             lastname: 'Replied',
-                                            profileImageSrc: 'https://randomuser.me/api/portraits/men/85.jpg'
+                                            profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                         },
                                         replyToId: '5bec34ace4',
                                         commentId: '5bec34ac77',
@@ -175,7 +175,7 @@ const routes = [
                         user: {
                             name: 'Test',
                             lastname: 'Tested',
-                            profileImageSrc: 'https://randomuser.me/api/portraits/men/85.jpg'
+                            profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         commentId: '5bec34acd1',
                         postId: 567,
@@ -189,7 +189,7 @@ const routes = [
                         user: {
                             name: 'Test',
                             lastname: 'Tested',
-                            profileImageSrc: 'https://randomuser.me/api/portraits/men/85.jpg'
+                            profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         commentId: '5bec34acd3',
                         postId: 567,
@@ -201,7 +201,6 @@ const routes = [
                     }
                 ],
                 postImageSrc: 'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
-                captionText: 'Lorem ipsum dolor.',
                 tags: '#dev #test #info',
                 likes: 45
             }
@@ -215,7 +214,7 @@ const routes = [
                 lastname: 'Tested',
                 email: 'test@example.com',
                 gender: 'male',
-                profileImageSrc: 'https://randomuser.me/api/portraits/men/85.jpg',
+                profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg',
             }
         }
     },

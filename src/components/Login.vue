@@ -8,7 +8,7 @@
                         <v-container text-xs-center>
                             <v-layout>
                                 <v-flex xs12>
-                                    <h3 class="font-weight-light headline mb-0">Login</h3>
+                                    <h2 class="font-weight-light headline mb-0">Login</h2>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -111,6 +111,8 @@ export default {
     methods: {
         validate() {
             if(this.$refs.form.validate()) {
+                // this.$root.isLoggedIn = true;
+                location.href = '/';
                 return true;
             }
         },

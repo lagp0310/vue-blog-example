@@ -4,7 +4,7 @@
             <v-stepper-header>
                 <v-stepper-step step="1">Basic Information</v-stepper-step>
                 <v-divider></v-divider>
-                <v-stepper-step step="2">Important Information</v-stepper-step>
+                <v-stepper-step step="2">Terms Of Service</v-stepper-step>
                 <v-divider></v-divider>
                 <v-stepper-step step="3">Preferences</v-stepper-step>
             </v-stepper-header>

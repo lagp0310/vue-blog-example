@@ -45,8 +45,10 @@
                         <v-divider></v-divider>
                         <v-card-text class="font-weight-regular">
                             <v-layout row justify-center>
-                                <v-btn flat round color="pink darken-1">
-                                    <v-icon>favorite</v-icon>&nbsp;
+                                <v-btn flat round color="pink darken-1"
+                                @click="incrementLikesCounter">
+                                    <v-icon v-if="!likePost">mdi-heart-outline</v-icon>&nbsp;
+                                    <v-icon v-if="likePost">mdi-heart</v-icon>&nbsp;
                                     {{ post.likes }}
                                 </v-btn>
                                 <v-btn flat round color="blue darken-1">
@@ -55,7 +57,7 @@
                                 </v-btn>
                                 <v-btn flat round color="green darken-1"
                                 @click="showSharePost = !showSharePost">
-                                    <v-icon>share</v-icon>
+                                    <v-icon>mdi-share-variant</v-icon>
                                 </v-btn>
                             </v-layout>
                         </v-card-text>
@@ -83,7 +85,24 @@ export default {
     },
     data: () => ({
         showSharePost: false,
+        likePost: false,
     }),
+    methods: {
+        incrementLikesCounter() {
+            if(this.likePost) {
+                this.$props.post.likes--;
+            } else {
+                this.$props.post.likes++;
+            }
+
+            this.likePost = !this.likePost;
+            this.$forceUpdate();
+        },
+        // TODO: Complete this.
+        addComment(postId) {
+            this.$forceUpdate();
+        }
+    },
     components: {
         Comment,
         Share,
