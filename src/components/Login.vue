@@ -98,7 +98,7 @@ export default {
         valid: true,
         email: '',
         emailRules: [
-            v => !!v || 'E-mail is required',
+            v => !!v || 'E-mail is required.',
             v => /.+@.+/.test(v) || 'E-mail is invalid.'
         ],
         password: '',
@@ -111,7 +111,6 @@ export default {
     methods: {
         validate() {
             if(this.$refs.form.validate()) {
-                // this.$root.isLoggedIn = true;
                 location.href = '/';
                 return true;
             }

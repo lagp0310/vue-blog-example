@@ -12,11 +12,10 @@
                 <router-link tag="v-btn" to="/articles" class="primary v-btn--flat">Articles</router-link>
                 <router-link tag="v-btn" to="/about" class="primary v-btn--flat">About Us</router-link>
                 <router-link tag="v-btn" to="/contact" class="primary v-btn--flat">Contact</router-link>
-                <router-link tag="v-btn" to="/help" class="primary v-btn--flat">Help</router-link>
-                <router-link v-if="!isLoggedIn" tag="v-btn" to="/signup" class="primary v-btn--flat">Sign Up</router-link>
-                <router-link v-if="!isLoggedIn" tag="v-btn" to="/login" class="primary v-btn--flat">Login</router-link>
+                <router-link tag="v-btn" to="/signup" class="primary v-btn--flat">Sign Up</router-link>
+                <router-link tag="v-btn" to="/login" class="primary v-btn--flat">Login</router-link>
                 <v-menu
-                v-if="isLoggedIn"
+                transition="slide-y-transition"
                 v-model="menu"
                 :close-on-content-click="false"
                 :nudge-width="200"
@@ -70,7 +69,7 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn flat @click="menu = false">Close</v-btn>
-                            <v-btn color="red" flat @click="menu = false, isLoggedIn = false, goToHref('/')">
+                            <v-btn color="red" flat @click="menu = false, goToHref('/')">
                                 Log Out
                             </v-btn>
                         </v-card-actions>
@@ -89,7 +88,6 @@ import Sidenav from './Sidenav.vue';
 export default {
     data: () => ({
         showSidenav: false,
-        isLoggedIn: false,
         darkMode: false,
         notifications: false,
         menu: false

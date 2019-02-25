@@ -7,22 +7,28 @@
         </v-layout>
         <v-layout row wrap justify-center>
             <v-flex xs12>
-                <v-timeline align-top>
+                <v-timeline align-top dense clipped>
                     <v-timeline-item
                     color="purple lighten-2"
                     fill-dot
                     right
                     small
                     >
-                        <span slot="opposite">
-                            <v-avatar
-                            :tile="false"
-                            size="200px"
-                            color="grey lighten-4"
-                            >
-                                <v-img src="https://picsum.photos/200?image=0" contain alt="avatar"></v-img>
-                            </v-avatar>
-                        </span>
+                        <v-container grid-list-md text-xs-center>
+                            <v-layout row wrap justify-center>
+                                <v-flex xs10>
+                                    <span>
+                                        <v-avatar
+                                        :tile="false"
+                                        size="300px"
+                                        color="transparent"
+                                        >
+                                            <v-img src="/public/images/26706.jpg" contain alt="avatar"></v-img>
+                                        </v-avatar>
+                                    </span>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
                         <div class="py-3">
                             <h2 class="headline font-weight-light mb-3">Lorem ipsum</h2>
                             <div>
@@ -38,15 +44,21 @@
                     left
                     small
                     >
-                        <span slot="opposite">
-                            <v-avatar
-                            :tile="false"
-                            size="200px"
-                            color="grey lighten-4"
-                            >
-                                <v-img src="https://picsum.photos/200?image=1" contain alt="avatar"></v-img>
-                            </v-avatar>
-                        </span>
+                        <v-container grid-list-md text-xs-center>
+                            <v-layout row wrap justify-center>
+                                <v-flex xs10>
+                                    <span>
+                                        <v-avatar
+                                        :tile="false"
+                                        size="300px"
+                                        color="white"
+                                        >
+                                            <v-img src="/public/images/59869.jpg" contain alt="avatar"></v-img>
+                                        </v-avatar>
+                                    </span>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
                         <div class="py-3">
                             <h2 class="headline font-weight-light mb-3">Lorem ipsum</h2>
                             <div>
@@ -62,15 +74,21 @@
                     right
                     small
                     >
-                        <span slot="opposite">
-                            <v-avatar
-                            :tile="false"
-                            size="200px"
-                            color="grey lighten-4"
-                            >
-                                <v-img src="https://picsum.photos/200?image=2" contain alt="avatar"></v-img>
-                            </v-avatar>
-                        </span>
+                        <v-container grid-list-md text-xs-center>
+                            <v-layout row wrap justify-center>
+                                <v-flex xs10>
+                                    <span>
+                                        <v-avatar
+                                        :tile="false"
+                                        size="300px"
+                                        color="transparent"
+                                        >
+                                            <v-img src="/public/images/517535-PJ5ZUG-806.jpg" contain alt="avatar"></v-img>
+                                        </v-avatar>
+                                    </span>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
                         <div class="py-3">
                             <h2 class="headline font-weight-light mb-3">Lorem ipsum</h2>
                             <div>
@@ -86,15 +104,21 @@
                     left
                     small
                     >
-                        <span slot="opposite">
-                            <v-avatar
-                            :tile="false"
-                            size="200px"
-                            color="grey lighten-4"
-                            >
-                                <v-img src="https://picsum.photos/200?image=3" contain alt="avatar"></v-img>
-                            </v-avatar>
-                        </span>
+                        <v-container grid-list-md text-xs-center>
+                            <v-layout row wrap justify-center>
+                                <v-flex xs10>
+                                    <span>
+                                        <v-avatar
+                                        :tile="false"
+                                        size="300px"
+                                        color="transparent"
+                                        >
+                                            <v-img src="/public/images/518055-PIW5O8-324.jpg" contain alt="avatar"></v-img>
+                                        </v-avatar>
+                                    </span>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
                         <div class="py-3">
                             <h2 class="headline font-weight-light mb-3">Lorem ipsum</h2>
                             <div>
@@ -110,15 +134,21 @@
                     right
                     small
                     >
-                        <span slot="opposite">
-                            <v-avatar
-                            :tile="false"
-                            size="200px"
-                            color="grey lighten-4"
-                            >
-                                <v-img src="https://picsum.photos/200?image=4" contain alt="avatar"></v-img>
-                            </v-avatar>
-                        </span>
+                        <v-container grid-list-md text-xs-center>
+                            <v-layout row wrap justify-center>
+                                <v-flex xs10>
+                                    <span>
+                                        <v-avatar
+                                        :tile="false"
+                                        size="300px"
+                                        color="transparent"
+                                        >
+                                            <v-img src="https://picsum.photos/200?image=4" contain alt="avatar"></v-img>
+                                        </v-avatar>
+                                    </span>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
                         <div class="py-3">
                             <h2 class="headline font-weight-light mb-3">Lorem ipsum</h2>
                             <div>
@@ -131,6 +161,10 @@
                 </v-timeline>
             </v-flex>
         </v-layout>
+        <a href="https://www.freepik.com/free-photos-vectors/people">People vector created by rawpixel.com - www.freepik.com</a><br>
+        <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by rawpixel.com - www.freepik.com</a><br>
+        <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a><br>
+        <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a>
     </v-container>
 </template>
 
@@ -143,6 +177,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    
+
 </style>
 

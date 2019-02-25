@@ -47,7 +47,6 @@ export default {
         items: [
             { title: 'Articles', icon: 'dashboard' },
             { title: 'About', icon: 'question_answer' },
-            { title: 'Help', icon: 'dashboard' },
             { title: 'Signup', icon: 'dashboard' },
             { title: 'Login', icon: 'dashboard' },
         ]

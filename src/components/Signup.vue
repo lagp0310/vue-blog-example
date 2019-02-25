@@ -12,8 +12,8 @@
                 <v-stepper-content step="1">
                     <v-container>
                         <v-layout>
-                            <v-flex sm4 md3></v-flex>
-                            <v-flex xs12 sm4 md6>
+                            <v-flex sm3 md3></v-flex>
+                            <v-flex xs12 sm6 md6>
                                 <v-form
                                 ref="form"
                                 v-model="isFormValid"
@@ -65,23 +65,30 @@
                                     class="input-group--focused"
                                     @click:append="showPasswordConfirmation = !showPasswordConfirmation"
                                     ></v-text-field>
-
-                                    <v-radio-group row :rules="[genderSelectorRules.required]">
-                                        <v-radio label="Male" value="male" color="info"></v-radio>
-                                        <v-radio label="Female" value="female" color="pink"></v-radio>
-                                    </v-radio-group>
+                                    <v-container>
+                                        <v-layout row wrap>
+                                            <v-flex xs8 sm10>
+                                                <v-radio-group row :rules="[genderSelectorRules.required]">
+                                                    <v-radio label="Male" value="male" color="info"></v-radio>
+                                                    <v-radio label="Female" value="female" color="pink"></v-radio>
+                                                </v-radio-group>
+                                            </v-flex>
+                                            <v-flex xs4 sm2>
+                                                <v-btn
+                                                color="primary"
+                                                :disabled="!isFormValid"
+                                                @click="validate"
+                                                >
+                                                    Continue
+                                                </v-btn>
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-container>
                                 </v-form>
                             </v-flex>
-                            <v-flex sm4 md3></v-flex>
+                            <v-flex sm3 md3></v-flex>
                         </v-layout>
                     </v-container>
-                    <v-btn
-                    color="primary"
-                    :disabled="!isFormValid"
-                    @click="validate"
-                    >
-                        Continue
-                    </v-btn>
                 </v-stepper-content>
                 <v-stepper-content step="2">
                     <v-container>
@@ -104,15 +111,17 @@
                                 </v-checkbox>
                             </v-form>
                         </v-layout>
+                        <v-layout row wrap justify-end>
+                            <v-btn flat @click="stepNumber = 1, isFormValid = true">Go back</v-btn>
+                            <v-btn
+                            color="primary"
+                            :disabled="!isFormValid"
+                            @click="validate"
+                            >
+                                Continue
+                            </v-btn>
+                        </v-layout>
                     </v-container>
-                    <v-btn
-                    color="primary"
-                    :disabled="!isFormValid"
-                    @click="validate"
-                    >
-                        Continue
-                    </v-btn>
-                    <v-btn flat @click="stepNumber = 1, isFormValid = true">Go back</v-btn>
                 </v-stepper-content>
                 <v-stepper-content step="3">
                     <v-container>
@@ -144,11 +153,13 @@
                                 </v-checkbox>
                             </v-form>
                         </v-layout>
+                        <v-layout row wrap justify-end>
+                            <v-btn flat @click="stepNumber = 2, isFormValid = true">Go back</v-btn>
+                            <v-btn color="primary" @click="goToHref('/')">
+                                Sign Up
+                            </v-btn>
+                        </v-layout>
                     </v-container>
-                    <v-btn color="primary">
-                        Sign Up
-                    </v-btn>
-                    <v-btn flat @click="stepNumber = 2, isFormValid = true">Go back</v-btn>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>
@@ -166,18 +177,20 @@ export default {
         isFormValid: false,
         name: '',
         nameRules: [
-            v => !!v || 'Name is required',
-            v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+            v => !!v || 'Name is required.',
+            v => (v && v.length <= 10) || 'Name must be less than 10 characters.',
+            v => /[a-zA-Z]+/.test(v) || 'Name contain invalid characters.'
         ],
         lastname: '',
         lastnameRules: [
-            v => !!v || 'Lastname is required',
-            v => (v && v.length <= 10) || 'Lastname must be less than 10 characters'
+            v => !!v || 'Lastname is required.',
+            v => (v && v.length <= 10) || 'Lastname must be less than 10 characters.',
+            v => /[a-zA-Z]+/.test(v) || 'Lastname contain invalid characters.'
         ],
         email: '',
         emailRules: [
-            v => !!v || 'E-mail is required',
-            v => /.+@.+/.test(v) || 'E-mail must be valid'
+            v => !!v || 'E-mail is required.',
+            v => /.+@.+/.test(v) || 'E-mail must be valid.'
         ],
         password: '',
         passwordConfirmation: '',
@@ -185,7 +198,7 @@ export default {
         showPasswordConfirmation: false,
         passwordRules: {
             required: value => !!value || 'Required.',
-            min: v => v.length >= 8 || 'Min 8 characters'
+            min: v => v.length >= 8 || 'Min 8 characters.'
         },
         genderSelectorRules: {
             required: value => (value === 'female' || value === 'male') || 'Required.'
@@ -197,11 +210,14 @@ export default {
         emailReplyComment: false,
     }),
     methods: {
+        goToHref(ref) {
+            location.href = '/';
+        },
         validate() {
             if(this.$refs.form.validate()) {
                 this.$data.stepNumber = (++this.$data.stepNumber);
                 if(this.stepNumber === 2) this.isFormValid = false;
-                return;
+                return true;
             }
         },
         checkPasswordChange() {

@@ -9,7 +9,6 @@ import Login from './components/Login.vue';
 import Post from './components/Post.vue';
 import PrivacyPolicy from './components/PrivacyPolicy.vue';
 import UserProfile from './components/UserProfile.vue';
-import Help from './components/Help.vue';
 import About from './components/About.vue';
 import TermsOfServiceModal from './components/TermsOfServiceModal.vue';
 import Articles from './components/Articles.vue';
@@ -38,7 +37,6 @@ const routes = [
     { path: '/', redirect: '/articles' },
     { path: '/articles', component: Articles },
     { path: '/about', component: About },
-    { path: '/help', component: Help },
     { path: '/contact', component: Contact },
     { path: '/privacy', component: PrivacyPolicy },
     { path: '/terms', component: TermsOfServiceModal },

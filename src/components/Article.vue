@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm8 offset-sm2 lg6 offset-lg3>
                 <v-hover>
                     <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
                         <v-img
