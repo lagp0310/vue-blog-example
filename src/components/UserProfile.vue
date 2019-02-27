@@ -23,7 +23,7 @@
                         class="white--text"
                         @click="loader = 'loading'"
                         >
-                            <v-icon dark>cloud_upload</v-icon>&nbsp;
+                            <v-icon dark>mdi-cloud-upload</v-icon>&nbsp;
                             Upload Profile Picture
                         </v-btn>
                     </v-layout>
@@ -59,7 +59,7 @@
                         <v-divider></v-divider>
                         <v-layout justify-center>
                             <v-btn flat @click="showChangePasswordDialog = !showChangePasswordDialog">
-                                <v-icon>lock</v-icon>&nbsp;
+                                <v-icon>mdi-lock</v-icon>&nbsp;
                                 Change Password
                             </v-btn>
                         </v-layout>

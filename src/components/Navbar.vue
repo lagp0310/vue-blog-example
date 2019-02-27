@@ -1,4 +1,5 @@
 <template>
+    <!-- TODO: Property to pass user's data. Same for Sidenav. -->
     <div>
         <v-toolbar dark color="primary" class="mb-4">
             <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="showSidenav = !showSidenav"></v-toolbar-side-icon>
@@ -12,9 +13,10 @@
                 <router-link tag="v-btn" to="/articles" class="primary v-btn--flat">Articles</router-link>
                 <router-link tag="v-btn" to="/about" class="primary v-btn--flat">About Us</router-link>
                 <router-link tag="v-btn" to="/contact" class="primary v-btn--flat">Contact</router-link>
-                <router-link tag="v-btn" to="/signup" class="primary v-btn--flat">Sign Up</router-link>
-                <router-link tag="v-btn" to="/login" class="primary v-btn--flat">Login</router-link>
+                <router-link v-if="!isLoggedIn" tag="v-btn" to="/signup" class="primary v-btn--flat">Signup</router-link>
+                <router-link v-if="!isLoggedIn" tag="v-btn" to="/login" class="primary v-btn--flat">Login</router-link>
                 <v-menu
+                v-if="isLoggedIn"
                 transition="slide-y-transition"
                 v-model="menu"
                 :close-on-content-click="false"
@@ -34,8 +36,8 @@
                         <v-list>
                             <v-list-tile avatar>
                                 <v-list-tile-avatar>
-                                    <img src="https://randomuser.me/api/portraits/men/86.jpg" 
-                                    alt="User Profile Picture">
+                                    <v-img src="https://randomuser.me/api/portraits/men/86.jpg" 
+                                    alt="User Profile Picture"></v-img>
                                 </v-list-tile-avatar>
                                 <v-list-tile-content>
                                     <v-list-tile-title>Some User</v-list-tile-title>
@@ -44,7 +46,7 @@
                                     <!-- TODO: Change link to a property. -->
                                     <v-btn
                                     icon
-                                    @click="goToHref('/users/1')"
+                                    @click="goToRoute('/users/1')"
                                     >
                                         <v-icon>mdi-settings</v-icon>
                                     </v-btn>
@@ -69,7 +71,8 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn flat @click="menu = false">Close</v-btn>
-                            <v-btn color="red" flat @click="menu = false, goToHref('/')">
+                            <v-btn color="red" flat 
+                            @click="menu = false, changeLoggedInState(), goToRoute('/')">
                                 Log Out
                             </v-btn>
                         </v-card-actions>
@@ -78,7 +81,7 @@
             </v-toolbar-items>
         </v-toolbar>
         <!-- Sidenav just shows on small screens. -->
-        <Sidenav v-if="showSidenav" :show="showSidenav"></Sidenav>
+        <Sidenav v-if="showSidenav" :show.sync="showSidenav" :user="user"></Sidenav>
     </div>
 </template>
 
@@ -86,6 +89,9 @@
 import Sidenav from './Sidenav.vue';
 
 export default {
+    props: {
+        user: Object
+    },
     data: () => ({
         showSidenav: false,
         darkMode: false,
@@ -93,12 +99,20 @@ export default {
         menu: false
     }),
     methods: {
-        goToHref(ref) {
-            location.href = ref;
+        goToRoute(ref) {
+            this.$router.replace(ref);
+        },
+        changeLoggedInState() {
+            this.$store.commit('changeLoggedInStatus');
         }
     },
     components: {
         Sidenav,
+    },
+    computed: {
+        isLoggedIn() {
+            return this.$store.state.isLoggedIn;
+        }
     }
 };
 </script>

@@ -20,7 +20,7 @@
                                     <span>
                                         <v-avatar
                                         :tile="false"
-                                        size="300px"
+                                        size="250px"
                                         color="transparent"
                                         >
                                             <v-img src="/public/images/26706.jpg" contain alt="avatar"></v-img>
@@ -50,7 +50,7 @@
                                     <span>
                                         <v-avatar
                                         :tile="false"
-                                        size="300px"
+                                        size="250px"
                                         color="white"
                                         >
                                             <v-img src="/public/images/59869.jpg" contain alt="avatar"></v-img>
@@ -80,7 +80,7 @@
                                     <span>
                                         <v-avatar
                                         :tile="false"
-                                        size="300px"
+                                        size="250px"
                                         color="transparent"
                                         >
                                             <v-img src="/public/images/517535-PJ5ZUG-806.jpg" contain alt="avatar"></v-img>
@@ -110,7 +110,7 @@
                                     <span>
                                         <v-avatar
                                         :tile="false"
-                                        size="300px"
+                                        size="250px"
                                         color="transparent"
                                         >
                                             <v-img src="/public/images/518055-PIW5O8-324.jpg" contain alt="avatar"></v-img>
@@ -140,10 +140,10 @@
                                     <span>
                                         <v-avatar
                                         :tile="false"
-                                        size="300px"
+                                        size="250px"
                                         color="transparent"
                                         >
-                                            <v-img src="https://picsum.photos/200?image=4" contain alt="avatar"></v-img>
+                                            <v-img src="/public/images/520501-PIVQ3S-304.jpg" contain alt="avatar"></v-img>
                                         </v-avatar>
                                     </span>
                                 </v-flex>
@@ -161,10 +161,21 @@
                 </v-timeline>
             </v-flex>
         </v-layout>
-        <a href="https://www.freepik.com/free-photos-vectors/people">People vector created by rawpixel.com - www.freepik.com</a><br>
-        <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by rawpixel.com - www.freepik.com</a><br>
-        <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a><br>
-        <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a>
+        <small>
+            <a href="https://www.freepik.com/free-photos-vectors/people">People vector created by rawpixel.com - www.freepik.com</a><br>
+        </small>
+        <small>
+            <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by rawpixel.com - www.freepik.com</a><br>
+        </small>
+        <small>
+            <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a><br>
+        </small>
+        <small>
+            <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a>
+        </small>
+        <small>
+            <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a>
+        </small>
     </v-container>
 </template>
 

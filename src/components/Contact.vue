@@ -12,7 +12,7 @@
                             <h3 class="headline mb-0">Contact Us!</h3>
                             <br>
                             <p class="text-xs-center">
-                                Feel free to contact us for any inquiries.
+                                Feel free to contact us for any inquiries.<br>
                                 Fill the following Form describing your situation.
                                 We'll answer as soon as we can.
                             </p>
@@ -21,7 +21,7 @@
                                     <v-flex xs12>
                                         <v-form
                                         ref="form"
-                                        v-model="valid"
+                                        v-model="isFormValid"
                                         lazy-validation
                                         >
                                             <v-text-field
@@ -48,6 +48,13 @@
                                             placeholder="Your reason here."
                                             :rules="textareaContactRules"
                                             ></v-textarea>
+                                            <v-btn
+                                            :disabled="!isFormValid"
+                                            color="success"
+                                            @click="validate"
+                                            >
+                                                Submit
+                                            </v-btn>
                                         </v-form>
                                     </v-flex>
                                 </v-layout>
@@ -65,7 +72,7 @@
                                         <v-icon color="blue lighten-1">mdi-twitter</v-icon>
                                     </v-btn>
                                     <v-btn class="px-0 text-capitalize font-weight-regular" flat round icon>
-                                        <img src="https://img.icons8.com/color/24/000000/instagram-new.png">
+                                        <v-img src="https://img.icons8.com/color/24/000000/instagram-new.png"></v-img>
                                     </v-btn>
                                 </v-flex>
                             </v-layout>
@@ -81,6 +88,7 @@
 <script>
 export default {
     data: () => ({
+        isFormValid: false,
         fullName: '',
         fullNameRules: [
             v => !!v || 'Full name is required',
@@ -97,6 +105,14 @@ export default {
             v => !!v || 'Contact reason is required.'
         ],
     }),
+    methods: {
+        validate() {
+            if(this.$refs.form.validate()) {
+                location.href = '/';
+                return true;
+            }
+        }
+    }
 };
 </script>
 

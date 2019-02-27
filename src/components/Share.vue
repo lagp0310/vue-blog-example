@@ -1,6 +1,6 @@
 <template>
     <div class="text-xs-center">
-        <v-bottom-sheet v-model="show" persistent>
+        <v-bottom-sheet v-model="show" persistent inset>
             <v-list>
                 <v-subheader>Share with</v-subheader>
                 <v-list-tile
@@ -10,10 +10,7 @@
                 >
                     <v-list-tile-avatar v-if="tile.src">
                         <v-avatar size="32px" tile>
-                            <img
-                            :src="tile.img"
-                            :alt="tile.title"
-                            >
+                            <v-img :src="tile.img" :alt="tile.title"></v-img>
                         </v-avatar>
                     </v-list-tile-avatar>
                     <v-icon v-if="!tile.src">{{ tile.icon }}</v-icon>

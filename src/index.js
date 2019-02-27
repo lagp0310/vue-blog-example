@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Index from './Index.vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
+import Vuex from 'vuex';
 
 // Components.
 import Signup from './components/Signup.vue';
@@ -25,6 +26,18 @@ Vue.use(Vuetify, {
     iconfont: 'mdi'
 });
 Vue.use(VueRouter);
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+    state: {
+        isLoggedIn: false
+    },
+    mutations: {
+        changeLoggedInStatus(state) {
+            state.isLoggedIn = !state.isLoggedIn;
+        }
+    }
+});
 
 Vue.config.productionTip = false;
 
@@ -232,6 +245,7 @@ const router = new VueRouter({
 // whole app router-aware.
 new Vue({
     el: '#app',
+    store,
     render: h => h(Index),
     router
 });

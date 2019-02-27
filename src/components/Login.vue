@@ -29,7 +29,7 @@
                                     ></v-text-field>
 
                                     <v-text-field
-                                    :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                                    :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                                     :rules="passwordRules"
                                     :type="showPassword ? 'text' : 'password'"
                                     v-model="password"
@@ -66,7 +66,7 @@
                         <v-layout row wrap>
                             <v-flex xs4>
                                 <v-btn class="px-0 text-capitalize font-weight-regular" flat>
-                                    <img src="https://img.icons8.com/color/24/000000/google-logo.png">&nbsp;
+                                    <v-img src="https://img.icons8.com/color/24/000000/google-logo.png"></v-img>&nbsp;
                                     Google
                                 </v-btn>
                             </v-flex>
@@ -111,7 +111,8 @@ export default {
     methods: {
         validate() {
             if(this.$refs.form.validate()) {
-                location.href = '/';
+                this.$store.commit('changeLoggedInStatus');
+                this.$router.replace('/');
                 return true;
             }
         },

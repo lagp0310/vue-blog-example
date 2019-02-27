@@ -41,7 +41,7 @@
                                     ></v-text-field>
 
                                     <v-text-field
-                                    :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                                    :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                                     :rules="[passwordRules.required, passwordRules.min, checkPasswordChange]"
                                     :type="showPassword ? 'text' : 'password'"
                                     v-model="password"
@@ -54,7 +54,7 @@
                                     ></v-text-field>
 
                                     <v-text-field
-                                    :append-icon="showPasswordConfirmation ? 'visibility_off' : 'visibility'"
+                                    :append-icon="showPasswordConfirmation ? 'mdi-eye-off' : 'mdi-eye'"
                                     :rules="[passwordRules.required, passwordRules.min, doPasswordsMatch]"
                                     :type="showPasswordConfirmation ? 'text' : 'password'"
                                     v-model="passwordConfirmation"
@@ -155,7 +155,7 @@
                         </v-layout>
                         <v-layout row wrap justify-end>
                             <v-btn flat @click="stepNumber = 2, isFormValid = true">Go back</v-btn>
-                            <v-btn color="primary" @click="goToHref('/')">
+                            <v-btn color="primary" @click="signup('/')">
                                 Sign Up
                             </v-btn>
                         </v-layout>
@@ -210,8 +210,9 @@ export default {
         emailReplyComment: false,
     }),
     methods: {
-        goToHref(ref) {
-            location.href = '/';
+        signup(ref) {
+            this.$store.commit('changeLoggedInStatus');
+            this.$router.replace(ref);
         },
         validate() {
             if(this.$refs.form.validate()) {
