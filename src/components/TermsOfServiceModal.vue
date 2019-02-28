@@ -18,10 +18,8 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <!-- <v-btn color="grey darken-1" flat="flat" @click="dialog = false">Disagree</v-btn>
-                    <v-btn color="green darken-1" flat="flat" @click="dialog = false">Agree</v-btn> -->
-                    <v-btn color="grey darken-1" flat="flat" @click="doesAgree(false)">Disagree</v-btn>
-                    <v-btn color="green darken-1" flat="flat" @click="doesAgree(true)">Agree</v-btn>
+                    <v-btn color="grey darken-1" flat @click="doesAgree(false)">Disagree</v-btn>
+                    <v-btn color="green darken-1" flat @click="doesAgree(true)">Agree</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>

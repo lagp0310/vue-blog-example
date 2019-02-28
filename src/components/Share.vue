@@ -28,8 +28,7 @@ export default {
     },
     data: () => ({
         tiles: [
-            { src: false, icon: 'mdi-close', title: 'Close' },
-            { src: true, img: 'https://cdn.vuetifyjs.com/images/bottom-sheets/keep.png', title: 'Keep' },
+            { src: true, img: 'https://img.icons8.com/ios/24/000000/delete-sign.png', title: 'Close' },
             { src: true, img: 'https://cdn.vuetifyjs.com/images/bottom-sheets/inbox.png', title: 'Inbox' },
             { src: true, img: 'https://cdn.vuetifyjs.com/images/bottom-sheets/hangouts.png', title: 'Hangouts' },
             { src: true, img: 'https://cdn.vuetifyjs.com/images/bottom-sheets/messenger.png', title: 'Messenger' }

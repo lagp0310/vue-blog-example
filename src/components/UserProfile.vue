@@ -29,7 +29,7 @@
                     </v-layout>
                     <v-form
                     ref="form"
-                    v-model="valid"
+                    v-model="isFormValid"
                     lazy-validation
                     >
                         <v-text-field
@@ -52,7 +52,7 @@
                         label="E-mail"
                         required
                         ></v-text-field>
-                        <v-radio-group row :rules="[genderSelectorRules.required]" v-model="user.genr">
+                        <v-radio-group row :rules="[genderSelectorRules.required]" v-model="user.gender">
                             <v-radio label="Male" value="male" color="info"></v-radio>
                             <v-radio label="Female" value="female" color="pink"></v-radio>
                         </v-radio-group>
@@ -64,6 +64,9 @@
                             </v-btn>
                         </v-layout>
                     </v-form>
+                    <v-btn color="info" block @click="showProfileUpdatedSnackbar = true">
+                        Update Profile
+                    </v-btn>
                 </v-flex>
                 <v-flex sm4 md3></v-flex>
             </v-layout>
@@ -81,26 +84,34 @@
                             <v-container grid-list-md>
                                 <v-layout row wrap justify-center>
                                     <v-flex xs12>
-                                        <v-text-field
-                                        :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                                        :rules="[passwordRules.required, passwordRules.min]"
-                                        :type="showPassword ? 'text' : 'password'"
-                                        label="New Password"
-                                        hint="At least 8 characters"
-                                        value=""
-                                        class="input-group--focused"
-                                        @click:append="showPassword = !showPassword"
-                                        ></v-text-field>
-                                        <v-text-field
-                                        :append-icon="showPasswordConfirmation ? 'visibility_off' : 'visibility'"
-                                        :rules="[passwordRules.required, passwordRules.min]"
-                                        :type="showPasswordConfirmation ? 'text' : 'password'"
-                                        label="Confirm New Password"
-                                        hint="At least 8 characters."
-                                        value=""
-                                        class="input-group--focused"
-                                        @click:append="showPasswordConfirmation = !showPasswordConfirmation"
-                                        ></v-text-field>
+                                        <v-form
+                                        ref="form"
+                                        v-model="isFormValid"
+                                        lazy-validation
+                                        >
+                                            <v-text-field
+                                            :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+                                            :rules="[passwordRules.required, passwordRules.min, checkPasswordChange]"
+                                            :type="showPassword ? 'text' : 'password'"
+                                            v-model="password"
+                                            label="New Password"
+                                            hint="At least 8 characters"
+                                            value=""
+                                            class="input-group--focused"
+                                            @click:append="showPassword = !showPassword"
+                                            ></v-text-field>
+                                            <v-text-field
+                                            :append-icon="showPasswordConfirmation ? 'mdi-eye-off' : 'mdi-eye'"
+                                            :rules="[passwordRules.required, passwordRules.min, doPasswordsMatch]"
+                                            :type="showPasswordConfirmation ? 'text' : 'password'"
+                                            v-model="passwordConfirmation"
+                                            label="Confirm New Password"
+                                            hint="At least 8 characters."
+                                            value=""
+                                            class="input-group--focused"
+                                            @click:append="showPasswordConfirmation = !showPasswordConfirmation"
+                                            ></v-text-field>
+                                        </v-form>
                                     </v-flex>
                                 </v-layout>
                             </v-container>
@@ -118,6 +129,20 @@
                 </v-dialog>
             </v-layout>
         </v-container>
+        <v-snackbar
+        v-model="showProfileUpdatedSnackbar"
+        color="grey darken-2"
+        timeout="6000"
+        >
+            Profile was updated!
+            <v-btn
+                dark
+                flat
+                @click="showProfileUpdatedSnackbar = false"
+            >
+                Close
+            </v-btn>
+        </v-snackbar>
     </div>
 </template>
 
@@ -128,8 +153,9 @@ export default {
     },
     data: () => ({
         showChangePasswordDialog: false,
+        showProfileUpdatedSnackbar: false,
         loading: false,
-        valid: true,
+        isFormValid: true,
         name: '',
         nameRules: [
             v => !!v || 'Name is required',
@@ -151,8 +177,7 @@ export default {
         passwordConfirmation: '',
         passwordRules: {
             required: value => !!value || 'Required.',
-            min: v => v.length >= 8 || 'Min 8 characters',
-            passwordsMatch: () => ('The password and the password confirmation does not match!'),
+            min: v => v.length >= 8 || 'Min 8 characters'
         },
         genderSelectorRules: {
             required: value => (value === 'female' || value === 'male') || 'Required.'
@@ -161,7 +186,24 @@ export default {
     methods: {
         doPasswordsMatch () {
             return (this.password === this.passwordConfirmation ? true : 'Passwords do not match!');
-        }
+        },
+        changePassword() {
+            if(this.$refs.form.validate()) {
+                this.showChangePasswordDialog = false;
+                this.password = '';
+                this.passwordConfirmation = '';
+                return true;
+            }
+
+            return false;
+        },
+        checkPasswordChange() {
+            if(this.passwordConfirmation.length > 0 && this.password !== this.passwordConfirmation) {
+                this.passwordConfirmation = '';
+            }
+
+            return true;
+        },
     },
     watch: {
         loader () {

@@ -43,10 +43,9 @@
                                     <v-list-tile-title>Some User</v-list-tile-title>
                                 </v-list-tile-content>
                                 <v-list-tile-action>
-                                    <!-- TODO: Change link to a property. -->
                                     <v-btn
                                     icon
-                                    @click="goToRoute('/users/1')"
+                                    @click="goToRoute('/users/1'), menu = false"
                                     >
                                         <v-icon>mdi-settings</v-icon>
                                     </v-btn>

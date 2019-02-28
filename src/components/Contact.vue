@@ -4,7 +4,7 @@
             <v-flex xs12 sm6 offset-sm3>
                 <v-card>
                     <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+                    src="https://picsum.photos/500/?image=4"
                     aspect-ratio="2.75"
                     ></v-img>
                     <v-card-title primary-title>
@@ -48,9 +48,11 @@
                                             placeholder="Your reason here."
                                             :rules="textareaContactRules"
                                             ></v-textarea>
+                                            <br />
                                             <v-btn
                                             :disabled="!isFormValid"
                                             color="success"
+                                            block
                                             @click="validate"
                                             >
                                                 Submit

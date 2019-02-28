@@ -9,11 +9,12 @@
                 <v-list class="pa-1">
                     <v-list-tile avatar>
                         <v-list-tile-avatar>
-                            <v-img v-if="isLoggedIn" src="https://randomuser.me/api/portraits/men/86.jpg"></v-img>
+                            <v-img v-if="isLoggedIn" :src="user.profileImageSrc" alt="User Profile Picture"></v-img>
+                            <v-img v-if="!isLoggedIn" src="/public/logo.png" alt="Bloggy Logo"></v-img>
                         </v-list-tile-avatar>
                         <v-list-tile-content>
                             <v-list-tile-title v-if="!isLoggedIn">Bloggy!</v-list-tile-title>
-                            <v-list-tile-title v-if="isLoggedIn"></v-list-tile-title>
+                            <v-list-tile-title v-if="isLoggedIn">{{ user.name + ' ' + user.lastname }}</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
                 </v-list>
