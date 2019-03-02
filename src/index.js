@@ -30,11 +30,21 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        isLoggedIn: false
+        isLoggedIn: false,
+        user: {
+            name: 'Test',
+            lastname: 'Tested',
+            email: 'test@example.com',
+            gender: 'male',
+            profileImageSrc: 'https://randomuser.me/api/portraits/men/88.jpg',
+        }
     },
     mutations: {
         changeLoggedInStatus(state) {
             state.isLoggedIn = !state.isLoggedIn;
+        },
+        updateUsersProfile(state, data) {
+            state.user = data;
         }
     }
 });
@@ -59,14 +69,14 @@ const routes = [
         path: '/articles/:articlesId', component: Post, 
         props: {
             level: 0,
+            author: {
+                name: 'Test',
+                lastname: 'Tested',
+                email: 'test@example.com',
+                profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg',
+                biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+            },
             post: {
-                author: {
-                    name: 'Test',
-                    lastname: 'Tested',
-                    email: 'test@example.com',
-                    profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg',
-                    biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                },
                 title: 'Ut mattis dignissim convallis. Maecenas non magna imperdiet arcu accumsan pulvinar non.', 
                 body: '\
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed sollicitudin pharetra quam eu fermentum.\

@@ -12,14 +12,6 @@
 import Navbar from './components/Navbar.vue';
 import Article from './components/Article.vue';
 
-// const user = {
-//     name: 'Test',
-//     lastname: 'Tested',
-//     email: 'test@example.com',
-//     gender: 'male',
-//     profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg',
-// };
-
 export default {
     data: () => ({
         //

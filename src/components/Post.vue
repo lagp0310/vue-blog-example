@@ -27,16 +27,16 @@
                                         :size="`80px`"
                                         color="grey lighten-4"
                                         >
-                                            <v-img :src="post.author.profileImageSrc" contain alt="avatar"></v-img>
+                                            <v-img :src="author.profileImageSrc" contain alt="avatar"></v-img>
                                         </v-avatar>
                                     </v-flex>
                                     <v-flex xs8 offset-xs1>
-                                        <h3 class="title mb-0">{{ post.author.name + ' ' + post.author.lastname }}</h3>
+                                        <h3 class="title mb-0">{{ author.name + ' ' + author.lastname }}</h3>
                                         <br />
                                         <div class="font-weight-regular body-1">
-                                            About Me: {{ post.author.biography }}
+                                            About Me: {{ author.biography }}
                                             <br />
-                                            Contact me: {{ post.author.email }}
+                                            Contact me: {{ author.email }}
                                         </div>
                                     </v-flex>
                                 </v-layout>
@@ -80,6 +80,7 @@ import Share from './Share.vue';
 
 export default {
     props: {
+        author: Object,
         post: Object,
         level: Number,
     },

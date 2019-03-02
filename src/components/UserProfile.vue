@@ -10,7 +10,7 @@
                         :size="`200px`"
                         color="grey lighten-4"
                         >
-                            <v-img :src="user.profileImageSrc" contain alt="avatar"></v-img>
+                            <v-img :src="profileImageSrc" contain alt="avatar"></v-img>
                         </v-avatar>
                     </v-layout>
                     <v-layout row justify-center>
@@ -33,26 +33,24 @@
                     lazy-validation
                     >
                         <v-text-field
-                        v-model="user.name"
+                        v-model="name"
                         :rules="nameRules"
                         label="Name"
                         required
                         ></v-text-field>
-
                         <v-text-field
-                        v-model="user.lastname"
+                        v-model="lastname"
                         :rules="lastnameRules"
                         label="Lastname"
                         required
                         ></v-text-field>
-
                         <v-text-field
-                        v-model="user.email"
+                        v-model="email"
                         :rules="emailRules"
                         label="E-mail"
                         required
                         ></v-text-field>
-                        <v-radio-group row :rules="[genderSelectorRules.required]" v-model="user.gender">
+                        <v-radio-group v-model="gender" row :rules="[genderSelectorRules.required]">
                             <v-radio label="Male" value="male" color="info"></v-radio>
                             <v-radio label="Female" value="female" color="pink"></v-radio>
                         </v-radio-group>
@@ -64,7 +62,7 @@
                             </v-btn>
                         </v-layout>
                     </v-form>
-                    <v-btn color="info" block @click="showProfileUpdatedSnackbar = true">
+                    <v-btn color="info" block @click="showProfileUpdatedSnackbar = true, updateUsersProfile()">
                         Update Profile
                     </v-btn>
                 </v-flex>
@@ -136,9 +134,9 @@
         >
             Profile was updated!
             <v-btn
-                dark
-                flat
-                @click="showProfileUpdatedSnackbar = false"
+            dark
+            flat
+            @click="showProfileUpdatedSnackbar = false"
             >
                 Close
             </v-btn>
@@ -148,9 +146,6 @@
 
 <script>
 export default {
-    props: {
-        user: Object,
-    },
     data: () => ({
         showChangePasswordDialog: false,
         showProfileUpdatedSnackbar: false,
@@ -179,10 +174,19 @@ export default {
             required: value => !!value || 'Required.',
             min: v => v.length >= 8 || 'Min 8 characters'
         },
+        gender: '',
         genderSelectorRules: {
             required: value => (value === 'female' || value === 'male') || 'Required.'
         },
+        profileImageSrc: ''
     }),
+    mounted() {
+        this.name = this.$store.state.user.name;
+        this.lastname = this.$store.state.user.lastname;
+        this.email = this.$store.state.user.email;
+        this.gender = this.$store.state.user.gender;
+        this.profileImageSrc = this.$store.state.user.profileImageSrc;
+    },
     methods: {
         doPasswordsMatch () {
             return (this.password === this.passwordConfirmation ? true : 'Passwords do not match!');
@@ -204,6 +208,15 @@ export default {
 
             return true;
         },
+        updateUsersProfile() {
+            this.$store.commit('updateUsersProfile', {
+                name: this.name,
+                lastname: this.lastname,
+                email: this.email,
+                gender: this.gender,
+                profileImageSrc: this.profileImageSrc,
+            });
+        }
     },
     watch: {
         loader () {

@@ -1,5 +1,4 @@
 <template>
-    <!-- TODO: Property to pass user's data. Same for Sidenav. -->
     <div>
         <v-toolbar dark color="primary" class="mb-4">
             <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="showSidenav = !showSidenav"></v-toolbar-side-icon>
@@ -36,11 +35,10 @@
                         <v-list>
                             <v-list-tile avatar>
                                 <v-list-tile-avatar>
-                                    <v-img src="https://randomuser.me/api/portraits/men/86.jpg" 
-                                    alt="User Profile Picture"></v-img>
+                                    <v-img :src="usersProfilePictureSrc" alt="User Profile Picture"></v-img>
                                 </v-list-tile-avatar>
                                 <v-list-tile-content>
-                                    <v-list-tile-title>Some User</v-list-tile-title>
+                                    <v-list-tile-title>{{ usersName }}</v-list-tile-title>
                                 </v-list-tile-content>
                                 <v-list-tile-action>
                                     <v-btn
@@ -72,7 +70,7 @@
                             <v-btn flat @click="menu = false">Close</v-btn>
                             <v-btn color="red" flat 
                             @click="menu = false, changeLoggedInState(), goToRoute('/')">
-                                Log Out
+                                Logout
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -80,7 +78,7 @@
             </v-toolbar-items>
         </v-toolbar>
         <!-- Sidenav just shows on small screens. -->
-        <Sidenav v-if="showSidenav" :show.sync="showSidenav" :user="user"></Sidenav>
+        <Sidenav v-if="showSidenav" :show.sync="showSidenav"></Sidenav>
     </div>
 </template>
 
@@ -88,9 +86,6 @@
 import Sidenav from './Sidenav.vue';
 
 export default {
-    props: {
-        user: Object
-    },
     data: () => ({
         showSidenav: false,
         darkMode: false,
@@ -111,6 +106,12 @@ export default {
     computed: {
         isLoggedIn() {
             return this.$store.state.isLoggedIn;
+        },
+        usersName() {
+            return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
+        },
+        usersProfilePictureSrc() {
+            return this.$store.state.user.profileImageSrc;
         }
     }
 };
