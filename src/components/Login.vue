@@ -4,18 +4,10 @@
             <v-flex sm3 md4></v-flex>
             <v-flex xs12 sm6 md4>
                 <v-card>
-                    <v-card-title primary-title>
-                        <v-container text-xs-center>
-                            <v-layout>
-                                <v-flex xs12>
-                                    <h2 class="font-weight-light headline mb-0">Login</h2>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-card-title>
                     <v-container grid-list-md text-xs-center>
                         <v-layout row wrap>
                             <v-flex xs12>
+                                <v-img src="/public/images/logo/2/logo_transparent.png" max-height="120px" alt="Bloggy Logo"></v-img>
                                 <v-form
                                 ref="form"
                                 v-model="valid"

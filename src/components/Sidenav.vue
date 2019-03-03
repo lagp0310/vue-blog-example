@@ -1,5 +1,5 @@
 <template>
-    <v-container @click="$emit('update:show', false)">
+    <v-container>
         <v-layout wrap>
             <v-navigation-drawer
             v-model="show"
@@ -7,21 +7,33 @@
             temporary
             >
                 <v-list class="pa-1">
-                    <v-list-tile avatar class="white v-btn--flat">
-                        <v-list-tile-avatar>
-                            <v-img v-if="!isLoggedIn" src="/public/logo.png" alt="Bloggy Logo"></v-img>
-                            <v-img v-if="isLoggedIn" :src="usersProfilePictureSrc" alt="User Profile Picture"></v-img>
-                        </v-list-tile-avatar>
-                        <v-list-tile-content>
-                            <v-list-tile-title v-if="!isLoggedIn">Bloggy!</v-list-tile-title>
-                            <v-list-tile-title v-if="isLoggedIn">{{ usersName }}</v-list-tile-title>
-                        </v-list-tile-content>
-                        <v-list-tile-action v-if="isLoggedIn">
-                            <v-btn icon>
-                                <v-icon @click="goToRoute('/users/1')">mdi-settings</v-icon>
-                            </v-btn>
-                        </v-list-tile-action>
-                    </v-list-tile>
+                    <div v-if="isLoggedIn">
+                        <v-list-tile avatar class="white v-btn--flat">
+                            <v-list-tile-avatar>
+                                <v-img :src="usersProfilePictureSrc" alt="User Profile Picture"></v-img>
+                            </v-list-tile-avatar>
+                            <v-list-tile-action>
+                                <v-btn icon>
+                                    <v-icon @click="goToRoute('/users/1')">mdi-settings</v-icon>
+                                </v-btn>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title>{{ usersName }}</v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </div>
+                    <v-container justify-center>
+                        <v-layout row>
+                            <v-flex xs10>
+                                <v-img src="/public/images/logo/2/logo_transparent.png" alt="Bloggy Logo" max-width="150px" contain></v-img>
+                            </v-flex>
+                            <v-flex xs2>
+                                <v-btn icon flat @click="$emit('update:show', false)">
+                                    <v-icon>mdi-close</v-icon>
+                                </v-btn>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
                 </v-list>
                 <v-list class="pt-0" dense>
                     <v-divider></v-divider>

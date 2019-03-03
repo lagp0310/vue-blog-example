@@ -10,7 +10,7 @@
                     >
                         <v-img :src="comment.user.profileImageSrc" contain alt="avatar"></v-img>
                     </v-avatar>
-                    <h3 class="body-1 mt-1">{{ getCompleteName }}</h3>
+                    <h3 class="body-1 mt-1">{{ getFullname }}</h3>
                 </v-flex>
                 <v-flex xs8 sm9 offset-xs1 offset-md0 class="mt-4">
                     <!-- Thanks: https://forum.vuejs.org/t/how-to-handle-anchors-bookmarks-with-vue-router/14563/6 -->
@@ -50,12 +50,12 @@
 
 <script>
 export default {
+    // For Recursive Components.
+    name: 'Comment',
     props: {
         comment: Object,
         level: Number,
     },
-    // For Recursive Components.
-    name: 'Comment',
     data: () => ({
         likeComment: false,
     }),
@@ -79,7 +79,7 @@ export default {
         }
     },
     computed: {
-        getCompleteName() {
+        getFullname() {
             return this.$props.comment.user.name + ' ' + this.$props.comment.user.lastname;
         },
         getReferenceToComment() {
