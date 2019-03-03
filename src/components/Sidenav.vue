@@ -12,20 +12,20 @@
                             <v-list-tile-avatar>
                                 <v-img :src="usersProfilePictureSrc" alt="User Profile Picture"></v-img>
                             </v-list-tile-avatar>
-                            <v-list-tile-action>
-                                <v-btn icon>
-                                    <v-icon @click="goToRoute('/users/1')">mdi-settings</v-icon>
-                                </v-btn>
-                            </v-list-tile-action>
                             <v-list-tile-content>
                                 <v-list-tile-title>{{ usersName }}</v-list-tile-title>
                             </v-list-tile-content>
+                            <v-list-tile-action>
+                                <v-btn icon @click="goToRoute('/users/1'), $emit('update:show', false)">
+                                    <v-icon>mdi-settings</v-icon>
+                                </v-btn>
+                            </v-list-tile-action>
                         </v-list-tile>
                     </div>
-                    <v-container justify-center>
+                    <v-container v-if="!isLoggedIn" justify-center>
                         <v-layout row>
                             <v-flex xs10>
-                                <v-img src="/public/images/logo/2/logo_transparent.png" alt="Bloggy Logo" max-width="150px" contain></v-img>
+                                <v-img src="/public/images/logo/2/logo_transparent.png" alt="Bloggy Logo" max-height="120px" contain></v-img>
                             </v-flex>
                             <v-flex xs2>
                                 <v-btn icon flat @click="$emit('update:show', false)">
@@ -37,9 +37,9 @@
                 </v-list>
                 <v-list class="pt-0" dense>
                     <v-divider></v-divider>
-                    <div v-for="item in items" :key="item.title" @click="$emit('update:show', false)">
+                    <div v-for="item in items" :key="item.title">
                         <v-list-tile v-if="showHideLink(item.showOnLoggedIn)"
-                        tag="a" :to="item.to" class="white v-btn--flat">
+                        tag="a" :to="item.to" class="white v-btn--flat" @click="$emit('update:show', false)">
                             <v-list-tile-action>
                                 <v-icon>{{ item.icon }}</v-icon>
                             </v-list-tile-action>
@@ -49,7 +49,7 @@
                         </v-list-tile>
                     </div>
                     <v-list-tile v-if="isLoggedIn" tag="a" color="red" flat
-                    @click="changeLoggedInState(), goToRoute('/')">
+                    @click="changeLoggedInState(), goToRoute('/'), $emit('update:show', false)">
                         <v-list-tile-action>
                             <v-icon>mdi-logout-variant</v-icon>
                         </v-list-tile-action>
@@ -70,7 +70,7 @@ export default {
     },
     data: () => ({
         items: [
-            { title: 'Articles', icon: 'mdi-view-dashboard', to: '/', showOnLoggedIn: true },
+            { title: 'Articles', icon: 'mdi-view-dashboard', to: '/articles', showOnLoggedIn: true },
             { title: 'About Us', icon: 'mdi-information', to: '/about', showOnLoggedIn: true },
             { title: 'Contact', icon: 'mdi-account-box', to: '/contact', showOnLoggedIn: true },
             { title: 'Signup', icon: 'mdi-account-plus', to: '/signup', showOnLoggedIn: false },

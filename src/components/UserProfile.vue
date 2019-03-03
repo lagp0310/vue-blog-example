@@ -69,9 +69,9 @@
                 <v-flex sm4 md3></v-flex>
             </v-layout>
         </v-container>
-        <v-container>
-            <v-layout row justify-center>
-                <v-dialog v-model="showChangePasswordDialog" persistent max-width="35%">
+        <v-container justify-center>
+            <v-layout row>
+                <v-dialog v-model="showChangePasswordDialog" persistent max-width="600px">
                     <v-card>
                         <v-card-title>
                             <v-layout justify-center>

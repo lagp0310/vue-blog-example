@@ -2,7 +2,7 @@
     <div>
         <v-toolbar dark color="primary" class="mb-4">
             <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="showSidenav = !showSidenav"></v-toolbar-side-icon>
-            <v-img text-xs-center src="/public/images/logo/1/logo_transparent.png" alt="Bloggy Logo" max-width="150px" contain></v-img>
+            <v-img src="/public/images/logo/1/logo_transparent.png" alt="Bloggy Logo" max-width="150px" contain></v-img>
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-sm-and-down">
                 <!-- This is handled by vue-router. -->
