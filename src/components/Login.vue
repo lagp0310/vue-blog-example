@@ -7,7 +7,18 @@
                     <v-container grid-list-md text-xs-center>
                         <v-layout row wrap>
                             <v-flex xs12>
-                                <v-img src="/public/images/logo/2/logo_transparent.png" max-height="120px" alt="Bloggy Logo"></v-img>
+                                <v-img src="/public/images/logo/2/logo_transparent.png" max-height="120px" alt="Bloggy Logo" lazy-src="/public/images/logo/2/logo_transparent.png">
+                                    <template v-slot:placeholder>
+                                        <v-layout
+                                        fill-height
+                                        align-center
+                                        justify-center
+                                        ma-0
+                                        >
+                                            <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                        </v-layout>
+                                    </template>
+                                </v-img>
                                 <v-form
                                 ref="form"
                                 v-model="valid"

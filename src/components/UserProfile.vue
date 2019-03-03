@@ -10,7 +10,18 @@
                         :size="`200px`"
                         color="grey lighten-4"
                         >
-                            <v-img :src="profileImageSrc" contain alt="avatar"></v-img>
+                            <v-img :src="profileImageSrc" contain alt="avatar" :lazy-src="profileImageSrc">
+                                <template v-slot:placeholder>
+                                    <v-layout
+                                    fill-height
+                                    align-center
+                                    justify-center
+                                    ma-0
+                                    >
+                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                    </v-layout>
+                                </template>
+                            </v-img>
                         </v-avatar>
                     </v-layout>
                     <v-layout row justify-center>

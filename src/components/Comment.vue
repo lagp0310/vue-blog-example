@@ -8,7 +8,18 @@
                     :size="`60px`"
                     color="grey lighten-4"
                     >
-                        <v-img :src="comment.user.profileImageSrc" contain alt="avatar"></v-img>
+                        <v-img :src="comment.user.profileImageSrc" contain alt="avatar" :lazy-src="comment.user.profileImageSrc">
+                            <template v-slot:placeholder>
+                                <v-layout
+                                fill-height
+                                align-center
+                                justify-center
+                                ma-0
+                                >
+                                    <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                </v-layout>
+                            </template>
+                        </v-img>
                     </v-avatar>
                     <h3 class="body-1 mt-1">{{ getFullname }}</h3>
                 </v-flex>

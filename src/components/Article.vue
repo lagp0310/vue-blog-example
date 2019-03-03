@@ -6,8 +6,19 @@
                     <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
                         <v-img
                         :src="article.articleImageSrc"
+                        :lazy-sc="article.articleImageSrc"
                         height="200px"
                         >
+                            <template v-slot:placeholder>
+                                <v-layout
+                                fill-height
+                                align-center
+                                justify-center
+                                ma-0
+                                >
+                                    <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                </v-layout>
+                            </template>
                         </v-img>
                         <v-card-title primary-title>
                             <div>

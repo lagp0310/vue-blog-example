@@ -5,8 +5,20 @@
                 <v-card>
                     <v-img
                     src="https://picsum.photos/500/?image=4"
+                    lazy-src="https://picsum.photos/500/?image=4"
                     aspect-ratio="2.75"
-                    ></v-img>
+                    >
+                        <template v-slot:placeholder>
+                            <v-layout
+                            fill-height
+                            align-center
+                            justify-center
+                            ma-0
+                            >
+                                <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                            </v-layout>
+                        </template>
+                    </v-img>
                     <v-card-title primary-title>
                         <div>
                             <h3 class="headline mb-0">Contact Us!</h3>

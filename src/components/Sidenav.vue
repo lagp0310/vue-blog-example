@@ -10,7 +10,18 @@
                     <div v-if="isLoggedIn">
                         <v-list-tile avatar class="white v-btn--flat">
                             <v-list-tile-avatar>
-                                <v-img :src="usersProfilePictureSrc" alt="User Profile Picture"></v-img>
+                                <v-img :src="usersProfilePictureSrc" alt="User Profile Picture" :lazy-src="usersProfilePictureSrc">
+                                    <template v-slot:placeholder>
+                                        <v-layout
+                                        fill-height
+                                        align-center
+                                        justify-center
+                                        ma-0
+                                        >
+                                            <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                        </v-layout>
+                                    </template>
+                                </v-img>
                             </v-list-tile-avatar>
                             <v-list-tile-content>
                                 <v-list-tile-title>{{ usersName }}</v-list-tile-title>
@@ -25,7 +36,18 @@
                     <v-container v-if="!isLoggedIn" justify-center>
                         <v-layout row>
                             <v-flex xs10>
-                                <v-img src="/public/images/logo/2/logo_transparent.png" alt="Bloggy Logo" max-height="120px" contain></v-img>
+                                <v-img src="/public/images/logo/2/logo_transparent.png" alt="Bloggy Logo" max-height="120px" contain lazy-src="/public/images/logo/2/logo_transparent.png">
+                                    <template v-slot:placeholder>
+                                        <v-layout
+                                        fill-height
+                                        align-center
+                                        justify-center
+                                        ma-0
+                                        >
+                                            <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                        </v-layout>
+                                    </template>
+                                </v-img>
                             </v-flex>
                             <v-flex xs2>
                                 <v-btn icon flat @click="$emit('update:show', false)">

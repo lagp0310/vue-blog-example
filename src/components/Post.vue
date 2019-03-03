@@ -27,7 +27,18 @@
                                         :size="`80px`"
                                         color="grey lighten-4"
                                         >
-                                            <v-img :src="author.profileImageSrc" contain alt="avatar"></v-img>
+                                            <v-img :src="author.profileImageSrc" contain alt="avatar" :lazy-src="author.profileImageSrc">
+                                                <template v-slot:placeholder>
+                                                    <v-layout
+                                                    fill-height
+                                                    align-center
+                                                    justify-center
+                                                    ma-0
+                                                    >
+                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                    </v-layout>
+                                                </template>
+                                            </v-img>
                                         </v-avatar>
                                     </v-flex>
                                     <v-flex xs8 offset-xs1>

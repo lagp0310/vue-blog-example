@@ -2,7 +2,18 @@
     <div>
         <v-toolbar dark color="primary" class="mb-4">
             <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="showSidenav = !showSidenav"></v-toolbar-side-icon>
-            <v-img src="/public/images/logo/1/logo_transparent.png" alt="Bloggy Logo" max-width="150px" contain></v-img>
+            <v-img src="/public/images/logo/1/logo_transparent.png" alt="Bloggy Logo" max-width="150px" contain lazy-src="/public/images/logo/1/logo_transparent.png">
+                <template v-slot:placeholder>
+                    <v-layout
+                    fill-height
+                    align-center
+                    justify-center
+                    ma-0
+                    >
+                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                    </v-layout>
+                </template>
+            </v-img>
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-sm-and-down">
                 <!-- This is handled by vue-router. -->
@@ -28,7 +39,18 @@
                         :size="`40px`"
                         color="grey lighten-4"
                         >
-                            <v-img src="https://randomuser.me/api/portraits/men/86.jpg" contain alt="avatar"></v-img>
+                            <v-img src="https://randomuser.me/api/portraits/men/86.jpg" contain alt="avatar" lazy-src="https://randomuser.me/api/portraits/men/86.jpg">
+                                <template v-slot:placeholder>
+                                    <v-layout
+                                    fill-height
+                                    align-center
+                                    justify-center
+                                    ma-0
+                                    >
+                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                    </v-layout>
+                                </template>
+                            </v-img>
                         </v-avatar>
                     </span>
                     <v-card>

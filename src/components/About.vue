@@ -23,7 +23,18 @@
                                         size="250px"
                                         color="transparent"
                                         >
-                                            <v-img src="/public/images/26706.jpg" contain alt="avatar"></v-img>
+                                            <v-img src="/public/images/26706.jpg" contain alt="avatar" lazy-src="/public/images/26706.jpg">
+                                                <template v-slot:placeholder>
+                                                    <v-layout
+                                                    fill-height
+                                                    align-center
+                                                    justify-center
+                                                    ma-0
+                                                    >
+                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                    </v-layout>
+                                                </template>
+                                            </v-img>
                                         </v-avatar>
                                     </span>
                                 </v-flex>
@@ -53,7 +64,18 @@
                                         size="250px"
                                         color="white"
                                         >
-                                            <v-img src="/public/images/59869.jpg" contain alt="avatar"></v-img>
+                                            <v-img src="/public/images/59869.jpg" contain alt="avatar" lazy-src="/public/images/59869.jpg">
+                                                <template v-slot:placeholder>
+                                                    <v-layout
+                                                    fill-height
+                                                    align-center
+                                                    justify-center
+                                                    ma-0
+                                                    >
+                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                    </v-layout>
+                                                </template>
+                                            </v-img>
                                         </v-avatar>
                                     </span>
                                 </v-flex>
@@ -83,7 +105,18 @@
                                         size="250px"
                                         color="transparent"
                                         >
-                                            <v-img src="/public/images/517535-PJ5ZUG-806.jpg" contain alt="avatar"></v-img>
+                                            <v-img src="/public/images/517535-PJ5ZUG-806.jpg" contain alt="avatar" lazy-src="/public/images/517535-PJ5ZUG-806.jpg">
+                                                <template v-slot:placeholder>
+                                                    <v-layout
+                                                    fill-height
+                                                    align-center
+                                                    justify-center
+                                                    ma-0
+                                                    >
+                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                    </v-layout>
+                                                </template>
+                                            </v-img>
                                         </v-avatar>
                                     </span>
                                 </v-flex>
@@ -113,7 +146,18 @@
                                         size="250px"
                                         color="transparent"
                                         >
-                                            <v-img src="/public/images/518055-PIW5O8-324.jpg" contain alt="avatar"></v-img>
+                                            <v-img src="/public/images/518055-PIW5O8-324.jpg" contain alt="avatar" lazy-src="/public/images/518055-PIW5O8-324.jpg">
+                                                <template v-slot:placeholder>
+                                                    <v-layout
+                                                    fill-height
+                                                    align-center
+                                                    justify-center
+                                                    ma-0
+                                                    >
+                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                    </v-layout>
+                                                </template>
+                                            </v-img>
                                         </v-avatar>
                                     </span>
                                 </v-flex>
@@ -143,7 +187,18 @@
                                         size="250px"
                                         color="transparent"
                                         >
-                                            <v-img src="/public/images/520501-PIVQ3S-304.jpg" contain alt="avatar"></v-img>
+                                            <v-img src="/public/images/520501-PIVQ3S-304.jpg" contain alt="avatar" lazy-src="/public/images/520501-PIVQ3S-304.jpg">
+                                                <template v-slot:placeholder>
+                                                    <v-layout
+                                                    fill-height
+                                                    align-center
+                                                    justify-center
+                                                    ma-0
+                                                    >
+                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                    </v-layout>
+                                                </template>
+                                            </v-img>
                                         </v-avatar>
                                     </span>
                                 </v-flex>
