@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 
 // Components.
+import ViewNotFound from './components/ViewNotFound.vue';
 import Signup from './components/Signup.vue';
 import Login from './components/Login.vue';
 import Post from './components/Post.vue';
@@ -57,6 +58,7 @@ Vue.config.productionTip = false;
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
 const routes = [
+    { path: '*', component: ViewNotFound },
     { path: '/', redirect: '/articles' },
     { path: '/articles', component: Articles },
     { path: '/about', component: About },
@@ -245,6 +247,7 @@ const routes = [
 // You can pass in additional options here, but let's
 // keep it simple for now.
 const router = new VueRouter({
+    // https://router.vuejs.org/api/#mode
     // https://stackoverflow.com/questions/34623833/how-to-remove-hashbang-from-url
     mode: 'history',
     routes

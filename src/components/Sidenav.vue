@@ -36,7 +36,7 @@
                     <v-container v-if="!isLoggedIn" justify-center>
                         <v-layout row>
                             <v-flex xs10>
-                                <v-img src="/public/images/logo/2/logo_transparent.png" alt="Bloggy Logo" max-height="120px" contain lazy-src="/public/images/logo/2/logo_transparent.png">
+                                <v-img src="/public/images/logos/2/logo_transparent.png" alt="Bloggy Logo" max-height="120px" contain lazy-src="/public/images/logos/2/logo_transparent.png">
                                     <template v-slot:placeholder>
                                         <v-layout
                                         fill-height

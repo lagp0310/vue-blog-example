@@ -19,7 +19,6 @@
                                 <v-flex xs10>
                                     <span>
                                         <v-avatar
-                                        :tile="false"
                                         size="250px"
                                         color="transparent"
                                         >
@@ -60,7 +59,6 @@
                                 <v-flex xs10>
                                     <span>
                                         <v-avatar
-                                        :tile="false"
                                         size="250px"
                                         color="white"
                                         >
@@ -101,7 +99,6 @@
                                 <v-flex xs10>
                                     <span>
                                         <v-avatar
-                                        :tile="false"
                                         size="250px"
                                         color="transparent"
                                         >
@@ -142,7 +139,6 @@
                                 <v-flex xs10>
                                     <span>
                                         <v-avatar
-                                        :tile="false"
                                         size="250px"
                                         color="transparent"
                                         >
@@ -183,7 +179,6 @@
                                 <v-flex xs10>
                                     <span>
                                         <v-avatar
-                                        :tile="false"
                                         size="250px"
                                         color="transparent"
                                         >

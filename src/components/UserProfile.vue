@@ -6,8 +6,7 @@
                 <v-flex xs12 sm4 md6>
                     <v-layout row justify-center>
                         <v-avatar
-                        :tile="false"
-                        :size="`200px`"
+                        size="200px"
                         color="grey lighten-4"
                         >
                             <v-img :src="profileImageSrc" contain alt="avatar" :lazy-src="profileImageSrc">

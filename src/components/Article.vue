@@ -25,8 +25,7 @@
                                 <div class="headline">{{ article.title }}</div>
                                 <div class="text-xs-left grey--text">
                                     <v-avatar
-                                    :tile="false"
-                                    :size="`30px`"
+                                    size="30px"
                                     color="grey lighten-4"
                                     >
                                         <v-img :src="article.profileImageSrc" contain alt="avatar"></v-img>

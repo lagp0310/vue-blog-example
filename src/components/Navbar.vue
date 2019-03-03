@@ -2,7 +2,7 @@
     <div>
         <v-toolbar dark color="primary" class="mb-4">
             <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="showSidenav = !showSidenav"></v-toolbar-side-icon>
-            <v-img src="/public/images/logo/1/logo_transparent.png" alt="Bloggy Logo" max-width="150px" contain lazy-src="/public/images/logo/1/logo_transparent.png">
+            <v-img src="/public/images/logos/1/logo_transparent.png" alt="Bloggy Logo" max-width="150px" contain lazy-src="/public/images/logos/1/logo_transparent.png">
                 <template v-slot:placeholder>
                     <v-layout
                     fill-height
@@ -35,8 +35,7 @@
                 >
                     <span slot="activator" color="primary" dark>
                         <v-avatar
-                        :tile="false"
-                        :size="`40px`"
+                        size="40px"
                         color="grey lighten-4"
                         >
                             <v-img src="https://randomuser.me/api/portraits/men/86.jpg" contain alt="avatar" lazy-src="https://randomuser.me/api/portraits/men/86.jpg">

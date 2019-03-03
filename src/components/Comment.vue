@@ -4,8 +4,7 @@
             <v-layout row justify-center>
                 <v-flex xs3 sm2 class="pt-4 pl-4">
                     <v-avatar
-                    :tile="false"
-                    :size="`60px`"
+                    size="60px"
                     color="grey lighten-4"
                     >
                         <v-img :src="comment.user.profileImageSrc" contain alt="avatar" :lazy-src="comment.user.profileImageSrc">

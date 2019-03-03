@@ -59,6 +59,8 @@ module.exports = {
         new VueLoaderPlugin(),
     ],
     devServer: {
+        // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
+        historyApiFallback: true,
         // The url you want the webpack-dev-server to use for serving files.
         host: '127.0.0.1',
         // Can be the popular 8080 also.

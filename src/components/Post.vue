@@ -23,8 +23,7 @@
                                 <v-layout row>
                                     <v-flex xs2>
                                         <v-avatar
-                                        :tile="false"
-                                        :size="`80px`"
+                                        size="80px"
                                         color="grey lighten-4"
                                         >
                                             <v-img :src="author.profileImageSrc" contain alt="avatar" :lazy-src="author.profileImageSrc">

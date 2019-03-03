@@ -7,7 +7,7 @@
                     <v-container grid-list-md text-xs-center>
                         <v-layout row wrap>
                             <v-flex xs12>
-                                <v-img src="/public/images/logo/2/logo_transparent.png" max-height="120px" alt="Bloggy Logo" lazy-src="/public/images/logo/2/logo_transparent.png">
+                                <v-img src="/public/images/logos/2/logo_transparent.png" max-height="120px" alt="Bloggy Logo" lazy-src="/public/images/logos/2/logo_transparent.png">
                                     <template v-slot:placeholder>
                                         <v-layout
                                         fill-height
