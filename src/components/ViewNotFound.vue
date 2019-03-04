@@ -3,7 +3,7 @@
         <v-layout row wrap>
             <v-flex xs12>
                 <v-avatar
-                size="400px"
+                size="350px"
                 color="grey lighten-4"
                 >
                     <v-img src="/public/images/errors/404/221867-P19WAJ-478.jpg" alt="404 Page Not Found Image" 

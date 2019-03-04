@@ -28,7 +28,18 @@
                                     size="30px"
                                     color="grey lighten-4"
                                     >
-                                        <v-img :src="article.profileImageSrc" contain alt="avatar"></v-img>
+                                        <v-img :src="article.profileImageSrc" contain alt="avatar" :lazy-src="article.profileImageSrc">
+                                            <template v-slot:placeholder>
+                                                <v-layout
+                                                fill-height
+                                                align-center
+                                                justify-center
+                                                ma-0
+                                                >
+                                                    <v-progress-circular indeterminate color="grey" :size="20"></v-progress-circular>
+                                                </v-layout>
+                                            </template>
+                                        </v-img>
                                     </v-avatar>
                                     {{ article.author }}
                                 </div>

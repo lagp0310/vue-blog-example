@@ -74,6 +74,8 @@
                     </v-card>
                     <v-divider></v-divider>
                     <br />
+                    <WriteEditComment :level="0" :postComments="postComments" 
+                    v-on:update="updatePostComments"></WriteEditComment>
                     <Comment v-for="(comment, id) in post.comments" :key="id" :comment="comment" 
                     :level="level"></Comment>
                     <v-divider></v-divider>
@@ -87,6 +89,7 @@
 <script>
 import Comment from './Comment.vue';
 import Share from './Share.vue';
+import WriteEditComment from './WriteEditComment.vue';
 
 export default {
     props: {
@@ -95,9 +98,13 @@ export default {
         level: Number,
     },
     data: () => ({
+        postComments: [],
         showSharePost: false,
         likePost: false,
     }),
+    mounted() {
+        this.$data.postComments = this.$props.post.comments;
+    },
     methods: {
         incrementLikesCounter() {
             if(this.likePost) {
@@ -109,14 +116,14 @@ export default {
             this.likePost = !this.likePost;
             this.$forceUpdate();
         },
-        // TODO: Complete this.
-        addComment(postId) {
-            this.$forceUpdate();
+        updatePostComments(newComment) {
+            this.$props.post.comments.unshift(newComment);
         }
     },
     components: {
         Comment,
         Share,
+        WriteEditComment
     }
 };
 </script>

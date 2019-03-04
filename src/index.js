@@ -16,6 +16,7 @@ import TermsOfServiceModal from './components/TermsOfServiceModal.vue';
 import Articles from './components/Articles.vue';
 import Contact from './components/Contact.vue';
 import WriteEditPost from './components/WriteEditPost.vue';
+import WriteEditComment from './components/WriteEditComment.vue';
 
 // Vuetify CSS.
 import 'vuetify/dist/vuetify.min.css';

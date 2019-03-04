@@ -106,7 +106,7 @@ export default {
         fullName: '',
         fullNameRules: [
             v => !!v || 'Full name is required',
-            v => (v && v.length <= 30) || 'Full name must be less than 10 characters.',
+            v => (v && v.length <= 30) || 'Full name must be less than 30 characters.',
             v => /[a-zA-Z]+/.test(v) || 'Full name contain invalid characters.'
         ],
         email: '',
