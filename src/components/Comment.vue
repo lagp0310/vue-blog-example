@@ -1,7 +1,7 @@
 <template>
     <div :id="comment.commentId" :class="['comment', getLevel]">
         <v-card class="mb-4">
-            <v-container>
+            <v-container grid-list-md>
                 <v-layout row>
                     <v-flex xs3 sm2 class="pt-4 pl-4">
                         <v-avatar
@@ -48,33 +48,44 @@
                                 @click="addReplyFor(comment.commentId)">
                                     <v-icon>mdi-message-reply-text</v-icon>&nbsp;{{ comment.replies.length }}&nbsp;
                                 </v-btn>
+                                <v-btn v-if="showEditComment(comment.createdByUserID)" 
+                                round flat color="grey darken-1"
+                                @click="editComment(comment.commentId)">
+                                    <v-icon>mdi-pencil</v-icon>&nbsp;
+                                </v-btn>
                             </v-layout>
                         </v-card-text>
                     </v-flex>
                 </v-layout>
             </v-container>
         </v-card>
-        <WriteEditComment v-if="showReplyComponent" :level="getNextLevel" :postComments="[comment]" 
-        v-on:update="updatePostComments"></WriteEditComment>
+        <WriteComment v-if="showCommentEqualID(comment.commentId) && !showEditCommentData" :isThisAReply="true" 
+        :level="getNextLevel" 
+        :postComments="[comment]" v-on:update="updatePostComments"></WriteComment>
+        <EditComment v-if="showCommentEqualID(comment.commentId) && showEditCommentData" 
+        :isThisAReply="true" :level="getNextLevel" 
+        :postComments="[comment]" v-on:update="updateEditedComment" 
+        :commentContent="getEditCommentContent"></EditComment>
         <!-- https://vuejs.org/v2/guide/components-edge-cases.html#Recursive-Components -->
-        <Comment v-for="(reply, id) in comment.replies" :key="id" :comment="reply" :level="getNextLevel" 
-        class="reply"></Comment>
+        <Comment v-for="(reply, id) in comment.replies" :key="id" :comment="reply" :level="getNextLevel" class="reply"></Comment>
     </div>
 </template>
 
 <script>
-import WriteEditComment from './WriteEditComment.vue';
+import WriteComment from './WriteComment.vue';
+import EditComment from './EditComment.vue';
 
 export default {
     // For Recursive Components.
     name: 'Comment',
     props: {
         comment: Object,
-        level: Number,
+        level: Number
     },
     data: () => ({
         likeComment: false,
-        showReplyComponent: false
+        editCommentContent: '',
+        showEditCommentData: false
     }),
     methods: {
         goToHref(ref) {
@@ -90,12 +101,25 @@ export default {
             this.likeComment = !this.likeComment;
             this.$forceUpdate();
         },
-        addReplyFor(commentId) {
-            this.$data.showReplyComponent = true;
+        addReplyFor(commentID) {
+            this.$store.state.currentCommentID = commentID;
         },
         updatePostComments(newComment) {
             this.$props.comment.replies.unshift(newComment);
-            this.$data.showReplyComponent = false;
+        },
+        updateEditedComment(editedComment) {
+            this.$props.comment = editedComment;
+        },
+        showCommentEqualID(commentID) {
+            return this.$store.state.currentCommentID === commentID;
+        },
+        showEditComment(createdByUserID) {
+            return this.$store.state.user.userID === createdByUserID;
+        },
+        editComment(commentID) {
+            this.$store.commit('changeCurrentCommentID', commentID);
+            this.$data.editCommentContent = this.$props.comment.content;
+            this.$data.showEditCommentData = true;
         }
     },
     computed: {
@@ -111,10 +135,14 @@ export default {
         getNextLevel() {
             var nextLevel = this.$props.level;
             return ((++nextLevel) > 10 ? 0 : nextLevel);
+        },
+        getEditCommentContent() {
+            return this.$data.editCommentContent;
         }
     },
     components: {
-        WriteEditComment
+        WriteComment,
+        EditComment
     }
 };
 </script>

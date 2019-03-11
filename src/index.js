@@ -15,8 +15,10 @@ import About from './components/About.vue';
 import TermsOfServiceModal from './components/TermsOfServiceModal.vue';
 import Articles from './components/Articles.vue';
 import Contact from './components/Contact.vue';
-import WriteEditPost from './components/WriteEditPost.vue';
-import WriteEditComment from './components/WriteEditComment.vue';
+import WritePost from './components/WritePost.vue';
+import EditPost from './components/EditPost.vue';
+import WriteComment from './components/WriteComment.vue';
+import EditComment from './components/EditComment.vue';
 
 // Vuetify CSS.
 import 'vuetify/dist/vuetify.min.css';
@@ -34,12 +36,14 @@ const store = new Vuex.Store({
     state: {
         isLoggedIn: false,
         user: {
+            userID: 1,
             name: 'Test',
             lastname: 'Tested',
             email: 'test@example.com',
             gender: 'male',
             profileImageSrc: 'https://randomuser.me/api/portraits/men/88.jpg',
-        }
+        },
+        currentCommentID: ''
     },
     mutations: {
         changeLoggedInStatus(state) {
@@ -47,6 +51,9 @@ const store = new Vuex.Store({
         },
         updateUsersProfile(state, data) {
             state.user = data;
+        },
+        changeCurrentCommentID(state, commentID) {
+            state.currentCommentID = commentID;
         }
     }
 });
@@ -73,6 +80,7 @@ const routes = [
         props: {
             level: 0,
             author: {
+                authorID: 1,
                 name: 'Test',
                 lastname: 'Tested',
                 email: 'test@example.com',
@@ -80,6 +88,7 @@ const routes = [
                 biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
             },
             post: {
+                postID: 1,
                 title: 'Ut mattis dignissim convallis. Maecenas non magna imperdiet arcu accumsan pulvinar non.', 
                 body: '\
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed sollicitudin pharetra quam eu fermentum.\
@@ -122,10 +131,12 @@ const routes = [
                 comments: [
                     {
                         user: {
+                            userID: 1,
                             name: 'Test',
                             lastname: 'Tested',
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
+                        createdByUserID: 1,
                         commentId: '5bec34acd4',
                         postId: 567,
                         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dolor ligula, tincidunt.',
@@ -136,10 +147,12 @@ const routes = [
                     },
                     {
                         user: {
+                            userID: 2,
                             name: 'Test',
                             lastname: 'Tested',
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
+                        createdByUserID: 2,
                         commentId: '5bec34acd2',
                         postId: 567,
                         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
@@ -148,10 +161,12 @@ const routes = [
                         replies: [
                             {
                                 user: {
+                                    userID: 3,
                                     name: 'User1',
                                     lastname: 'Replied',
                                     profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                 },
+                                createdByUserID: 3,
                                 replyToId: '5bec34acd2',
                                 commentId: '5bec34ace2',
                                 postId: 567,
@@ -164,10 +179,12 @@ const routes = [
                             },
                             {
                                 user: {
+                                    userID: 4,
                                     name: 'User2',
                                     lastname: 'Replied',
                                     profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                 },
+                                createdByUserID: 4,
                                 replyToId: '5bec34acd2',
                                 commentId: '5bec34ace4',
                                 postId: 567,
@@ -177,10 +194,12 @@ const routes = [
                                 replies: [
                                     {
                                         user: {
+                                            userID: 5,
                                             name: 'User1',
                                             lastname: 'Replied',
                                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                         },
+                                        createdByUserID: 5,
                                         replyToId: '5bec34ace4',
                                         commentId: '5bec34ac77',
                                         postId: 567,
@@ -197,10 +216,12 @@ const routes = [
                     },
                     {
                         user: {
+                            userID: 1,
                             name: 'Test',
                             lastname: 'Tested',
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
+                        createdByUserID: 1,
                         commentId: '5bec34acd1',
                         postId: 567,
                         content: 'Lorem ipsum dolor sit amet.',
@@ -211,10 +232,12 @@ const routes = [
                     },
                     {
                         user: {
+                            userID: 1,
                             name: 'Test',
                             lastname: 'Tested',
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
+                        createdByUserID: 1,
                         commentId: '5bec34acd3',
                         postId: 567,
                         content: 'Lorem ipsum dolor.',
@@ -234,6 +257,7 @@ const routes = [
         path: '/users/:userId', component: UserProfile, 
         props: {
             user: {
+                userID: 1,
                 name: 'Test',
                 lastname: 'Tested',
                 email: 'test@example.com',

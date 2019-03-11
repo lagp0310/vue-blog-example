@@ -43,16 +43,32 @@
                                 :rules="textareaCommentRules"
                                 ></v-textarea>
                                 <br />
-                                <v-btn
-                                :disabled="!isFormValid"
-                                flat
-                                color="primary"
-                                @click="validate"
-                                class="mb-3"
-                                text-xs-center
-                                >
-                                    Publish Comment
-                                </v-btn>
+                                <v-container grid-list-md text-xs-center>
+                                    <v-layout row wrap>
+                                        <v-flex xs12>
+                                            <v-btn
+                                            v-if="isThisAReply"
+                                            flat
+                                            color="grey"
+                                            @click="changeCurrentCommentID('')"
+                                            class="mb-3"
+                                            text-xs-center
+                                            >
+                                                Cancel
+                                            </v-btn>
+                                            <v-btn
+                                            :disabled="!isFormValid"
+                                            flat
+                                            color="primary"
+                                            @click="validate(), $emit('hideWriteReplies')"
+                                            class="mb-3"
+                                            text-xs-center
+                                            >
+                                                Publish Comment
+                                            </v-btn>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
                             </v-form>
                         </div>
                     </v-flex>
@@ -80,7 +96,8 @@
 export default {
     props: {
         level: Number,
-        postComments: Array
+        postComments: Array,
+        isThisAReply: Boolean
     },
     data: () => ({
         showPostedCommentSnackbar: false,
@@ -98,6 +115,7 @@ export default {
                 const commentText = this.$data.textareaComment;
                 const commentObject = {
                     user,
+                    createdByUserID: user.userID,
                     commentId: '5bec34acu5',
                     postId: 567,
                     content: commentText,
@@ -118,6 +136,9 @@ export default {
 
                 return true;
             }
+        },
+        changeCurrentCommentID(commentID) {
+            this.$store.commit('changeCurrentCommentID', commentID);
         }
     },
     computed: {

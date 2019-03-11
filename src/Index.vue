@@ -10,15 +10,13 @@
 
 <script>
 import Navbar from './components/Navbar.vue';
-import Article from './components/Article.vue';
 
 export default {
     data: () => ({
         //
     }),
     components: {
-        Navbar,
-        Article,
+        Navbar
     }
 };
 </script>

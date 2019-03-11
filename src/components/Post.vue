@@ -14,6 +14,7 @@
                             {{ post.body }}
                         </v-card-text>
                         <v-divider></v-divider>
+                        <!-- TODO: Use https://vuetifyjs.com/en/components/chips for Tags. -->
                         <v-card-text class="font-weight-light font-italic text-lowercase"> 
                             Tags: {{ post.tags }}
                         </v-card-text>
@@ -61,9 +62,15 @@
                                     <v-icon v-if="likePost">mdi-heart</v-icon>&nbsp;
                                     {{ post.likes }}
                                 </v-btn>
-                                <v-btn flat round color="blue darken-1">
+                                <v-btn flat round color="blue darken-1" 
+                                @click="goToWriteComment('#write-post-comment')">
                                     <v-icon>mdi-message-reply-text</v-icon>&nbsp;
                                     {{ post.comments.length }}
+                                </v-btn>
+                                <v-btn v-if="showEditPost(author.authorID)" 
+                                round flat color="grey darken-1"
+                                @click="editPost(post.postID)">
+                                    <v-icon>mdi-pencil</v-icon>&nbsp;
                                 </v-btn>
                                 <v-btn flat round color="green darken-1"
                                 @click="showSharePost = !showSharePost">
@@ -74,14 +81,14 @@
                     </v-card>
                     <v-divider></v-divider>
                     <br />
-                    <WriteEditComment :level="0" :postComments="postComments" 
-                    v-on:update="updatePostComments"></WriteEditComment>
-                    <Comment v-for="(comment, id) in post.comments" :key="id" :comment="comment" 
-                    :level="level"></Comment>
+                    <WriteComment id="write-post-comment" :isThisAReply="false" :level="0" 
+                    :postComments="postComments" v-on:update="updatePostComments"></WriteComment>
+                    <Comment v-for="(comment, id) in post.comments" :key="id" :comment="comment" :level="level"></Comment>
                     <v-divider></v-divider>
                 </v-flex>
             </v-layout>
         </v-container>
+        <EditPost :post.sync="post" :showDialog.sync="showEditPostModal"></EditPost>
         <Share :show.sync="showSharePost"></Share>
     </div>
 </template>
@@ -89,7 +96,8 @@
 <script>
 import Comment from './Comment.vue';
 import Share from './Share.vue';
-import WriteEditComment from './WriteEditComment.vue';
+import WriteComment from './WriteComment.vue';
+import EditPost from './EditPost.vue';
 
 export default {
     props: {
@@ -101,6 +109,7 @@ export default {
         postComments: [],
         showSharePost: false,
         likePost: false,
+        showEditPostModal: false
     }),
     mounted() {
         this.$data.postComments = this.$props.post.comments;
@@ -118,12 +127,22 @@ export default {
         },
         updatePostComments(newComment) {
             this.$props.post.comments.unshift(newComment);
+        },
+        goToWriteComment(ref) {
+            location.href = ref;
+        },
+        showEditPost(authorID) {
+            return this.$store.state.user.userID === authorID;
+        },
+        editPost(postID) {
+            this.$data.showEditPostModal = true;
         }
     },
     components: {
         Comment,
         Share,
-        WriteEditComment
+        WriteComment,
+        EditPost
     }
 };
 </script>
