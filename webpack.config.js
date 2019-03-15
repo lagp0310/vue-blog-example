@@ -5,8 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-    devtool: 'source-map',
-    mode: "production",
+    devtool: "source-map",
+    mode: "development",
     entry: "./src/index.js",
     output: {
         // options related to how webpack emits results

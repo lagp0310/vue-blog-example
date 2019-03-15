@@ -129,7 +129,7 @@
                             <v-form ref="form2">
                                 <v-checkbox
                                 v-model="emailNewContent"
-                                color="blue darken-4"
+                                color="blue darken-1"
                                 >
                                     <div slot="label">
                                         Send me an email with new content each week.
@@ -137,7 +137,7 @@
                                 </v-checkbox>
                                 <v-checkbox
                                 v-model="emailCommentPost"
-                                color="blue darken-4"
+                                color="blue darken-1"
                                 >
                                     <div slot="label">
                                         Send me an email when someone writes a Comment in one of my Posts.
@@ -145,7 +145,7 @@
                                 </v-checkbox>
                                 <v-checkbox
                                 v-model="emailReplyComment"
-                                color="blue darken-4"
+                                color="blue darken-1"
                                 >
                                     <div slot="label">
                                         Send me an email when someone replies one of my Comments.

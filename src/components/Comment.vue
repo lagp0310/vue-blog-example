@@ -1,5 +1,5 @@
 <template>
-    <div :id="comment.commentId" :class="['comment', getLevel]">
+    <div :id="comment.commentID" :class="['comment', getLevel]">
         <v-card class="mb-4">
             <v-container grid-list-md>
                 <v-layout row>
@@ -45,12 +45,12 @@
                                     {{ comment.likes }}&nbsp;
                                 </v-btn>
                                 <v-btn round flat color="blue darken-1"
-                                @click="addReplyFor(comment.commentId)">
+                                @click="addReplyFor(comment.commentID)">
                                     <v-icon>mdi-message-reply-text</v-icon>&nbsp;{{ comment.replies.length }}&nbsp;
                                 </v-btn>
                                 <v-btn v-if="showEditComment(comment.createdByUserID)" 
                                 round flat color="grey darken-1"
-                                @click="editComment(comment.commentId)">
+                                @click="editComment(comment.commentID)">
                                     <v-icon>mdi-pencil</v-icon>&nbsp;
                                 </v-btn>
                             </v-layout>
@@ -59,33 +59,57 @@
                 </v-layout>
             </v-container>
         </v-card>
-        <WriteComment v-if="showCommentEqualID(comment.commentId) && !showEditCommentData" :isThisAReply="true" 
+        <WriteComment 
+        v-if="showCommentEqualID(comment.commentID) && !showEditCommentData" 
+        :showCancelButton="true" 
         :level="getNextLevel" 
-        :postComments="[comment]" v-on:update="updatePostComments"></WriteComment>
-        <EditComment v-if="showCommentEqualID(comment.commentId) && showEditCommentData" 
-        :isThisAReply="true" :level="getNextLevel" 
-        :postComments="[comment]" v-on:update="updateEditedComment" 
-        :commentContent="getEditCommentContent"></EditComment>
+        :postComments="[comment]"
+        ></WriteComment>
+        <EditComment 
+        v-if="showCommentEqualID(comment.commentID) && showEditCommentData" 
+        :level="getNextLevel" 
+        :comment.sync="comment"
+        :postComments="[comment]"
+        :showCancelButton="true" 
+        :showEditComment.sync="showEditCommentData"
+        :showEditedCommentSnackbar.sync="showEditedCommentSnackbar"
+        ></EditComment>
         <!-- https://vuejs.org/v2/guide/components-edge-cases.html#Recursive-Components -->
-        <Comment v-for="(reply, id) in comment.replies" :key="id" :comment="reply" :level="getNextLevel" class="reply"></Comment>
+        <Comment v-for="(reply, id) in comment.replies" :key="id" :comment="reply" :level="getNextLevel" 
+        class="reply"></Comment>
+        <Snackbar 
+        :show.sync="showEditedCommentSnackbar" 
+        snackbarColor="grey darken-1" 
+        snackbarText="Comment was updated!" 
+        :snackbarCloseTime="6000"
+        snackbarCloseText="Close"
+        ></Snackbar>
     </div>
 </template>
 
 <script>
 import WriteComment from './WriteComment.vue';
 import EditComment from './EditComment.vue';
+import Snackbar from './Snackbar.vue';
 
 export default {
     // For Recursive Components.
     name: 'Comment',
     props: {
-        comment: Object,
-        level: Number
+        comment: {
+            type: Object,
+            required: true
+        },
+        level: {
+            type: Number,
+            required: true
+        }
     },
     data: () => ({
         likeComment: false,
         editCommentContent: '',
-        showEditCommentData: false
+        showEditCommentData: false,
+        showEditedCommentSnackbar: false
     }),
     methods: {
         goToHref(ref) {
@@ -103,12 +127,6 @@ export default {
         },
         addReplyFor(commentID) {
             this.$store.state.currentCommentID = commentID;
-        },
-        updatePostComments(newComment) {
-            this.$props.comment.replies.unshift(newComment);
-        },
-        updateEditedComment(editedComment) {
-            this.$props.comment = editedComment;
         },
         showCommentEqualID(commentID) {
             return this.$store.state.currentCommentID === commentID;
@@ -135,14 +153,12 @@ export default {
         getNextLevel() {
             var nextLevel = this.$props.level;
             return ((++nextLevel) > 10 ? 0 : nextLevel);
-        },
-        getEditCommentContent() {
-            return this.$data.editCommentContent;
         }
     },
     components: {
         WriteComment,
-        EditComment
+        EditComment,
+        Snackbar
     }
 };
 </script>

@@ -15,10 +15,6 @@ import About from './components/About.vue';
 import TermsOfServiceModal from './components/TermsOfServiceModal.vue';
 import Articles from './components/Articles.vue';
 import Contact from './components/Contact.vue';
-import WritePost from './components/WritePost.vue';
-import EditPost from './components/EditPost.vue';
-import WriteComment from './components/WriteComment.vue';
-import EditComment from './components/EditComment.vue';
 
 // Vuetify CSS.
 import 'vuetify/dist/vuetify.min.css';
@@ -43,7 +39,8 @@ const store = new Vuex.Store({
             gender: 'male',
             profileImageSrc: 'https://randomuser.me/api/portraits/men/88.jpg',
         },
-        currentCommentID: ''
+        currentCommentID: '',
+        lastWrittenCommentID: 7
     },
     mutations: {
         changeLoggedInStatus(state) {
@@ -54,6 +51,9 @@ const store = new Vuex.Store({
         },
         changeCurrentCommentID(state, commentID) {
             state.currentCommentID = commentID;
+        },
+        incrementLastWrittenCommentID(state) {
+            state.lastWrittenCommentID++;
         }
     }
 });
@@ -137,13 +137,13 @@ const routes = [
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         createdByUserID: 1,
-                        commentId: '5bec34acd4',
+                        commentID: 1,
                         postId: 567,
                         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dolor ligula, tincidunt.',
                         likes: 44,
                         replies: [],
-                        createdAt: '02-20-19-14:30',
-                        updatedAt: '02-20-19-14:35'
+                        createdAt: '1552435492020',
+                        updatedAt: '1552435492020'
                     },
                     {
                         user: {
@@ -153,7 +153,7 @@ const routes = [
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         createdByUserID: 2,
-                        commentId: '5bec34acd2',
+                        commentID: 2,
                         postId: 567,
                         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
                         consectetur consectetur. Pellentesque vel leo lacinia.',
@@ -167,15 +167,15 @@ const routes = [
                                     profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                 },
                                 createdByUserID: 3,
-                                replyToId: '5bec34acd2',
-                                commentId: '5bec34ace2',
+                                replyToId: 2,
+                                commentID: 3,
                                 postId: 567,
                                 content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
                                 consectetur consectetur. Pellentesque vel leo lacinia.',
                                 likes: 1,
                                 replies: [],
-                                createdAt: '02-20-19-14:10',
-                                updatedAt: '02-20-19-14:39'
+                                createdAt: '1552435603459',
+                                updatedAt: '1552435603459'
                             },
                             {
                                 user: {
@@ -185,8 +185,8 @@ const routes = [
                                     profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                 },
                                 createdByUserID: 4,
-                                replyToId: '5bec34acd2',
-                                commentId: '5bec34ace4',
+                                replyToId: 2,
+                                commentID: 4,
                                 postId: 567,
                                 content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
                                 consectetur consectetur. Pellentesque vel leo lacinia.',
@@ -200,19 +200,23 @@ const routes = [
                                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                         },
                                         createdByUserID: 5,
-                                        replyToId: '5bec34ace4',
-                                        commentId: '5bec34ac77',
+                                        replyToId: 4,
+                                        commentID: 5,
                                         postId: 567,
                                         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
                                         consectetur consectetur. Pellentesque vel leo lacinia.',
                                         likes: 1,
                                         replies: [],
-                                        createdAt: '02-20-19-12:00',
-                                        updatedAt: '02-20-19-14:30'
+                                        createdAt: '1552435546827',
+                                        updatedAt: '1552435546827'
                                     }
-                                ]
+                                ],
+                                createdAt: '1552435630766',
+                                updatedAt: '1552435630766'
                             }
-                        ]
+                        ],
+                        createdAt: '1552435511192',
+                        updatedAt: '1552435511192'
                     },
                     {
                         user: {
@@ -222,13 +226,13 @@ const routes = [
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         createdByUserID: 1,
-                        commentId: '5bec34acd1',
+                        commentID: 6,
                         postId: 567,
                         content: 'Lorem ipsum dolor sit amet.',
                         likes: 0,
                         replies: [],
-                        createdAt: '02-20-19-09:11',
-                        updatedAt: '02-20-19-17:50'
+                        createdAt: '1552435558863',
+                        updatedAt: '1552435558863'
                     },
                     {
                         user: {
@@ -238,17 +242,17 @@ const routes = [
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         createdByUserID: 1,
-                        commentId: '5bec34acd3',
+                        commentID: 7,
                         postId: 567,
                         content: 'Lorem ipsum dolor.',
                         likes: 12,
                         replies: [],
-                        createdAt: '02-20-19-23:30',
-                        updatedAt: '02-20-19-23:32'
+                        createdAt: '1552435558870',
+                        updatedAt: '1552435558870'
                     }
                 ],
                 postImageSrc: 'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
-                tags: '#dev #test #info',
+                tags: ['#dev', '#test', '#info'],
                 likes: 45
             }
         }

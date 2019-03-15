@@ -24,7 +24,10 @@
 <script>
 export default {
     props: {
-        show: Boolean,
+        show: {
+            type: Boolean,
+            required: true
+        }
     },
     data: () => ({
         tiles: [

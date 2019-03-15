@@ -44,7 +44,7 @@
                                     <v-checkbox
                                     v-model="checkbox"
                                     label="Remember Me"
-                                    color="blue darken-4"
+                                    color="blue darken-1"
                                     required
                                     ></v-checkbox>
                                     <v-btn

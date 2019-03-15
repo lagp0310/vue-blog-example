@@ -75,7 +75,10 @@ import Share from './Share.vue';
 
 export default {
     props: {
-        article: Object,
+        article: {
+            type: Object,
+            required: true
+        }
     },
     data: () => ({
         showShare: false,

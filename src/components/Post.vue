@@ -14,9 +14,10 @@
                             {{ post.body }}
                         </v-card-text>
                         <v-divider></v-divider>
-                        <!-- TODO: Use https://vuetifyjs.com/en/components/chips for Tags. -->
-                        <v-card-text class="font-weight-light font-italic text-lowercase"> 
-                            Tags: {{ post.tags }}
+                        <v-card-text class="font-weight-light">
+                            <v-chip v-for="tag in post.tags" :key="tag.id">
+                                {{ tag }}
+                            </v-chip>
                         </v-card-text>
                         <v-divider></v-divider>
                         <v-card-title primary-title>
@@ -81,7 +82,7 @@
                     </v-card>
                     <v-divider></v-divider>
                     <br />
-                    <WriteComment id="write-post-comment" :isThisAReply="false" :level="0" 
+                    <WriteComment id="write-post-comment" :level="0" 
                     :postComments="postComments" v-on:update="updatePostComments"></WriteComment>
                     <Comment v-for="(comment, id) in post.comments" :key="id" :comment="comment" :level="level"></Comment>
                     <v-divider></v-divider>
@@ -98,12 +99,22 @@ import Comment from './Comment.vue';
 import Share from './Share.vue';
 import WriteComment from './WriteComment.vue';
 import EditPost from './EditPost.vue';
+import Snackbar from './Snackbar.vue';
 
 export default {
     props: {
-        author: Object,
-        post: Object,
-        level: Number,
+        author: {
+            type: Object,
+            required: true
+        },
+        post: {
+            type: Object,
+            required: true
+        },
+        level: {
+            type: Number,
+            required: true
+        }
     },
     data: () => ({
         postComments: [],
@@ -142,7 +153,8 @@ export default {
         Comment,
         Share,
         WriteComment,
-        EditPost
+        EditPost,
+        Snackbar
     }
 };
 </script>

@@ -47,7 +47,7 @@
                                     <v-layout row wrap>
                                         <v-flex xs12>
                                             <v-btn
-                                            v-if="isThisAReply"
+                                            v-if="showCancelButton"
                                             flat
                                             color="grey"
                                             @click="changeCurrentCommentID('')"
@@ -60,7 +60,7 @@
                                             :disabled="!isFormValid"
                                             flat
                                             color="primary"
-                                            @click="validate(), $emit('hideWriteReplies')"
+                                            @click="validate()"
                                             class="mb-3"
                                             text-xs-center
                                             >
@@ -75,29 +75,33 @@
                 </v-layout>
             </v-container>
         </v-card>
-        <v-snackbar
-        v-model="showPostedCommentSnackbar"
-        color="grey darken-2"
-        timeout="6000"
-        >
-            Comment was posted!
-            <v-btn
-            dark
-            flat
-            @click="showPostedCommentSnackbar = false"
-            >
-                Close
-            </v-btn>
-        </v-snackbar>
+        <Snackbar 
+        :show.sync="showPostedCommentSnackbar" 
+        snackbarColor="grey darken-1" 
+        snackbarText="Comment was posted!" 
+        :snackbarCloseTime="6000"
+        snackbarCloseText="Close"
+        ></Snackbar>
     </div>
 </template>
 
 <script>
+import Snackbar from './Snackbar.vue';
+
 export default {
     props: {
-        level: Number,
-        postComments: Array,
-        isThisAReply: Boolean
+        level: {
+            type: Number,
+            required: true
+        },
+        postComments: {
+            type: Array,
+            required: true
+        },
+        showCancelButton: {
+            type: Boolean,
+            required: true
+        }
     },
     data: () => ({
         showPostedCommentSnackbar: false,
@@ -113,21 +117,25 @@ export default {
             if(this.$refs.form.validate()) {
                 const user = this.$store.state.user;
                 const commentText = this.$data.textareaComment;
+
+                this.$store.commit('incrementLastWrittenCommentID');
+                const commentID = this.$store.state.lastWrittenCommentID;
+
                 const commentObject = {
                     user,
                     createdByUserID: user.userID,
-                    commentId: '5bec34acu5',
+                    commentID: commentID,
                     postId: 567,
                     content: commentText,
                     likes: 44,
                     replies: [],
-                    createdAt: '02-20-19-14:30',
-                    updatedAt: '02-20-19-14:35'
+                    createdAt: Date.now(),
+                    updatedAt: Date.now()
                 };
-                
-                this.$emit('update', commentObject);
 
-                location.href = '#' + this.$props.postComments[0].commentId;
+                this.$props.postComments.unshift(commentObject);
+
+                location.href = '#' + this.$props.postComments[0].commentID;
 
                 this.$data.showPostedCommentSnackbar = true;
 
@@ -148,6 +156,9 @@ export default {
         getProfileImageSrc() {
             return this.$store.state.user.profileImageSrc;
         }
+    },
+    components: {
+        Snackbar
     }
 };
 </script>

@@ -4,14 +4,14 @@
             <v-dialog v-model="showDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
                 <v-card>
                     <v-toolbar dark color="primary">
-                        <v-btn icon dark @click="$emit('update:showDialog', false)">
+                        <v-btn icon dark @click="$emit('update:showDialog', false), resetEditPostContent()">
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
                         <v-toolbar-title>Edit Post</v-toolbar-title>
                         <v-spacer></v-spacer>
                         <v-toolbar-items>
                             <v-btn :disabled="!allFieldsValid" dark flat 
-                            @click="validate(), $emit('update:showDialog', false)">Save</v-btn>
+                            @click="validate()">Save</v-btn>
                         </v-toolbar-items>
                     </v-toolbar>
                     <v-list three-line subheader>
@@ -67,84 +67,178 @@
                         <v-subheader>Tags</v-subheader>
                         <v-container grid-list-md text-xs-center>
                             <v-layout row wrap justify-center>
-                                <v-flex xs12>
+                                <v-flex xs12 sm4>
                                     <v-form
                                     ref="tags"
                                     v-model="isTagsFormValid"
                                     lazy-validation
                                     >
                                         <v-text-field
-                                        v-model="postTags"
+                                        v-model="newTag"
                                         :rules="postTagsRules"
-                                        label="Post Tags"
-                                        required
+                                        label="New Tag"
+                                        prefix="#"
                                         ></v-text-field>
+                                        <v-btn
+                                        fab
+                                        small
+                                        color="primary"
+                                        @click="addTag(newTag)"
+                                        >
+                                            <v-icon>mdi-plus</v-icon>
+                                        </v-btn>
                                     </v-form>
+                                </v-flex>
+                                <v-flex sm8>
+                                    <v-chip v-for="(tag, id) in postTags" :key="id" v-model="tag.show" close
+                                    @input="removeTag(tag)">
+                                        {{ tag.tagName }}
+                                    </v-chip>
                                 </v-flex>
                             </v-layout>
                         </v-container>
                     </v-list>
                 </v-card>
             </v-dialog>
+            <Snackbar 
+            :show.sync="showEmptySnackbar" 
+            snackbarColor="grey darken-1" 
+            snackbarText="Tag cannot be empty!" 
+            :snackbarCloseTime="6000"
+            snackbarCloseText="Close"
+            ></Snackbar>
+            <Snackbar 
+            :show.sync="showRepeatedTagSnackbar" 
+            snackbarColor="grey darken-1" 
+            snackbarText="Tag is already in the List!" 
+            :snackbarCloseTime="6000"
+            snackbarCloseText="Close"
+            ></Snackbar>
         </v-layout>
     </v-container>
 </template>
 
 <script>
+import Snackbar from './Snackbar.vue';
+
 export default {
     props: {
-        post: Object,
-        showDialog: Boolean
+        post: {
+            type: Object,
+            required: true
+        },
+        showDialog: {
+            type: Boolean,
+            required: true
+        }
     },
     data: () => ({
         isTitleFormValid: false,
         isBodyFormValid: false,
         isTagsFormValid: false,
+        showEmptySnackbar: false,
+        showRepeatedTagSnackbar: false,
         postTitle: '',
         postTitleRules: [
             v => !!v || 'Post title is required.',
             v => (v && v.length < 100) || 'Post title must be less than 100 characters.',
-            v => /[a-zA-Z0-9\\W]+/.test(v) || 'Post title contain invalid characters.'
+            v => /[a-z]+[0-9\W]*/gi.test(v) || 'Post title contain invalid characters.'
         ],
         postBody: '',
         postBodyRules: [
             v => !!v || 'Body is required.',
             v => (v && v.length < 100000) || 'Body must be less than 100,000 characters.',
-            v => /[a-zA-Z0-9\\W]+/.test(v) || 'Body contain invalid characters.'
+            v => /[a-z]+[0-9\W]*/gi.test(v) || 'Body contain invalid characters.'
         ],
-        postTags: '',
+        newTag: '',
+        postTags: [],
         postTagsRules: [
-            v => !!v || 'Tags are required.',
-            v => (v && v.length < 100) || 'Tags must be less than 100 characters.',
-            v => /[a-zA-Z0-9]+/.test(v) || 'Full name contain invalid characters.'
+            v => !!v || 'Tag is required.',
+            v => (v && v.length < 20) || 'Tags must be less than 20 characters.',
+            v => /^[a-z0-9]*$/gi.test(v) || 'Tags contain invalid characters.'
         ]
     }),
-    beforeMount() {
+    mounted() {
         this.$data.postTitle = this.$props.post.title;
         this.$data.postBody = this.$props.post.body;
-        this.$data.postTags = this.$props.post.tags;
+        var that = this;
+        this.$props.post.tags.forEach(function(value) {
+            that.$data.postTags.push({
+                tagName: value,
+                show: true
+            });
+        });
     },
     methods: {
+        isTagAlreadyInArray(tag) {
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
+            return((this.$data.postTags.findIndex(function(value) {
+                return value.tagName === tag
+            }) === -1) ? false : true);
+        },
+        isTagEmpty(tag) {
+            return(!tag ? true : false);
+        },
+        addTag(newTag) {
+            if(this.$refs.tags.validate()) {
+                if(this.isTagEmpty(newTag)) {
+                    this.$refs.tags.validate();
+                    this.$data.showEmptySnackbar = true;
+                    return;
+                }
+
+                newTag = newTag.replace(/[#]+/g, '');
+                newTag = '#'.concat(newTag);
+
+                if(this.isTagAlreadyInArray(newTag)) {
+                    this.$data.showRepeatedTagSnackbar = true;
+                    return;
+                }
+
+                this.$data.postTags.push({
+                    tagName: newTag,
+                    show: true
+                });
+                this.$data.newTag = '';
+                this.$refs.tags.resetValidation();
+            }            
+        },
+        removeTag(tagObject) {
+            this.$data.postTags.splice(this.$data.postTags.indexOf(tagObject), 1);
+        },
+        allFieldsValid() {
+            return(this.$data.isTitleFormValid && this.$data.isBodyFormValid);
+        },
         validate() {
-            if(this.$refs.title.validate() &&
-                this.$refs.body.validate() &&
-                this.$refs.tags.validate()) {
+            if(this.$refs.title.validate() && this.$refs.body.validate()) {
                 this.$props.post.title = this.$data.postTitle;
                 this.$props.post.body = this.$data.postBody;
-                this.$props.post.tags = this.$data.postTags;
-                this.$emit('update:post', this.$props.post);
+                var tags = [];
+                this.$data.postTags.forEach(function(value) {
+                    tags.push(value.tagName);
+                });
+                this.$props.post.tags = tags;
                 this.$emit('update:showDialog', false);
                 return true;
             }
 
             return false;
         },
-        allFieldsValid() {
-            return(this.$data.isTitleFormValid && this.$data.isBodyFormValid && this.$data.isTagsFormValid);
+        resetEditPostContent() {
+            this.$data.postTitle = this.$props.post.title;
+            this.$data.postBody = this.$props.post.body;
+            this.$data.postTags = [];
+            var that = this;
+            this.$props.post.tags.forEach(function(value) {
+                that.$data.postTags.push({
+                    tagName: value,
+                    show: true
+                });
+            });
         }
     },
     components: {
-        //
+        Snackbar
     }
 };
 </script>

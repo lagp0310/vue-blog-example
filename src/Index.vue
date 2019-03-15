@@ -1,4 +1,6 @@
 <template>
+    <!-- TODO: Better property validation for each Component. -->
+    <!-- TODO: Snackbar stack. -->
     <v-app>
         <Navbar></Navbar>
         <!-- This is handled by vue-router module. -->

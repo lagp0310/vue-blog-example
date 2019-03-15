@@ -137,24 +137,19 @@
                 </v-dialog>
             </v-layout>
         </v-container>
-        <v-snackbar
-        v-model="showProfileUpdatedSnackbar"
-        color="grey darken-2"
-        timeout="6000"
-        >
-            Profile was updated!
-            <v-btn
-            dark
-            flat
-            @click="showProfileUpdatedSnackbar = false"
-            >
-                Close
-            </v-btn>
-        </v-snackbar>
+        <Snackbar 
+        :show.sync="showProfileUpdatedSnackbar" 
+        snackbarColor="grey darken-1" 
+        snackbarText="Profile was updated!" 
+        :snackbarCloseTime="6000"
+        snackbarCloseText="Close"
+        ></Snackbar>
     </div>
 </template>
 
 <script>
+import Snackbar from './Snackbar.vue';
+
 export default {
     data: () => ({
         showChangePasswordDialog: false,
@@ -235,6 +230,9 @@ export default {
             setTimeout(() => (this[l] = false), 3000)
             this.loader = null
         }
+    },
+    components: {
+        Snackbar
     }
 }
 </script>

@@ -29,8 +29,14 @@
 <script>
 export default {
     props: {
-        agree: Boolean,
-        showTerms: Boolean,
+        agree: {
+            type: Boolean,
+            required: true
+        },
+        showTerms: {
+            type: Boolean,
+            required: true
+        }
     },
     data: () => ({
         dialog: true
