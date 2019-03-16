@@ -1,5 +1,4 @@
 <template>
-    <!-- TODO: Check Vuetify Directives. -->
     <v-app>
         <Navbar></Navbar>
         <!-- This is handled by vue-router module. -->

@@ -108,7 +108,7 @@ export default {
                 const replyText = this.$data.textareaReply;
 
                 this.$store.commit('incrementLastWrittenCommentID');
-                const commentID = this.$store.state.lastWrittenCommentID;
+                const commentID = 'c'.concat(this.$store.state.lastWrittenCommentID);
 
                 const replyObject = {
                     user,
@@ -124,13 +124,12 @@ export default {
 
                 this.$props.comment.replies.push(replyObject);
 
-                // location.href = '#' + this.$props.comment.replies[this.$props.comment.replies.length].commentID;
-
                 this.$data.textareaReply = '';
                 this.$data.isFormValid = true;
 
                 this.$emit('hideWriteReply');
                 this.$emit('update:showPostedReplySnackbar', true);
+                this.$emit('updatedCommentReplies');
 
                 return true;
             }

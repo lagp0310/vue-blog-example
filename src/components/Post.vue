@@ -15,7 +15,7 @@
                         </v-card-text>
                         <v-divider></v-divider>
                         <v-card-text class="font-weight-light">
-                            <v-chip v-for="tag in post.tags" :key="tag.id">
+                            <v-chip v-for="tag in post.tags" :key="tag.id" v-ripple>
                                 {{ tag }}
                             </v-chip>
                         </v-card-text>
@@ -64,7 +64,7 @@
                                     {{ post.likes }}
                                 </v-btn>
                                 <v-btn flat round color="blue darken-1" 
-                                @click="goToWriteComment('#write-post-comment')">
+                                @click="$vuetify.goTo('#write-post-comment'), goToRef('#write-post-comment')">
                                     <v-icon>mdi-message-reply-text</v-icon>&nbsp;
                                     {{ post.comments.length }}
                                 </v-btn>
@@ -82,8 +82,8 @@
                     </v-card>
                     <v-divider></v-divider>
                     <br />
-                    <WriteComment id="write-post-comment" :level="0" :showCancelButton="false" 
-                    :postComments="postComments" @update="updatePostComments"></WriteComment>
+                    <WriteComment id="write-post-comment" :postComments.sync="post.comments" 
+                    @updatedComments="$forceUpdate(), scrollToLastPostedComment()"></WriteComment>
                     <Comment v-for="(comment, id) in post.comments" :key="id" :comment="comment" :level="level"></Comment>
                     <v-divider></v-divider>
                 </v-flex>
@@ -116,15 +116,18 @@ export default {
         }
     },
     data: () => ({
-        postComments: [],
         showSharePost: false,
         likePost: false,
         showEditPostModal: false
     }),
-    mounted() {
-        this.$data.postComments = this.$props.post.comments;
-    },
     methods: {
+        scrollToLastPostedComment() {
+            var that = this;
+            this.$nextTick(() => {
+                that.$vuetify.goTo('#'.concat(that.$props.post.comments[0].commentID));                
+                that.goToRef('#'.concat(that.$props.post.comments[0].commentID));
+            });
+        },
         incrementLikesCounter() {
             if(this.likePost) {
                 this.$props.post.likes--;
@@ -138,7 +141,7 @@ export default {
         updatePostComments(newComment) {
             this.$props.post.comments.unshift(newComment);
         },
-        goToWriteComment(ref) {
+        goToRef(ref) {
             location.href = ref;
         },
         showEditPost(authorID) {

@@ -1,5 +1,5 @@
 <template>
-    <div :class="['comment', 'level-' + level]">
+    <div class="comment level-0">
         <v-card class="mb-4">
             <v-container justify-center>
                 <v-layout row>
@@ -80,10 +80,6 @@ import Snackbar from './Snackbar.vue';
 
 export default {
     props: {
-        level: {
-            type: Number,
-            required: true
-        },
         postComments: {
             type: Array,
             required: true
@@ -105,7 +101,7 @@ export default {
                 const commentText = this.$data.textareaComment;
 
                 this.$store.commit('incrementLastWrittenCommentID');
-                const commentID = this.$store.state.lastWrittenCommentID;
+                const commentID = 'c'.concat(this.$store.state.lastWrittenCommentID);
 
                 const commentObject = {
                     user,
@@ -121,14 +117,14 @@ export default {
 
                 this.$props.postComments.unshift(commentObject);
 
-                location.href = '#' + this.$props.postComments[0].commentID;
-
                 this.$data.showPostedCommentSnackbar = true;
 
                 this.$data.textareaComment = '';
                 this.$data.isFormValid = true;
 
                 this.$refs.form.resetValidation();
+
+                this.$emit('updatedComments');
 
                 return true;
             }

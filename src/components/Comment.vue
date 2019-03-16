@@ -27,7 +27,7 @@
                         <!-- Thanks: https://forum.vuejs.org/t/how-to-handle-anchors-bookmarks-with-vue-router/14563/6 -->
                         <router-link v-if="comment.replyToId" class="font-weight-regular font-italic caption"
                         :to="getReferenceToComment">
-                            <div @click="goToHref(getReferenceToComment)">
+                            <div @click="goToRef(getReferenceToComment)">
                                 Reply to: {{ comment.replyToId }}
                             </div>
                         </router-link>
@@ -65,6 +65,7 @@
         :comment="comment"
         :showPostedReplySnackbar.sync="showPostedReplySnackbar"
         @hideWriteReply="changeCurrentCommentID('')"
+        @updatedCommentReplies="scrollToLastPostedReply()"
         ></WriteReply>
         <EditComment 
         v-if="showCommentEqualID(comment.commentID) && showEditCommentData" 
@@ -121,7 +122,14 @@ export default {
         showPostedReplySnackbar: false
     }),
     methods: {
-        goToHref(ref) {
+        scrollToLastPostedReply() {
+            var that = this;
+            this.$nextTick(() => {
+                that.$vuetify.goTo('#'.concat(that.getLastReplyID));                
+                that.goToRef('#'.concat(that.getLastReplyID));
+            });
+        },
+        goToRef(ref) {
             location.href = ref;
         },
         incrementLikesCounter() {
@@ -165,6 +173,10 @@ export default {
         getNextLevel() {
             var nextLevel = this.$props.level;
             return ((++nextLevel) > 10 ? 0 : nextLevel);
+        },
+        getLastReplyID() {
+            var repliesLength = this.$props.comment.replies.length;
+            return this.$props.comment.replies[repliesLength - 1].commentID;
         }
     },
     components: {

@@ -65,6 +65,9 @@ Vue.config.productionTip = false;
 // either be an actual component constructor created via
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
+
+// Some information about querySelector for the commentID: 
+// https://stackoverflow.com/questions/37270787/uncaught-syntaxerror-failed-to-execute-queryselector-on-document
 const routes = [
     { path: '*', component: ViewNotFound },
     { path: '/', redirect: '/articles' },
@@ -137,7 +140,7 @@ const routes = [
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         createdByUserID: 1,
-                        commentID: 1,
+                        commentID: 'c1',
                         postId: 567,
                         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dolor ligula, tincidunt.',
                         likes: 44,
@@ -153,7 +156,7 @@ const routes = [
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         createdByUserID: 2,
-                        commentID: 2,
+                        commentID: 'c2',
                         postId: 567,
                         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
                         consectetur consectetur. Pellentesque vel leo lacinia.',
@@ -167,8 +170,8 @@ const routes = [
                                     profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                 },
                                 createdByUserID: 3,
-                                replyToId: 2,
-                                commentID: 3,
+                                replyToId: 'c2',
+                                commentID: 'c3',
                                 postId: 567,
                                 content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
                                 consectetur consectetur. Pellentesque vel leo lacinia.',
@@ -185,8 +188,8 @@ const routes = [
                                     profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                 },
                                 createdByUserID: 4,
-                                replyToId: 2,
-                                commentID: 4,
+                                replyToId: 'c2',
+                                commentID: 'c4',
                                 postId: 567,
                                 content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
                                 consectetur consectetur. Pellentesque vel leo lacinia.',
@@ -200,8 +203,8 @@ const routes = [
                                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                         },
                                         createdByUserID: 5,
-                                        replyToId: 4,
-                                        commentID: 5,
+                                        replyToId: 'c4',
+                                        commentID: 'c5',
                                         postId: 567,
                                         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
                                         consectetur consectetur. Pellentesque vel leo lacinia.',
@@ -226,7 +229,7 @@ const routes = [
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         createdByUserID: 1,
-                        commentID: 6,
+                        commentID: 'c6',
                         postId: 567,
                         content: 'Lorem ipsum dolor sit amet.',
                         likes: 0,
@@ -242,7 +245,7 @@ const routes = [
                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                         },
                         createdByUserID: 1,
-                        commentID: 7,
+                        commentID: 'c7',
                         postId: 567,
                         content: 'Lorem ipsum dolor.',
                         likes: 12,
