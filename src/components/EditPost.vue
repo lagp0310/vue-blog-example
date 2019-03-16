@@ -100,21 +100,21 @@
                     </v-list>
                 </v-card>
             </v-dialog>
-            <Snackbar 
-            :show.sync="showEmptySnackbar" 
-            snackbarColor="grey darken-1" 
-            snackbarText="Tag cannot be empty!" 
-            :snackbarCloseTime="6000"
-            snackbarCloseText="Close"
-            ></Snackbar>
-            <Snackbar 
-            :show.sync="showRepeatedTagSnackbar" 
-            snackbarColor="grey darken-1" 
-            snackbarText="Tag is already in the List!" 
-            :snackbarCloseTime="6000"
-            snackbarCloseText="Close"
-            ></Snackbar>
         </v-layout>
+        <Snackbar 
+        :show.sync="showEmptySnackbar" 
+        snackbarColor="grey darken-1" 
+        snackbarText="Tag cannot be empty!" 
+        :snackbarCloseTime="6000"
+        snackbarCloseText="Close"
+        ></Snackbar>
+        <Snackbar 
+        :show.sync="showRepeatedTagSnackbar" 
+        snackbarColor="grey darken-1" 
+        snackbarText="Tag is already in the List!" 
+        :snackbarCloseTime="6000"
+        snackbarCloseText="Close"
+        ></Snackbar>
     </v-container>
 </template>
 
@@ -180,13 +180,13 @@ export default {
             return(!tag ? true : false);
         },
         addTag(newTag) {
+            if(this.isTagEmpty(newTag)) {
+                this.$refs.tags.validate();
+                this.$data.showEmptySnackbar = true;
+                return;
+            }
+            
             if(this.$refs.tags.validate()) {
-                if(this.isTagEmpty(newTag)) {
-                    this.$refs.tags.validate();
-                    this.$data.showEmptySnackbar = true;
-                    return;
-                }
-
                 newTag = newTag.replace(/[#]+/g, '');
                 newTag = '#'.concat(newTag);
 
@@ -201,7 +201,7 @@ export default {
                 });
                 this.$data.newTag = '';
                 this.$refs.tags.resetValidation();
-            }            
+            }
         },
         removeTag(tagObject) {
             this.$data.postTags.splice(this.$data.postTags.indexOf(tagObject), 1);

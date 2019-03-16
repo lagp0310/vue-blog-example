@@ -59,12 +59,13 @@
                 </v-layout>
             </v-container>
         </v-card>
-        <WriteComment 
+        <WriteReply 
         v-if="showCommentEqualID(comment.commentID) && !showEditCommentData" 
-        :showCancelButton="true" 
         :level="getNextLevel" 
-        :postComments="[comment]"
-        ></WriteComment>
+        :comment="comment"
+        :showPostedReplySnackbar.sync="showPostedReplySnackbar"
+        @hideWriteReply="changeCurrentCommentID('')"
+        ></WriteReply>
         <EditComment 
         v-if="showCommentEqualID(comment.commentID) && showEditCommentData" 
         :level="getNextLevel" 
@@ -84,11 +85,18 @@
         :snackbarCloseTime="6000"
         snackbarCloseText="Close"
         ></Snackbar>
+        <Snackbar 
+        :show.sync="showPostedReplySnackbar" 
+        snackbarColor="grey darken-1" 
+        snackbarText="Reply was posted!" 
+        :snackbarCloseTime="6000"
+        snackbarCloseText="Close"
+        ></Snackbar>
     </div>
 </template>
 
 <script>
-import WriteComment from './WriteComment.vue';
+import WriteReply from './WriteReply.vue';
 import EditComment from './EditComment.vue';
 import Snackbar from './Snackbar.vue';
 
@@ -109,7 +117,8 @@ export default {
         likeComment: false,
         editCommentContent: '',
         showEditCommentData: false,
-        showEditedCommentSnackbar: false
+        showEditedCommentSnackbar: false,
+        showPostedReplySnackbar: false
     }),
     methods: {
         goToHref(ref) {
@@ -126,7 +135,7 @@ export default {
             this.$forceUpdate();
         },
         addReplyFor(commentID) {
-            this.$store.state.currentCommentID = commentID;
+            this.$store.commit('changeCurrentCommentID', commentID);
         },
         showCommentEqualID(commentID) {
             return this.$store.state.currentCommentID === commentID;
@@ -138,6 +147,9 @@ export default {
             this.$store.commit('changeCurrentCommentID', commentID);
             this.$data.editCommentContent = this.$props.comment.content;
             this.$data.showEditCommentData = true;
+        },
+        changeCurrentCommentID(commentID) {
+            this.$store.commit('changeCurrentCommentID', commentID);
         }
     },
     computed: {
@@ -156,7 +168,7 @@ export default {
         }
     },
     components: {
-        WriteComment,
+        WriteReply,
         EditComment,
         Snackbar
     }

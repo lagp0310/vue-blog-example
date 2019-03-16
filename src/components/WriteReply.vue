@@ -31,8 +31,8 @@
                             lazy-validation
                             >
                                 <v-textarea
-                                v-model="textareaComment"
-                                name="textareaComment"
+                                v-model="textareaReply"
+                                name="textareaReply"
                                 counter
                                 label="Comment"
                                 auto-grow
@@ -40,7 +40,7 @@
                                 hint="Your comment here."
                                 persistent-hint
                                 placeholder="Your comment here."
-                                :rules="textareaCommentRules"
+                                :rules="textareaReplyRules"
                                 ></v-textarea>
                             </v-form>
                         </div>
@@ -51,10 +51,9 @@
                 <v-layout row wrap>
                     <v-flex xs11>
                         <v-btn
-                        v-if="showCancelButton"
                         flat
                         color="grey"
-                        @click="changeCurrentCommentID('')"
+                        @click="changeCurrentCommentID(''), $emit('hideWriteReply');"
                         class="mb-3"
                         >
                             Cancel
@@ -66,7 +65,7 @@
                         @click="validate()"
                         class="mb-3"
                         >
-                            Publish Comment
+                            Publish Reply
                         </v-btn>
                     </v-flex>
                     <v-flex xs1></v-flex>
@@ -77,6 +76,8 @@
 </template>
 
 <script>
+import Snackbar from './Snackbar.vue';
+
 export default {
     props: {
         level: {
@@ -87,47 +88,49 @@ export default {
             type: Object,
             required: true
         },
-        postComments: {
-            type: Array,
-            required: true
-        },
-        showCancelButton: {
-            type: Boolean,
-            required: true
-        },
-        showEditComment: {
-            type: Boolean,
-            required: true
-        },
-        showEditedCommentSnackbar: {
+        showPostedReplySnackbar: {
             type: Boolean,
             required: true
         }
     },
     data: () => ({
         isFormValid: true,
-        textareaComment: '',
-        textareaCommentRules: [
-            v => !!v || 'Comment cannot be empty.',
-            v => (v && v.length <= 1000) || 'Comment cannot exceed 1000 characters.'
+        textareaReply: '',
+        textareaReplyRules: [
+            v => !!v || 'Reply cannot be empty.',
+            v => (v && v.length <= 1000) || 'Reply cannot exceed 1000 characters.'
         ]
     }),
-    mounted() {
-        this.$data.textareaComment = this.$props.comment.content;
-    },
     methods: {
         validate() {
             if(this.$refs.form.validate()) {
-                this.$props.comment.content = this.$data.textareaComment;
-                this.$props.comment.updatedAt = Date.now();
+                const user = this.$store.state.user;
+                const replyText = this.$data.textareaReply;
 
-                this.$data.textareaComment = '';
+                this.$store.commit('incrementLastWrittenCommentID');
+                const commentID = this.$store.state.lastWrittenCommentID;
+
+                const replyObject = {
+                    user,
+                    createdByUserID: user.userID,
+                    commentID: commentID,
+                    postId: 567,
+                    content: replyText,
+                    likes: 44,
+                    replies: [],
+                    createdAt: Date.now(),
+                    updatedAt: Date.now()
+                };
+
+                this.$props.comment.replies.push(replyObject);
+
+                // location.href = '#' + this.$props.comment.replies[this.$props.comment.replies.length].commentID;
+
+                this.$data.textareaReply = '';
                 this.$data.isFormValid = true;
 
-                this.$emit('update:showEditComment', false);
-                this.$emit('update:showEditedCommentSnackbar', true);
-
-                this.changeCurrentCommentID('');
+                this.$emit('hideWriteReply');
+                this.$emit('update:showPostedReplySnackbar', true);
 
                 return true;
             }
@@ -143,6 +146,9 @@ export default {
         getProfileImageSrc() {
             return this.$store.state.user.profileImageSrc;
         }
+    },
+    components: {
+        Snackbar
     }
 };
 </script>

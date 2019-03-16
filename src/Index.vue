@@ -1,6 +1,5 @@
 <template>
-    <!-- TODO: Better property validation for each Component. -->
-    <!-- TODO: Snackbar stack. -->
+    <!-- TODO: Check Vuetify Directives. -->
     <v-app>
         <Navbar></Navbar>
         <!-- This is handled by vue-router module. -->
@@ -12,13 +11,15 @@
 
 <script>
 import Navbar from './components/Navbar.vue';
+import Snackbar from './components/Snackbar.vue';
 
 export default {
     data: () => ({
-        //
+        showEditedCommentSnackbar: false
     }),
     components: {
-        Navbar
+        Navbar,
+        Snackbar
     }
 };
 </script>

@@ -43,35 +43,25 @@
                                 :rules="textareaCommentRules"
                                 ></v-textarea>
                                 <br />
-                                <v-container grid-list-md text-xs-center>
-                                    <v-layout row wrap>
-                                        <v-flex xs12>
-                                            <v-btn
-                                            v-if="showCancelButton"
-                                            flat
-                                            color="grey"
-                                            @click="changeCurrentCommentID('')"
-                                            class="mb-3"
-                                            text-xs-center
-                                            >
-                                                Cancel
-                                            </v-btn>
-                                            <v-btn
-                                            :disabled="!isFormValid"
-                                            flat
-                                            color="primary"
-                                            @click="validate()"
-                                            class="mb-3"
-                                            text-xs-center
-                                            >
-                                                Publish Comment
-                                            </v-btn>
-                                        </v-flex>
-                                    </v-layout>
-                                </v-container>
                             </v-form>
                         </div>
                     </v-flex>
+                </v-layout>
+            </v-container>
+            <v-container grid-list-md text-xs-right>
+                <v-layout row wrap>
+                    <v-flex xs11>
+                        <v-btn
+                        :disabled="!isFormValid"
+                        flat
+                        color="primary"
+                        @click="validate()"
+                        class="mb-3"
+                        >
+                            Publish Comment
+                        </v-btn>
+                    </v-flex>
+                    <v-flex xs1></v-flex>
                 </v-layout>
             </v-container>
         </v-card>
@@ -96,10 +86,6 @@ export default {
         },
         postComments: {
             type: Array,
-            required: true
-        },
-        showCancelButton: {
-            type: Boolean,
             required: true
         }
     },
@@ -141,6 +127,8 @@ export default {
 
                 this.$data.textareaComment = '';
                 this.$data.isFormValid = true;
+
+                this.$refs.form.resetValidation();
 
                 return true;
             }

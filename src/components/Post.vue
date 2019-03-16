@@ -82,8 +82,8 @@
                     </v-card>
                     <v-divider></v-divider>
                     <br />
-                    <WriteComment id="write-post-comment" :level="0" 
-                    :postComments="postComments" v-on:update="updatePostComments"></WriteComment>
+                    <WriteComment id="write-post-comment" :level="0" :showCancelButton="false" 
+                    :postComments="postComments" @update="updatePostComments"></WriteComment>
                     <Comment v-for="(comment, id) in post.comments" :key="id" :comment="comment" :level="level"></Comment>
                     <v-divider></v-divider>
                 </v-flex>
@@ -99,7 +99,6 @@ import Comment from './Comment.vue';
 import Share from './Share.vue';
 import WriteComment from './WriteComment.vue';
 import EditPost from './EditPost.vue';
-import Snackbar from './Snackbar.vue';
 
 export default {
     props: {
@@ -153,8 +152,7 @@ export default {
         Comment,
         Share,
         WriteComment,
-        EditPost,
-        Snackbar
+        EditPost
     }
 };
 </script>

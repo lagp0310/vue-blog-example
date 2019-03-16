@@ -1,9 +1,10 @@
 <template>
-    <!-- input event: https://github.com/vuetifyjs/vuetify/issues/756#issuecomment-452905069 -->
+    <!-- Input event: https://github.com/vuetifyjs/vuetify/issues/756#issuecomment-452905069 -->
     <v-snackbar
     v-model="show"
     :color="snackbarColor"
     :timeout="snackbarCloseTime"
+    left
     @input="$emit('update:show', false)"
     >
         {{ snackbarText }}
