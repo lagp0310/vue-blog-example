@@ -25,6 +25,7 @@
                                     label="Name"
                                     required
                                     @keydown.enter="validate"
+                                    @keydown.esc="blurInput($event)"
                                     ></v-text-field>
 
                                     <v-text-field
@@ -33,6 +34,7 @@
                                     label="Lastname"
                                     required
                                     @keydown.enter="validate"
+                                    @keydown.esc="blurInput($event)"
                                     ></v-text-field>
 
                                     <v-text-field
@@ -41,6 +43,7 @@
                                     label="E-mail"
                                     required
                                     @keydown.enter="validate"
+                                    @keydown.esc="blurInput($event)"
                                     ></v-text-field>
 
                                     <v-text-field
@@ -55,6 +58,7 @@
                                     class="input-group--focused"
                                     @click:append="showPassword = !showPassword"
                                     @keydown.enter="validate"
+                                    @keydown.esc="blurInput($event)"
                                     ></v-text-field>
 
                                     <v-text-field
@@ -69,6 +73,7 @@
                                     class="input-group--focused"
                                     @click:append="showPasswordConfirmation = !showPasswordConfirmation"
                                     @keydown.enter="validate"
+                                    @keydown.esc="blurInput($event)"
                                     ></v-text-field>
                                     <v-container>
                                         <v-layout row wrap>
@@ -215,6 +220,9 @@ export default {
         emailReplyComment: false,
     }),
     methods: {
+        blurInput(event) {
+            event.target.blur();
+        },
         signup(ref) {
             this.$store.commit('changeLoggedInStatus');
             this.$router.replace(ref);

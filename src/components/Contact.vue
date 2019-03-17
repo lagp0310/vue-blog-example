@@ -42,6 +42,7 @@
                                             label="Full Name"
                                             required
                                             @keydown.enter="validate"
+                                            @keydown.esc="blurInput($event)"
                                             ></v-text-field>
                                             <v-text-field
                                             v-model="email"
@@ -49,6 +50,7 @@
                                             label="E-mail"
                                             required
                                             @keydown.enter="validate"
+                                            @keydown.esc="blurInput($event)"
                                             ></v-text-field>
                                             <v-textarea
                                             v-model="textareaContact"
@@ -62,6 +64,7 @@
                                             placeholder="Your reason here."
                                             :rules="textareaContactRules"
                                             @keydown.enter="validate"
+                                            @keydown.esc="blurInput($event)"
                                             ></v-textarea>
                                             <br />
                                             <v-btn
@@ -119,10 +122,14 @@ export default {
         ],
         textareaContact: '',
         textareaContactRules: [
-            v => !!v || 'Contact reason is required.'
+            v => !!v || 'Contact reason is required.',
+            v => /.+/.test(v) || 'Contact reason cannot be empty.'
         ],
     }),
     methods: {
+        blurInput(event) {
+            event.target.blur();
+        },
         validate() {
             if(this.$refs.form.validate()) {
                 location.href = '/';

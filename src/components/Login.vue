@@ -30,6 +30,7 @@
                                     label="E-mail"
                                     required
                                     @keydown.enter="validate"
+                                    @keydown.esc="blurInput($event)"
                                     ></v-text-field>
                                     <v-text-field
                                     :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
@@ -42,6 +43,7 @@
                                     class="input-group--focused"
                                     @click:append="showPassword = !showPassword"
                                     @keydown.enter="validate"
+                                    @keydown.esc="blurInput($event)"
                                     ></v-text-field>
                                     <v-checkbox
                                     v-model="checkbox"
@@ -49,6 +51,7 @@
                                     color="blue darken-1"
                                     required
                                     @keydown.enter="validate"
+                                    @keydown.esc="blurInput($event)"
                                     ></v-checkbox>
                                     <v-btn
                                     :disabled="!valid"
@@ -113,6 +116,9 @@ export default {
         checkbox: false,
     }),
     methods: {
+        blurInput(event) {
+            event.target.blur();
+        },
         validate() {
             if(this.$refs.form.validate()) {
                 this.$store.commit('changeLoggedInStatus');

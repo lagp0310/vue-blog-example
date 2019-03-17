@@ -30,6 +30,7 @@
                                         label="Post Title"
                                         required
                                         @keydown.enter="validate"
+                                        @keydown.esc="blurInput($event)"
                                         ></v-text-field>
                                     </v-form>
                                 </v-flex>
@@ -59,6 +60,7 @@
                                         placeholder="Post Body"
                                         :rules="postBodyRules"
                                         @keydown.enter="validate"
+                                        @keydown.esc="blurInput($event)"
                                         ></v-textarea>
                                     </v-form>
                                 </v-flex>
@@ -81,6 +83,7 @@
                                         label="New Tag"
                                         prefix="#"
                                         @keydown.enter="validate"
+                                        @keydown.esc="blurInput($event)"
                                         ></v-text-field>
                                         <v-btn
                                         fab
@@ -173,6 +176,9 @@ export default {
         });
     },
     methods: {
+        blurInput(event) {
+            event.target.blur();
+        },
         isTagAlreadyInArray(tag) {
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
             return((this.$data.postTags.findIndex(function(value) {

@@ -48,6 +48,7 @@
                         label="Name"
                         required
                         @keydown.enter="updateUsersProfile()"
+                        @keydown.esc="blurInput($event)"
                         ></v-text-field>
                         <v-text-field
                         v-model="lastname"
@@ -55,6 +56,7 @@
                         label="Lastname"
                         required
                         @keydown.enter="updateUsersProfile()"
+                        @keydown.esc="blurInput($event)"
                         ></v-text-field>
                         <v-text-field
                         v-model="email"
@@ -62,6 +64,7 @@
                         label="E-mail"
                         required
                         @keydown.enter="updateUsersProfile()"
+                        @keydown.esc="blurInput($event)"
                         ></v-text-field>
                         <v-radio-group v-model="gender" row :rules="[genderSelectorRules.required]">
                             <v-radio label="Male" value="male" color="info"></v-radio>
@@ -196,6 +199,9 @@ export default {
         this.profileImageSrc = this.$store.state.user.profileImageSrc;
     },
     methods: {
+        blurInput(event) {
+            event.target.blur();
+        },
         doPasswordsMatch () {
             return (this.password === this.passwordConfirmation ? true : 'Passwords do not match!');
         },

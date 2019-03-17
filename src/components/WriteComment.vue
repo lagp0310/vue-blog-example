@@ -42,6 +42,7 @@
                                 placeholder="Your comment here."
                                 :rules="textareaCommentRules"
                                 @keydown.enter="validate"
+                                @keydown.esc="blurInput($event)"
                                 ></v-textarea>
                                 <br />
                             </v-form>
@@ -96,6 +97,9 @@ export default {
         ]
     }),
     methods: {
+        blurInput(event) {
+            event.target.blur();
+        },
         validate() {
             if(this.$refs.form.validate()) {
                 const user = this.$store.state.user;
