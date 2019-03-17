@@ -29,6 +29,7 @@
                                         :rules="postTitleRules"
                                         label="Post Title"
                                         required
+                                        @keydown.enter="validate"
                                         ></v-text-field>
                                     </v-form>
                                 </v-flex>
@@ -57,6 +58,7 @@
                                         persistent-hint
                                         placeholder="Post Body"
                                         :rules="postBodyRules"
+                                        @keydown.enter="validate"
                                         ></v-textarea>
                                     </v-form>
                                 </v-flex>
@@ -78,6 +80,7 @@
                                         :rules="postTagsRules"
                                         label="New Tag"
                                         prefix="#"
+                                        @keydown.enter="validate"
                                         ></v-text-field>
                                         <v-btn
                                         fab

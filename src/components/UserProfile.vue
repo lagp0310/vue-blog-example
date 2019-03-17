@@ -47,18 +47,21 @@
                         :rules="nameRules"
                         label="Name"
                         required
+                        @keydown.enter="updateUsersProfile()"
                         ></v-text-field>
                         <v-text-field
                         v-model="lastname"
                         :rules="lastnameRules"
                         label="Lastname"
                         required
+                        @keydown.enter="updateUsersProfile()"
                         ></v-text-field>
                         <v-text-field
                         v-model="email"
                         :rules="emailRules"
                         label="E-mail"
                         required
+                        @keydown.enter="updateUsersProfile()"
                         ></v-text-field>
                         <v-radio-group v-model="gender" row :rules="[genderSelectorRules.required]">
                             <v-radio label="Male" value="male" color="info"></v-radio>
@@ -72,7 +75,7 @@
                             </v-btn>
                         </v-layout>
                     </v-form>
-                    <v-btn color="info" block @click="showProfileUpdatedSnackbar = true, updateUsersProfile()">
+                    <v-btn color="info" block @click="updateUsersProfile()">
                         Update Profile
                     </v-btn>
                 </v-flex>
@@ -221,6 +224,7 @@ export default {
                 gender: this.gender,
                 profileImageSrc: this.profileImageSrc,
             });
+            this.$data.showProfileUpdatedSnackbar = true;
         }
     },
     watch: {

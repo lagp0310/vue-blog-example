@@ -29,6 +29,7 @@
                                     :rules="emailRules"
                                     label="E-mail"
                                     required
+                                    @keydown.enter="validate"
                                     ></v-text-field>
                                     <v-text-field
                                     :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
@@ -40,12 +41,14 @@
                                     value=""
                                     class="input-group--focused"
                                     @click:append="showPassword = !showPassword"
+                                    @keydown.enter="validate"
                                     ></v-text-field>
                                     <v-checkbox
                                     v-model="checkbox"
                                     label="Remember Me"
                                     color="blue darken-1"
                                     required
+                                    @keydown.enter="validate"
                                     ></v-checkbox>
                                     <v-btn
                                     :disabled="!valid"

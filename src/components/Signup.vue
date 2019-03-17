@@ -24,6 +24,7 @@
                                     :rules="nameRules"
                                     label="Name"
                                     required
+                                    @keydown.enter="validate"
                                     ></v-text-field>
 
                                     <v-text-field
@@ -31,6 +32,7 @@
                                     :rules="lastnameRules"
                                     label="Lastname"
                                     required
+                                    @keydown.enter="validate"
                                     ></v-text-field>
 
                                     <v-text-field
@@ -38,6 +40,7 @@
                                     :rules="emailRules"
                                     label="E-mail"
                                     required
+                                    @keydown.enter="validate"
                                     ></v-text-field>
 
                                     <v-text-field
@@ -51,6 +54,7 @@
                                     value=""
                                     class="input-group--focused"
                                     @click:append="showPassword = !showPassword"
+                                    @keydown.enter="validate"
                                     ></v-text-field>
 
                                     <v-text-field
@@ -64,6 +68,7 @@
                                     value=""
                                     class="input-group--focused"
                                     @click:append="showPasswordConfirmation = !showPasswordConfirmation"
+                                    @keydown.enter="validate"
                                     ></v-text-field>
                                     <v-container>
                                         <v-layout row wrap>

@@ -41,12 +41,14 @@
                                             :rules="fullNameRules"
                                             label="Full Name"
                                             required
+                                            @keydown.enter="validate"
                                             ></v-text-field>
                                             <v-text-field
                                             v-model="email"
                                             :rules="emailRules"
                                             label="E-mail"
                                             required
+                                            @keydown.enter="validate"
                                             ></v-text-field>
                                             <v-textarea
                                             v-model="textareaContact"
@@ -59,6 +61,7 @@
                                             persistent-hint
                                             placeholder="Your reason here."
                                             :rules="textareaContactRules"
+                                            @keydown.enter="validate"
                                             ></v-textarea>
                                             <br />
                                             <v-btn

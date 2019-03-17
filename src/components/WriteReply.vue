@@ -41,6 +41,7 @@
                                 persistent-hint
                                 placeholder="Your comment here."
                                 :rules="textareaReplyRules"
+                                @keydown.enter="validate"
                                 ></v-textarea>
                             </v-form>
                         </div>
