@@ -217,7 +217,7 @@ export default {
         doesAgree: false,
         emailNewContent: false,
         emailCommentPost: false,
-        emailReplyComment: false,
+        emailReplyComment: false
     }),
     methods: {
         blurInput(event) {
@@ -246,7 +246,7 @@ export default {
         }
     },
     components: {
-        TermsOfServiceModal,
+        TermsOfServiceModal
     }
 }
 </script>

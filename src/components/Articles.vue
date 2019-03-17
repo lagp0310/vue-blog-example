@@ -72,7 +72,7 @@ export default {
         ]
     }),
     components: {
-        Article,
+        Article
     }
 };
 </script>

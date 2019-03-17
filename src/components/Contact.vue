@@ -124,7 +124,7 @@ export default {
         textareaContactRules: [
             v => !!v || 'Contact reason is required.',
             v => /.+/.test(v) || 'Contact reason cannot be empty.'
-        ],
+        ]
     }),
     methods: {
         blurInput(event) {

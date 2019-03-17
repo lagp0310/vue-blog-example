@@ -121,9 +121,6 @@ export default {
             this.$store.commit('changeLoggedInStatus');
         }
     },
-    components: {
-        Sidenav,
-    },
     computed: {
         isLoggedIn() {
             return this.$store.state.isLoggedIn;
@@ -134,6 +131,9 @@ export default {
         usersProfilePictureSrc() {
             return this.$store.state.user.profileImageSrc;
         }
+    },
+    components: {
+        Sidenav
     }
 };
 </script>

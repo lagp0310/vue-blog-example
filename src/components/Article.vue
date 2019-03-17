@@ -82,7 +82,7 @@ export default {
     },
     data: () => ({
         showShare: false,
-        likeArticle: false,
+        likeArticle: false
     }),
     methods: {
         scrollToTop() {
@@ -90,7 +90,7 @@ export default {
         }
     }, 
     components: {
-        Share,
+        Share
     }
 };
 </script>

@@ -113,7 +113,7 @@ export default {
         passwordRules: [
             v => !!v || 'Password is required.'
         ],
-        checkbox: false,
+        checkbox: false
     }),
     methods: {
         blurInput(event) {
@@ -125,7 +125,7 @@ export default {
                 this.$router.replace('/');
                 return true;
             }
-        },
+        }
     }
 }
 </script>
