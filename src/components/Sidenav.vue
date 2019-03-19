@@ -59,6 +59,16 @@
                 </v-list>
                 <v-list class="pt-0" dense>
                     <v-divider></v-divider>
+                    <v-list-tile v-if="isLoggedIn" tag="a" flat
+                    @click="showWritePost = true">
+                        <v-list-tile-action>
+                            <v-icon>mdi-pencil</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>New Post</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                    <v-divider v-if="isLoggedIn"></v-divider>
                     <div v-for="item in items" :key="item.title">
                         <v-list-tile v-if="showHideLink(item.showOnLoggedIn)"
                         tag="a" :to="item.to" class="white v-btn--flat" @click="$emit('update:show', false)">
@@ -82,10 +92,13 @@
                 </v-list>
             </v-navigation-drawer>
         </v-layout>
+        <WritePost :showDialog.sync="showWritePost"></WritePost>
     </v-container>
 </template>
 
 <script>
+import WritePost from './WritePost.vue';
+
 export default {
     props: {
         show: {
@@ -100,7 +113,8 @@ export default {
             { title: 'Contact', icon: 'mdi-account-box', to: '/contact', showOnLoggedIn: true },
             { title: 'Signup', icon: 'mdi-account-plus', to: '/signup', showOnLoggedIn: false },
             { title: 'Login', icon: 'mdi-login-variant', to: '/login', showOnLoggedIn: false }
-        ]
+        ],
+        showWritePost: false
     }),
     methods: {
         goToRoute(ref) {
@@ -113,6 +127,13 @@ export default {
             return((this.isLoggedIn && showOnLoggedIn) || !this.isLoggedIn);
         }
     },
+    watch: {
+        show: function(newValue, oldValue) {
+            if(newValue === false) {
+                this.$emit('update:show', false);
+            }
+        }
+    },
     computed: {
         isLoggedIn() {
             return this.$store.state.isLoggedIn;
@@ -123,6 +144,9 @@ export default {
         usersProfilePictureSrc() {
             return this.$store.state.user.profileImageSrc;
         }
+    },
+    components: {
+        WritePost
     }
 }
 </script>

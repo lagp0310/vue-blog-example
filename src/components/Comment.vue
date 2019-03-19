@@ -25,10 +25,10 @@
                     </v-flex>
                     <v-flex xs8 sm9 offset-xs1 offset-md0 class="mt-4">
                         <!-- Thanks: https://forum.vuejs.org/t/how-to-handle-anchors-bookmarks-with-vue-router/14563/6 -->
-                        <router-link v-if="comment.replyToId" class="font-weight-regular font-italic caption"
-                        :to="getReferenceToComment">
-                            <div @click="goToRef(getReferenceToComment)">
-                                Reply to: {{ comment.replyToId }}
+                        <router-link v-if="comment.replyToID" class="font-weight-regular font-italic caption"
+                        :to="getCommentID">
+                            <div @click="scrollTo(getCommentID)">
+                                Reply to: {{ comment.replyToID }}
                             </div>
                         </router-link>
                         <div class="font-weight-regular body-1">
@@ -65,7 +65,7 @@
         :comment="comment"
         :showPostedReplySnackbar.sync="showPostedReplySnackbar"
         @hideWriteReply="changeCurrentCommentID('')"
-        @updatedCommentReplies="scrollToLastPostedReply()"
+        @updatedCommentReplies="scrollTo(getLastReplyID)"
         ></WriteReply>
         <EditComment 
         v-if="showCommentEqualID(comment.commentID) && showEditCommentData" 
@@ -122,11 +122,11 @@ export default {
         showPostedReplySnackbar: false
     }),
     methods: {
-        scrollToLastPostedReply() {
+        scrollTo(ref) {
             var that = this;
             this.$nextTick(() => {
-                that.$vuetify.goTo('#'.concat(that.getLastReplyID));                
-                that.goToRef('#'.concat(that.getLastReplyID));
+                that.$vuetify.goTo('#'.concat(ref));                
+                that.goToRef('#'.concat(ref));
             });
         },
         goToRef(ref) {
@@ -164,8 +164,8 @@ export default {
         getFullname() {
             return this.$props.comment.user.name + ' ' + this.$props.comment.user.lastname;
         },
-        getReferenceToComment() {
-            return '#' + this.$props.comment.replyToId;
+        getCommentID() {
+            return this.$props.comment.replyToID;
         },
         getLevel() {
             return 'level-' + this.$props.level;

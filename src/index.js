@@ -170,7 +170,7 @@ const routes = [
                                     profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                 },
                                 createdByUserID: 3,
-                                replyToId: 'c2',
+                                replyToID: 'c2',
                                 commentID: 'c3',
                                 postId: 567,
                                 content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
@@ -188,7 +188,7 @@ const routes = [
                                     profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                 },
                                 createdByUserID: 4,
-                                replyToId: 'c2',
+                                replyToID: 'c2',
                                 commentID: 'c4',
                                 postId: 567,
                                 content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
@@ -203,7 +203,7 @@ const routes = [
                                             profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
                                         },
                                         createdByUserID: 5,
-                                        replyToId: 'c4',
+                                        replyToID: 'c4',
                                         commentID: 'c5',
                                         postId: 567,
                                         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \

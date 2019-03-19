@@ -115,9 +115,12 @@ export default {
                 this.$store.commit('incrementLastWrittenCommentID');
                 const commentID = 'c'.concat(this.$store.state.lastWrittenCommentID);
 
+                const replyToID = this.$props.comment.commentID;
+
                 const replyObject = {
                     user,
                     createdByUserID: user.userID,
+                    replyToID: replyToID,
                     commentID: commentID,
                     postId: 567,
                     content: replyText,

@@ -31,10 +31,11 @@ export default {
     },
     data: () => ({
         tiles: [
-            { src: true, img: 'https://img.icons8.com/ios/24/000000/delete-sign.png', title: 'Close' },
-            { src: true, img: 'https://cdn.vuetifyjs.com/images/bottom-sheets/inbox.png', title: 'Inbox' },
-            { src: true, img: 'https://cdn.vuetifyjs.com/images/bottom-sheets/hangouts.png', title: 'Hangouts' },
-            { src: true, img: 'https://cdn.vuetifyjs.com/images/bottom-sheets/messenger.png', title: 'Messenger' }
+            { src: true, img: 'https://img.icons8.com/material/96/000000/multiply.png', title: 'Close' },
+            { src: true, img: 'https://img.icons8.com/color/48/000000/instagram-new.png', title: 'Instagram' },
+            { src: true, img: 'https://img.icons8.com/color/96/000000/facebook.png', title: 'Facebook' },
+            { src: true, img: 'https://img.icons8.com/color/96/000000/facebook-messenger.png', title: 'Messenger' },
+            { src: true, img: 'https://img.icons8.com/color/96/000000/twitter.png', title: 'Twitter' }
         ]
     })
 }

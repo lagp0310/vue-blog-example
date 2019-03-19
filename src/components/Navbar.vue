@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-toolbar dark color="primary" class="mb-4">
-            <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="showSidenav = !showSidenav"></v-toolbar-side-icon>
+            <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="$emit('showSidenav');"></v-toolbar-side-icon>
             <v-img src="/public/images/logos/1/logo_transparent.png" alt="Bloggy Logo" max-width="150px" contain lazy-src="/public/images/logos/1/logo_transparent.png">
                 <template v-slot:placeholder>
                     <v-layout
@@ -19,7 +19,10 @@
                 <!-- This is handled by vue-router. -->
                 <!-- use router-link component for navigation. -->
                 <!-- specify the link by passing the `to` prop. -->
-                <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
+                <!-- `<router-link>` will be rendered as an `<a>` tag by default -->                    
+                <v-btn v-if="isLoggedIn" class="primary v-btn--flat" @click="showWritePost = true">
+                    New Post
+                </v-btn>
                 <router-link tag="v-btn" to="/articles" class="primary v-btn--flat">Articles</router-link>
                 <router-link tag="v-btn" to="/about" class="primary v-btn--flat">About Us</router-link>
                 <router-link tag="v-btn" to="/contact" class="primary v-btn--flat">Contact</router-link>
@@ -98,20 +101,19 @@
                 </v-menu>
             </v-toolbar-items>
         </v-toolbar>
-        <!-- Sidenav just shows on small screens. -->
-        <Sidenav v-if="showSidenav" :show.sync="showSidenav"></Sidenav>
+        <WritePost :showDialog.sync="showWritePost"></WritePost>
     </div>
 </template>
 
 <script>
-import Sidenav from './Sidenav.vue';
+import WritePost from './WritePost.vue';
 
 export default {
     data: () => ({
-        showSidenav: false,
         darkMode: false,
         notifications: false,
-        menu: false
+        menu: false,
+        showWritePost: false
     }),
     methods: {
         goToRoute(ref) {
@@ -133,11 +135,11 @@ export default {
         }
     },
     components: {
-        Sidenav
+        WritePost
     }
 };
 </script>
 
 <style lang="scss" scoped>
-    
+
 </style>
