@@ -123,10 +123,9 @@ export default {
     }),
     methods: {
         scrollTo(ref) {
-            var that = this;
-            this.$nextTick(() => {
-                that.$vuetify.goTo('#'.concat(ref));                
-                that.goToRef('#'.concat(ref));
+            this.$nextTick(function() {
+                this.$vuetify.goTo('#'.concat(ref));                
+                this.goToRef('#'.concat(ref));
             });
         },
         goToRef(ref) {

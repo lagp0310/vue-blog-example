@@ -81,7 +81,7 @@ const routes = [
     {
         path: '/articles/:articlesId', component: Post, 
         props: {
-            level: 0,
+            startingCommentLevel: 0,
             author: {
                 authorID: 1,
                 name: 'Test',

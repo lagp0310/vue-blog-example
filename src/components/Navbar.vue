@@ -20,7 +20,7 @@
                 <!-- use router-link component for navigation. -->
                 <!-- specify the link by passing the `to` prop. -->
                 <!-- `<router-link>` will be rendered as an `<a>` tag by default -->                    
-                <v-btn v-if="isLoggedIn" class="primary v-btn--flat" @click="showWritePost = true">
+                <v-btn v-if="isLoggedIn" class="primary v-btn--flat" @click="$emit('showWritePost')">
                     New Post
                 </v-btn>
                 <router-link tag="v-btn" to="/articles" class="primary v-btn--flat">Articles</router-link>
@@ -101,19 +101,15 @@
                 </v-menu>
             </v-toolbar-items>
         </v-toolbar>
-        <WritePost :showDialog.sync="showWritePost"></WritePost>
     </div>
 </template>
 
 <script>
-import WritePost from './WritePost.vue';
-
 export default {
     data: () => ({
         darkMode: false,
         notifications: false,
-        menu: false,
-        showWritePost: false
+        menu: false
     }),
     methods: {
         goToRoute(ref) {
@@ -133,9 +129,6 @@ export default {
         usersProfilePictureSrc() {
             return this.$store.state.user.profileImageSrc;
         }
-    },
-    components: {
-        WritePost
     }
 };
 </script>

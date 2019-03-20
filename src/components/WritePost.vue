@@ -1,5 +1,4 @@
 <template>
-    <!-- TODO: Markdown syntax to write Post. Same for EditPost and Comments. -->
     <v-container>
         <v-layout row justify-center>
             <v-dialog v-model="showDialog" fullscreen hide-overlay transition="dialog-bottom-transition">

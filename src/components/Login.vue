@@ -1,8 +1,8 @@
 <template>
     <v-container grid-list-md text-xs-center>
         <v-layout>
-            <v-flex sm3 md4></v-flex>
-            <v-flex xs12 sm6 md4>
+            <v-flex xs1 sm3 md3 lg4></v-flex>
+            <v-flex xs10 sm6 md6 lg4>
                 <v-card>
                     <v-container grid-list-md text-xs-center>
                         <v-layout row wrap>
@@ -73,7 +73,7 @@
                         <v-layout row wrap>
                             <v-flex xs4>
                                 <v-btn class="px-0 text-capitalize font-weight-regular" flat>
-                                    <v-img src="https://img.icons8.com/color/24/000000/google-logo.png"></v-img>&nbsp;
+                                    <v-img src="https://img.icons8.com/color/48/000000/google-logo.png"></v-img>&nbsp;
                                     Google
                                 </v-btn>
                             </v-flex>
@@ -85,7 +85,7 @@
                             </v-flex>
                             <v-flex xs4>
                                 <v-btn class="px-0 text-capitalize font-weight-regular" flat>
-                                    <v-icon color="blue lighten-1">mdi-twitter</v-icon>&nbsp;
+                                    <v-img src="https://img.icons8.com/color/48/000000/twitter.png"></v-img>&nbsp;
                                     Twitter
                                 </v-btn>
                             </v-flex>
@@ -93,9 +93,10 @@
                     </v-container>
                 </v-card>
             </v-flex>
-            <v-flex sm3 md4></v-flex>
+            <v-flex xs1 sm3 md3 lg4></v-flex>
         </v-layout>
-        <a href="https://icons8.com/icon/17949/google">Google icon by Icons8</a>
+        <a href="https://icons8.com/icon/17949/google">Google icon by Icons8</a><br />
+        <a href="https://icons8.com/icon/13963/twitter">Twitter icon by Icons8</a>
     </v-container>
 </template>
 

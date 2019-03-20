@@ -28,7 +28,10 @@
                                         size="80px"
                                         color="grey lighten-4"
                                         >
-                                            <v-img :src="author.profileImageSrc" contain alt="avatar" :lazy-src="author.profileImageSrc">
+                                            <v-img :src="author.profileImageSrc" 
+                                            contain 
+                                            alt="avatar" 
+                                            :lazy-src="author.profileImageSrc">
                                                 <template v-slot:placeholder>
                                                     <v-layout
                                                     fill-height
@@ -43,7 +46,7 @@
                                         </v-avatar>
                                     </v-flex>
                                     <v-flex xs8 offset-xs1>
-                                        <h3 class="title mb-0">{{ author.name + ' ' + author.lastname }}</h3>
+                                        <h3 class="title mb-0">{{ getUserFullname }}</h3>
                                         <br />
                                         <div class="font-weight-regular body-1">
                                             About Me: {{ author.biography }}
@@ -84,7 +87,8 @@
                     <br />
                     <WriteComment id="write-post-comment" :postComments.sync="post.comments" 
                     @updatedComments="$forceUpdate(), scrollToLastPostedComment()"></WriteComment>
-                    <Comment v-for="(comment, id) in post.comments" :key="id" :comment="comment" :level="level"></Comment>
+                    <Comment v-for="(comment, id) in post.comments" :key="id" :comment="comment" 
+                    :level="startingCommentLevel"></Comment>
                     <v-divider></v-divider>
                 </v-flex>
             </v-layout>
@@ -110,7 +114,7 @@ export default {
             type: Object,
             required: true
         },
-        level: {
+        startingCommentLevel: {
             type: Number,
             required: true
         }
@@ -122,10 +126,9 @@ export default {
     }),
     methods: {
         scrollToLastPostedComment() {
-            var that = this;
-            this.$nextTick(() => {
-                that.$vuetify.goTo('#'.concat(that.$props.post.comments[0].commentID));                
-                that.goToRef('#'.concat(that.$props.post.comments[0].commentID));
+            this.$nextTick(function() {
+                this.$vuetify.goTo('#'.concat(this.$props.post.comments[0].commentID));                
+                this.goToRef('#'.concat(this.$props.post.comments[0].commentID));
             });
         },
         incrementLikesCounter() {
@@ -136,7 +139,6 @@ export default {
             }
 
             this.likePost = !this.likePost;
-            this.$forceUpdate();
         },
         updatePostComments(newComment) {
             this.$props.post.comments.unshift(newComment);
@@ -149,6 +151,11 @@ export default {
         },
         editPost(postID) {
             this.$data.showEditPostModal = true;
+        }
+    },
+    computed: {
+        getUserFullname() {
+            return this.$props.author.name + ' ' + this.$props.author.lastname;
         }
     },
     components: {

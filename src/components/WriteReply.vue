@@ -1,5 +1,5 @@
 <template>
-    <div :class="['comment', 'level-' + level]">
+    <div :class="['comment', 'level-' + getLevel]">
         <v-card class="mb-4">
             <v-container justify-center>
                 <v-layout row>
@@ -147,6 +147,9 @@ export default {
         }
     },
     computed: {
+        getLevel() {
+            return this.$props.level;
+        },
         getFullname() {
             return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
         },

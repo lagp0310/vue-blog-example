@@ -86,7 +86,9 @@ export default {
     }),
     methods: {
         scrollToTop() {
-            window.scrollTo(0,0);
+            this.$nextTick(function() {
+                this.$vuetify.goTo(0);
+            });
         }
     }, 
     components: {

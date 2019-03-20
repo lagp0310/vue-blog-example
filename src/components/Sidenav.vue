@@ -2,7 +2,7 @@
     <v-container>
         <v-layout wrap>
             <v-navigation-drawer
-            v-model="show"
+            v-model="showSidenav"
             absolute
             temporary
             >
@@ -27,7 +27,7 @@
                                 <v-list-tile-title>{{ usersName }}</v-list-tile-title>
                             </v-list-tile-content>
                             <v-list-tile-action>
-                                <v-btn icon @click="goToRoute('/users/1'), $emit('update:show', false)">
+                                <v-btn icon @click="goToRoute('/users/1'), showSidenav = false">
                                     <v-icon>mdi-settings</v-icon>
                                 </v-btn>
                             </v-list-tile-action>
@@ -50,7 +50,7 @@
                                 </v-img>
                             </v-flex>
                             <v-flex xs2>
-                                <v-btn icon flat @click="$emit('update:show', false)">
+                                <v-btn icon flat @click="showSidenav = false">
                                     <v-icon>mdi-close</v-icon>
                                 </v-btn>
                             </v-flex>
@@ -59,8 +59,7 @@
                 </v-list>
                 <v-list class="pt-0" dense>
                     <v-divider></v-divider>
-                    <v-list-tile v-if="isLoggedIn" tag="a" flat
-                    @click="showWritePost = true">
+                    <v-list-tile v-if="isLoggedIn" tag="a" flat @click="$emit('showWritePost')">
                         <v-list-tile-action>
                             <v-icon>mdi-pencil</v-icon>
                         </v-list-tile-action>
@@ -71,7 +70,7 @@
                     <v-divider v-if="isLoggedIn"></v-divider>
                     <div v-for="item in items" :key="item.title">
                         <v-list-tile v-if="showHideLink(item.showOnLoggedIn)"
-                        tag="a" :to="item.to" class="white v-btn--flat" @click="$emit('update:show', false)">
+                        tag="a" :to="item.to" class="white v-btn--flat" @click="showSidenav = false">
                             <v-list-tile-action>
                                 <v-icon>{{ item.icon }}</v-icon>
                             </v-list-tile-action>
@@ -81,7 +80,7 @@
                         </v-list-tile>
                     </div>
                     <v-list-tile v-if="isLoggedIn" tag="a" color="red" flat
-                    @click="changeLoggedInState(), goToRoute('/'), $emit('update:show', false)">
+                    @click="changeLoggedInState(), goToRoute('/'), showSidenav = false">
                         <v-list-tile-action>
                             <v-icon>mdi-logout-variant</v-icon>
                         </v-list-tile-action>
@@ -92,13 +91,10 @@
                 </v-list>
             </v-navigation-drawer>
         </v-layout>
-        <WritePost :showDialog.sync="showWritePost"></WritePost>
     </v-container>
 </template>
 
 <script>
-import WritePost from './WritePost.vue';
-
 export default {
     props: {
         show: {
@@ -106,16 +102,18 @@ export default {
             required: true
         }
     },
-    data: () => ({
-        items: [
-            { title: 'Articles', icon: 'mdi-view-dashboard', to: '/articles', showOnLoggedIn: true },
-            { title: 'About Us', icon: 'mdi-information', to: '/about', showOnLoggedIn: true },
-            { title: 'Contact', icon: 'mdi-account-box', to: '/contact', showOnLoggedIn: true },
-            { title: 'Signup', icon: 'mdi-account-plus', to: '/signup', showOnLoggedIn: false },
-            { title: 'Login', icon: 'mdi-login-variant', to: '/login', showOnLoggedIn: false }
-        ],
-        showWritePost: false
-    }),
+    data: function() {
+        return {
+            showSidenav: this.show,
+            items: [
+                { title: 'Articles', icon: 'mdi-view-dashboard', to: '/articles', showOnLoggedIn: true },
+                { title: 'About Us', icon: 'mdi-information', to: '/about', showOnLoggedIn: true },
+                { title: 'Contact', icon: 'mdi-account-box', to: '/contact', showOnLoggedIn: true },
+                { title: 'Signup', icon: 'mdi-account-plus', to: '/signup', showOnLoggedIn: false },
+                { title: 'Login', icon: 'mdi-login-variant', to: '/login', showOnLoggedIn: false }
+            ]
+        }
+    },
     methods: {
         goToRoute(ref) {
             this.$router.replace(ref);
@@ -128,10 +126,12 @@ export default {
         }
     },
     watch: {
-        show: function(newValue, oldValue) {
-            if(newValue === false) {
-                this.$emit('update:show', false);
-            }
+        show: function(newValue) {
+            this.$data.showSidenav = newValue;
+            this.$emit('update:show', newValue);
+        },
+        showSidenav: function(newValue) {
+            this.$emit('update:show', newValue);
         }
     },
     computed: {
@@ -144,9 +144,6 @@ export default {
         usersProfilePictureSrc() {
             return this.$store.state.user.profileImageSrc;
         }
-    },
-    components: {
-        WritePost
     }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <!-- Input event: https://github.com/vuetifyjs/vuetify/issues/756#issuecomment-452905069 -->
     <v-snackbar
-    v-model="show"
+    v-model="showSnackbar"
     :color="snackbarColor"
     :timeout="snackbarCloseTime"
     left
@@ -42,14 +42,19 @@ export default {
             required: true
         }
     },
-    data: () => ({
-        //
-    }),
-    methods: {
-        //
+    data: function() {
+        return {
+            showSnackbar: this.show
+        }
     },
-    components: {
-        //
+    watch: {
+        show: function(newValue) {
+            this.$data.showSnackbar = newValue;
+            this.$emit('update:show', newValue);
+        },
+        showSnackbar: function(newValue) {
+            this.$emit('update:show', newValue);
+        }
     }
 };
 </script>
