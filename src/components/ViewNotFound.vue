@@ -1,13 +1,13 @@
 <template>
     <v-container text-xs-center>
-        <v-layout row wrap>
+        <v-layout row wrap align-center>
             <v-flex xs12>
-                <v-avatar
-                size="350px"
-                color="grey lighten-4"
-                >
-                    <v-img src="/public/images/errors/404/221867-P19WAJ-478.jpg" alt="404 Page Not Found Image" 
-                    contain lazy-src="/public/images/errors/404/221867-P19WAJ-478.jpg" max-height="400px">
+                <v-layout fill-height>
+                    <v-img src="/public/images/illustrations/undraw_empty_xct9.png" 
+                    alt="404 Page Not Found Illustration" 
+                    contain 
+                    max-height="450px"
+                    lazy-src="/public/images/illustrations/undraw_empty_xct9.png">
                         <template v-slot:placeholder>
                             <v-layout
                             fill-height
@@ -19,11 +19,14 @@
                             </v-layout>
                         </template>
                     </v-img>
-                </v-avatar>
-                <br /><br />
-                <small>
-                    <a href="https://www.freepik.com/free-photos-vectors/business">Business vector created by freepik - www.freepik.com</a>
-                </small>
+                </v-layout>
+            </v-flex>
+            <v-flex xs12>
+                <v-layout justify-center mt-4>
+                    <span class="headline font-weight-thin text-uppercase">
+                        Sorry, we couldn't find the page you are looking for.
+                    </span>
+                </v-layout>
             </v-flex>
         </v-layout>
     </v-container>

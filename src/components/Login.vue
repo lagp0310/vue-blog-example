@@ -1,8 +1,29 @@
 <template>
     <v-container grid-list-md text-xs-center>
         <v-layout>
-            <v-flex xs1 sm3 md3 lg4></v-flex>
-            <v-flex xs10 sm6 md6 lg4>
+            <v-flex xs1 sm3 md6 lg7>
+                <v-img 
+                src="/public/images/illustrations/undraw_content_vbqo.png" 
+                alt="Blog Content Illustration"
+                lazy-src="/public/images/illustrations/undraw_content_vbqo.png"
+                class="hidden-sm-and-down">
+                    <template v-slot:placeholder>
+                        <v-layout
+                        fill-height
+                        align-center
+                        justify-center
+                        ma-0
+                        >
+                            <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                        </v-layout>
+                    </template>
+                </v-img>
+                <h1 class="headline font-weight-thin text-uppercase hidden-sm-and-down">
+                    You're just one step behind blogging. Sign in.
+                </h1>
+            </v-flex>
+            <v-flex md1 lg1 class="hidden-sm-and-down"></v-flex>
+            <v-flex xs10 sm6 md5 lg4>
                 <v-card>
                     <v-container grid-list-md text-xs-center>
                         <v-layout row wrap>
@@ -92,11 +113,12 @@
                         </v-layout>
                     </v-container>
                 </v-card>
+                <br />
+                <a href="https://icons8.com/icon/17949/google">Google icon by Icons8</a><br />
+                <a href="https://icons8.com/icon/13963/twitter">Twitter icon by Icons8</a>
             </v-flex>
-            <v-flex xs1 sm3 md3 lg4></v-flex>
+            <v-flex xs1 class="hidden-md-and-up"></v-flex>
         </v-layout>
-        <a href="https://icons8.com/icon/17949/google">Google icon by Icons8</a><br />
-        <a href="https://icons8.com/icon/13963/twitter">Twitter icon by Icons8</a>
     </v-container>
 </template>
 

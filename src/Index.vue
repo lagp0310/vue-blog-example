@@ -1,8 +1,17 @@
 <template>
+    <!-- Some useful links to check out: 
+
+        https://vuejs.org/v2/style-guide/
+        https://vuetifyjs.com/en/directives/touch-support
+        https://vuetifyjs.com/en/framework/internationalization#internationalization
+        https://vuejs.org/v2/guide/deployment.html
+        https://jestjs.io/docs/en/setup-teardown
+        https://vuex.vuejs.org/guide/testing.html
+    -->
+
     <!-- TODO: Property validation in props object for each component. -->
     <!-- TODO: Markdown syntax to write Post. Same for EditPost and Comments. -->
-    <!-- TODO: Check Vue's Style Guide. -->
-    <!-- TODO: Implement light and dark themes. -->
+    <!-- TODO: Implement light and dark themes. https://vuetifyjs.com/en/framework/theme -->
     <v-app>
         <Navbar @showSidenav="showSidenav = true" @showWritePost="showWritePost = true"></Navbar>
         <!-- This is handled by vue-router module. -->
@@ -37,5 +46,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    
+    #app {
+        background-color: white;
+    }
 </style>

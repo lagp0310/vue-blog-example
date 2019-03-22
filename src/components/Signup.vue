@@ -7,6 +7,8 @@
                 <v-stepper-step step="2">Terms Of Service</v-stepper-step>
                 <v-divider></v-divider>
                 <v-stepper-step step="3">Preferences</v-stepper-step>
+                <v-divider></v-divider>
+                <v-stepper-step step="4">Signup Completed!</v-stepper-step>
             </v-stepper-header>
             <v-stepper-items>
                 <v-stepper-content step="1">
@@ -165,8 +167,46 @@
                         </v-layout>
                         <v-layout row wrap justify-end>
                             <v-btn flat @click="stepNumber = 2, isFormValid = true">Go back</v-btn>
+                            <v-btn color="primary" @click="validate">
+                                Complete Signup
+                            </v-btn>
+                        </v-layout>
+                    </v-container>
+                </v-stepper-content>
+                <v-stepper-content step="4">
+                    <v-container grid-list-md text-xs-center>
+                        <v-layout justify-center>
+                            <v-flex xs12>
+                                <v-img 
+                                src="/public/images/illustrations/undraw_press_play_bx2d.png" 
+                                alt="Blog Content Illustration"
+                                lazy-src="/public/images/illustrations/undraw_press_play_bx2d.png"
+                                max-height="300px"
+                                contain
+                                >
+                                    <template v-slot:placeholder>
+                                        <v-layout
+                                        fill-height
+                                        align-center
+                                        justify-center
+                                        ma-0
+                                        >
+                                            <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                        </v-layout>
+                                    </template>
+                                </v-img>
+                                <h1 class="headline font-weight-thin text-uppercase hidden-sm-and-up">
+                                    Congratulations! <br />You have signed up to Bloggy!
+                                </h1>
+                                <h1 class="headline font-weight-thin text-uppercase hidden-xs-only">
+                                    Congratulations! You have signed up to Bloggy!
+                                </h1>
+                            </v-flex>
+                        </v-layout>
+                        <br />
+                        <v-layout row wrap justify-center>
                             <v-btn color="primary" @click="signup('/')">
-                                Sign Up
+                                Start Blogging!
                             </v-btn>
                         </v-layout>
                     </v-container>
@@ -189,13 +229,13 @@ export default {
         nameRules: [
             v => !!v || 'Name is required.',
             v => (v && v.length <= 10) || 'Name must be less than 10 characters.',
-            v => /[a-zA-Z]+/.test(v) || 'Name contain invalid characters.'
+            v => /^[a-zA-Z]+$/.test(v) || 'Name contain invalid characters.'
         ],
         lastname: '',
         lastnameRules: [
             v => !!v || 'Lastname is required.',
             v => (v && v.length <= 10) || 'Lastname must be less than 10 characters.',
-            v => /[a-zA-Z]+/.test(v) || 'Lastname contain invalid characters.'
+            v => /^[a-zA-Z]+$/.test(v) || 'Lastname contain invalid characters.'
         ],
         email: '',
         emailRules: [

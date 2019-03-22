@@ -22,9 +22,9 @@
                     <v-card-title primary-title>
                         <div>
                             <h3 class="headline mb-0">Contact Us!</h3>
-                            <br>
+                            <br />
                             <p class="text-xs-center">
-                                Feel free to contact us for any inquiries.<br>
+                                Feel free to contact us for any inquiries.<br />
                                 Fill the following Form describing your situation.
                                 We'll answer as soon as we can.
                             </p>

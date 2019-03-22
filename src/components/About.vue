@@ -2,13 +2,14 @@
     <v-container grid-list-md text-xs-center>
         <v-layout row wrap justify-center>
             <v-flex xs12>
-                <h1 class="headline font-weight-light mb-3">About Us</h1>
+                <h1 id="about-title" class="headline font-weight-thin mb-3 text-uppercase">About Us</h1>
             </v-flex>
         </v-layout>
         <v-layout row wrap justify-center>
             <v-flex xs12>
                 <v-timeline align-top dense clipped>
                     <v-timeline-item
+                    id="item-1"
                     color="purple lighten-2"
                     fill-dot
                     right
@@ -18,23 +19,22 @@
                             <v-layout row wrap justify-center>
                                 <v-flex xs10>
                                     <span>
-                                        <v-avatar
-                                        size="250px"
-                                        color="transparent"
-                                        >
-                                            <v-img src="/public/images/26706.jpg" contain alt="avatar" lazy-src="/public/images/26706.jpg">
-                                                <template v-slot:placeholder>
-                                                    <v-layout
-                                                    fill-height
-                                                    align-center
-                                                    justify-center
-                                                    ma-0
-                                                    >
-                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
-                                                    </v-layout>
-                                                </template>
-                                            </v-img>
-                                        </v-avatar>
+                                        <v-img src="/public/images/illustrations/undraw_blogging_vpvv.png" 
+                                        contain 
+                                        alt="avatar" 
+                                        lazy-src="/public/images/illustrations/undraw_blogging_vpvv.png"
+                                        max-height="400px">
+                                            <template v-slot:placeholder>
+                                                <v-layout
+                                                fill-height
+                                                align-center
+                                                justify-center
+                                                ma-0
+                                                >
+                                                    <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                </v-layout>
+                                            </template>
+                                        </v-img>
                                     </span>
                                 </v-flex>
                             </v-layout>
@@ -49,6 +49,7 @@
                         </div>
                     </v-timeline-item>
                     <v-timeline-item
+                    id="item-2"
                     color="amber lighten-1"
                     fill-dot
                     left
@@ -58,23 +59,22 @@
                             <v-layout row wrap justify-center>
                                 <v-flex xs10>
                                     <span>
-                                        <v-avatar
-                                        size="250px"
-                                        color="white"
-                                        >
-                                            <v-img src="/public/images/59869.jpg" contain alt="avatar" lazy-src="/public/images/59869.jpg">
-                                                <template v-slot:placeholder>
-                                                    <v-layout
-                                                    fill-height
-                                                    align-center
-                                                    justify-center
-                                                    ma-0
-                                                    >
-                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
-                                                    </v-layout>
-                                                </template>
-                                            </v-img>
-                                        </v-avatar>
+                                        <v-img src="/public/images/illustrations/undraw_content_vbqo.png" 
+                                        contain 
+                                        alt="avatar" 
+                                        lazy-src="/public/images/illustrations/undraw_content_vbqo.png"
+                                        max-height="400px">
+                                            <template v-slot:placeholder>
+                                                <v-layout
+                                                fill-height
+                                                align-center
+                                                justify-center
+                                                ma-0
+                                                >
+                                                    <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                </v-layout>
+                                            </template>
+                                        </v-img>
                                     </span>
                                 </v-flex>
                             </v-layout>
@@ -89,6 +89,7 @@
                         </div>
                     </v-timeline-item>
                     <v-timeline-item
+                    id="item-3"
                     color="cyan lighten-1"
                     fill-dot
                     right
@@ -98,23 +99,22 @@
                             <v-layout row wrap justify-center>
                                 <v-flex xs10>
                                     <span>
-                                        <v-avatar
-                                        size="250px"
-                                        color="transparent"
-                                        >
-                                            <v-img src="/public/images/517535-PJ5ZUG-806.jpg" contain alt="avatar" lazy-src="/public/images/517535-PJ5ZUG-806.jpg">
-                                                <template v-slot:placeholder>
-                                                    <v-layout
-                                                    fill-height
-                                                    align-center
-                                                    justify-center
-                                                    ma-0
-                                                    >
-                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
-                                                    </v-layout>
-                                                </template>
-                                            </v-img>
-                                        </v-avatar>
+                                        <v-img src="/public/images/illustrations/undraw_content_creator_xeju.png" 
+                                        contain 
+                                        alt="avatar" 
+                                        lazy-src="/public/images/illustrations/undraw_content_creator_xeju.png"
+                                        max-height="400px">
+                                            <template v-slot:placeholder>
+                                                <v-layout
+                                                fill-height
+                                                align-center
+                                                justify-center
+                                                ma-0
+                                                >
+                                                    <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                </v-layout>
+                                            </template>
+                                        </v-img>
                                     </span>
                                 </v-flex>
                             </v-layout>
@@ -129,6 +129,7 @@
                         </div>
                     </v-timeline-item>
                     <v-timeline-item
+                    id="item-4"
                     color="red lighten-1"
                     fill-dot
                     left
@@ -138,23 +139,22 @@
                             <v-layout row wrap justify-center>
                                 <v-flex xs10>
                                     <span>
-                                        <v-avatar
-                                        size="250px"
-                                        color="transparent"
-                                        >
-                                            <v-img src="/public/images/518055-PIW5O8-324.jpg" contain alt="avatar" lazy-src="/public/images/518055-PIW5O8-324.jpg">
-                                                <template v-slot:placeholder>
-                                                    <v-layout
-                                                    fill-height
-                                                    align-center
-                                                    justify-center
-                                                    ma-0
-                                                    >
-                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
-                                                    </v-layout>
-                                                </template>
-                                            </v-img>
-                                        </v-avatar>
+                                        <v-img src="/public/images/illustrations/undraw_about_me_wa29.png" 
+                                        contain 
+                                        alt="avatar" 
+                                        lazy-src="/public/images/illustrations/undraw_about_me_wa29.png"
+                                        max-height="400px">
+                                            <template v-slot:placeholder>
+                                                <v-layout
+                                                fill-height
+                                                align-center
+                                                justify-center
+                                                ma-0
+                                                >
+                                                    <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                </v-layout>
+                                            </template>
+                                        </v-img>
                                     </span>
                                 </v-flex>
                             </v-layout>
@@ -169,6 +169,7 @@
                         </div>
                     </v-timeline-item>
                     <v-timeline-item
+                    id="item-5"
                     color="green lighten-1"
                     fill-dot
                     right
@@ -178,23 +179,22 @@
                             <v-layout row wrap justify-center>
                                 <v-flex xs10>
                                     <span>
-                                        <v-avatar
-                                        size="250px"
-                                        color="transparent"
-                                        >
-                                            <v-img src="/public/images/520501-PIVQ3S-304.jpg" contain alt="avatar" lazy-src="/public/images/520501-PIVQ3S-304.jpg">
-                                                <template v-slot:placeholder>
-                                                    <v-layout
-                                                    fill-height
-                                                    align-center
-                                                    justify-center
-                                                    ma-0
-                                                    >
-                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
-                                                    </v-layout>
-                                                </template>
-                                            </v-img>
-                                        </v-avatar>
+                                        <v-img src="/public/images/illustrations/undraw_image_post_24iy.png" 
+                                        contain 
+                                        alt="avatar" 
+                                        lazy-src="/public/images/illustrations/undraw_image_post_24iy.png"
+                                        max-height="400px">
+                                            <template v-slot:placeholder>
+                                                <v-layout
+                                                fill-height
+                                                align-center
+                                                justify-center
+                                                ma-0
+                                                >
+                                                    <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                </v-layout>
+                                            </template>
+                                        </v-img>
                                     </span>
                                 </v-flex>
                             </v-layout>
@@ -211,29 +211,44 @@
                 </v-timeline>
             </v-flex>
         </v-layout>
-        <small>
-            <a href="https://www.freepik.com/free-photos-vectors/people">People vector created by rawpixel.com - www.freepik.com</a><br>
-        </small>
-        <small>
-            <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by rawpixel.com - www.freepik.com</a><br>
-        </small>
-        <small>
-            <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a><br>
-        </small>
-        <small>
-            <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a>
-        </small>
-        <small>
-            <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a>
-        </small>
+        <v-btn
+        bottom
+        color="primary"
+        fab
+        fixed
+        right
+        @click="goToNextTimelineElement"
+        >
+            <v-icon>{{ currentTimelineElement >= 5 ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+        </v-btn>
     </v-container>
 </template>
 
 <script>
 export default {
     data: () => ({
-        //
-    })
+        currentTimelineElement: 0,
+        elementsArray: [
+            '#about-title',
+            '#item-1',
+            '#item-2',
+            '#item-3',
+            '#item-4',
+            '#item-5'
+        ]
+    }),
+    methods: {
+        goToNextTimelineElement() {
+            if(this.$data.currentTimelineElement >= 5) {
+                this.$data.currentTimelineElement = 0;
+                this.$vuetify.goTo(this.$data.elementsArray[this.$data.currentTimelineElement]);
+                return;
+            }
+
+            this.$data.currentTimelineElement++;
+            this.$vuetify.goTo(this.$data.elementsArray[this.$data.currentTimelineElement]);
+        }
+    }
 }
 </script>
 
