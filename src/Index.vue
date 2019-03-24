@@ -7,11 +7,12 @@
         https://vuejs.org/v2/guide/deployment.html
         https://jestjs.io/docs/en/setup-teardown
         https://vuex.vuejs.org/guide/testing.html
+
+        https://vuejs.org/v2/examples/index.html
     -->
 
-    <!-- TODO: Property validation in props object for each component. -->
-    <!-- TODO: Markdown syntax to write Post. Same for EditPost and Comments. -->
     <!-- TODO: Implement light and dark themes. https://vuetifyjs.com/en/framework/theme -->
+    <!-- TODO: Backend for testing. -->
     <v-app>
         <Navbar @showSidenav="showSidenav = true" @showWritePost="showWritePost = true"></Navbar>
         <!-- This is handled by vue-router module. -->

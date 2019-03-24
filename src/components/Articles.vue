@@ -16,7 +16,7 @@ export default {
     data: () => ({
         articles: [
             {
-                articleLink: '/articles/1',
+                articleLink: '/posts/1',
                 show: false,
                 title: 'Lorem ipsum dolor.',
                 articleImageSrc: 'https://picsum.photos/500/?image=0',
@@ -25,7 +25,7 @@ export default {
                 profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
             },
             {
-                articleLink: '/articles/2',
+                articleLink: '/posts/2',
                 show: false,
                 title: 'Cras eu leo.',
                 articleImageSrc: 'https://picsum.photos/500/?image=1',
@@ -34,7 +34,7 @@ export default {
                 profileImageSrc: 'https://randomuser.me/api/portraits/women/90.jpg'
             },
             {
-                articleLink: '/articles/3',
+                articleLink: '/posts/3',
                 show: false,
                 title: 'Vestibulum in vulputate quam. Integer eget.',
                 articleImageSrc: 'https://picsum.photos/500/?image=2',
@@ -43,7 +43,7 @@ export default {
                 profileImageSrc: 'https://randomuser.me/api/portraits/men/81.jpg'
             },
             {
-                articleLink: '/articles/4',
+                articleLink: '/posts/4',
                 show: false,
                 title: 'Vestibulum in vulputate quam. Integer eget.',
                 articleImageSrc: 'https://picsum.photos/500/?image=3',
@@ -52,7 +52,7 @@ export default {
                 profileImageSrc: 'https://randomuser.me/api/portraits/men/8.jpg'
             },
             {
-                articleLink: '/articles/5',
+                articleLink: '/posts/5',
                 show: false,
                 title: 'Vestibulum in vulputate quam. Integer eget.',
                 articleImageSrc: 'https://picsum.photos/500/?image=4',
@@ -61,7 +61,7 @@ export default {
                 profileImageSrc: 'https://randomuser.me/api/portraits/women/81.jpg'
             },
             {
-                articleLink: '/articles/6',
+                articleLink: '/posts/6',
                 show: false,
                 title: 'Vestibulum in vulputate quam. Integer eget.',
                 articleImageSrc: 'https://picsum.photos/500/?image=5',

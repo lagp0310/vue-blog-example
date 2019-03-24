@@ -29,7 +29,6 @@
                                         :rules="postTitleRules"
                                         label="Post Title"
                                         required
-                                        @keydown.enter="validate"
                                         @keydown.esc="blurInput($event)"
                                         ></v-text-field>
                                     </v-form>
@@ -42,7 +41,7 @@
                         <v-subheader>Body</v-subheader>
                         <v-container grid-list-md text-xs-center>
                             <v-layout row wrap justify-center>
-                                <v-flex xs12>
+                                <v-flex xs12 md5>
                                     <v-form
                                     ref="body"
                                     v-model="isBodyFormValid"
@@ -59,10 +58,14 @@
                                         persistent-hint
                                         placeholder="Post Body"
                                         :rules="postBodyRules"
-                                        @keydown.enter="validate"
                                         @keydown.esc="blurInput($event)"
                                         ></v-textarea>
                                     </v-form>
+                                </v-flex>
+                                <v-flex md1></v-flex>
+                                <v-flex xs12 md6>
+                                    <v-list-tile-sub-title>Post Body Preview</v-list-tile-sub-title>
+                                    <div v-html="compiledMarkdown(postBody)"></div>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -71,7 +74,7 @@
                         <v-subheader>Tags</v-subheader>
                         <v-container grid-list-md text-xs-center>
                             <v-layout row wrap justify-center>
-                                <v-flex xs12 sm4>
+                                <v-flex xs12 md5>
                                     <v-form
                                     ref="tags"
                                     v-model="isTagsFormValid"
@@ -82,20 +85,20 @@
                                         :rules="postTagsRules"
                                         label="New Tag"
                                         prefix="#"
-                                        @keydown.enter="validate"
+                                        @keydown.enter.prevent="addTag(newTag)"
                                         @keydown.esc="blurInput($event)"
                                         ></v-text-field>
                                         <v-btn
-                                        fab
-                                        small
                                         color="primary"
                                         @click="addTag(newTag)"
                                         >
-                                            <v-icon>mdi-plus</v-icon>
+                                            Add Tag
                                         </v-btn>
                                     </v-form>
                                 </v-flex>
-                                <v-flex sm8>
+                                <v-flex md1></v-flex>
+                                <v-flex xs12 md6>
+                                    <v-list-tile-sub-title>Post Tags</v-list-tile-sub-title>
                                     <v-chip v-for="(tag, id) in postTags" :key="id" v-model="tag.show" close
                                     @input="removeTag(tag)">
                                         {{ tag.tagName }}
@@ -126,6 +129,8 @@
 
 <script>
 import Snackbar from './Snackbar.vue';
+
+import marked from 'marked';
 
 export default {
     props: {
@@ -217,6 +222,9 @@ export default {
             }
 
             return false;
+        },
+        compiledMarkdown(markdown) {
+            return marked(markdown, { sanitize: true });
         }
     },
     components: {

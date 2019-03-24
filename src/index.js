@@ -78,8 +78,20 @@ const routes = [
     { path: '/terms', component: TermsOfServiceModal },
     { path: '/signup', component: Signup },
     { path: '/login', component: Login },
+    // TODO: Complete this.
+    // { path: '/new-post', component: WritePost, 
+    //     props: {
+    //         posts: posts
+    //     } 
+    // },
+    // // TODO: Complete this.
+    // { path: '/edit-post/:postId', component: EditPost,
+    //     props: {
+    //         posts: posts
+    //     }
+    // },
     {
-        path: '/articles/:articlesId', component: Post, 
+        path: '/posts/:postId', component: Post, 
         props: {
             startingCommentLevel: 0,
             author: {
@@ -92,9 +104,8 @@ const routes = [
             },
             post: {
                 postID: 1,
-                title: 'Ut mattis dignissim convallis. Maecenas non magna imperdiet arcu accumsan pulvinar non.', 
-                body: '\
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed sollicitudin pharetra quam eu fermentum.\
+                title: 'Ut mattis dignissim convallis. Maecenas non magna imperdiet arcu accumsan pulvinar non.',
+                body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed sollicitudin pharetra quam eu fermentum.\
                 Fusce nunc ex, faucibus sit amet augue ac, molestie rutrum eros.Cras semper, libero eu porta \
                 facilisis, ex arcu lacinia ante, eu molestie tellus ipsum sit amet erat.Aenean commodo vehicula sapien \
                 non auctor.Nullam et velit magna.Nunc sed velit eget nisl mollis vehicula vel at metus.Fusce elit \

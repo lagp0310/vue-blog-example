@@ -6,13 +6,18 @@
                     <v-card>
                         <v-card-title primary-title>
                             <div>
-                                <h3 class="title mb-0">{{ post.title }}</h3>
+                                <h3 
+                                class="title mb-0"
+                                >
+                                    {{ post.title }}
+                                </h3>
                             </div>
                         </v-card-title>
                         <v-divider></v-divider>
-                        <v-card-text class="font-weight-regular body-1">
-                            {{ post.body }}
-                        </v-card-text>
+                        <v-card-text 
+                        v-html="compiledMarkdown(post.body)" 
+                        class="font-weight-regular body-1"
+                        ></v-card-text>
                         <v-divider></v-divider>
                         <v-card-text class="font-weight-light">
                             <v-chip v-for="tag in post.tags" :key="tag.id" v-ripple>
@@ -59,28 +64,32 @@
                         </v-card-title>
                         <v-divider></v-divider>
                         <v-card-text class="font-weight-regular">
-                            <v-layout row justify-center>
-                                <v-btn flat round color="pink darken-1"
-                                @click="incrementLikesCounter">
-                                    <v-icon v-if="!likePost">mdi-heart-outline</v-icon>&nbsp;
-                                    <v-icon v-if="likePost">mdi-heart</v-icon>&nbsp;
-                                    {{ post.likes }}
-                                </v-btn>
-                                <v-btn flat round color="blue darken-1" 
-                                @click="$vuetify.goTo('#write-post-comment'), goToRef('#write-post-comment')">
-                                    <v-icon>mdi-message-reply-text</v-icon>&nbsp;
-                                    {{ post.comments.length }}
-                                </v-btn>
-                                <v-btn v-if="showEditPost(author.authorID)" 
-                                round flat color="grey darken-1"
-                                @click="editPost(post.postID)">
-                                    <v-icon>mdi-pencil</v-icon>&nbsp;
-                                </v-btn>
-                                <v-btn flat round color="green darken-1"
-                                @click="showSharePost = !showSharePost">
-                                    <v-icon>mdi-share-variant</v-icon>
-                                </v-btn>
-                            </v-layout>
+                            <v-container grid-list-md text-xs-center>
+                                <v-layout row>
+                                    <v-flex xs12>
+                                        <v-btn flat round color="pink darken-1"
+                                        @click="incrementLikesCounter">
+                                            <v-icon v-if="!likePost">mdi-heart-outline</v-icon>&nbsp;
+                                            <v-icon v-if="likePost">mdi-heart</v-icon>&nbsp;
+                                            {{ post.likes }}
+                                        </v-btn>
+                                        <v-btn flat round color="blue darken-1" 
+                                        @click="$vuetify.goTo('#write-post-comment'), goToRef('#write-post-comment')">
+                                            <v-icon>mdi-message-reply-text</v-icon>&nbsp;
+                                            {{ post.comments.length }}
+                                        </v-btn>
+                                        <v-btn v-if="showEditPost(author.authorID)" 
+                                        round flat color="grey darken-1"
+                                        @click="editPost(post.postID)">
+                                            <v-icon>mdi-pencil</v-icon>&nbsp;
+                                        </v-btn>
+                                        <v-btn flat round color="green darken-1"
+                                        @click="showSharePost = !showSharePost">
+                                            <v-icon>mdi-share-variant</v-icon>
+                                        </v-btn>
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
                         </v-card-text>
                     </v-card>
                     <v-divider></v-divider>
@@ -103,6 +112,8 @@ import Comment from './Comment.vue';
 import Share from './Share.vue';
 import WriteComment from './WriteComment.vue';
 import EditPost from './EditPost.vue';
+
+import marked from 'marked';
 
 export default {
     props: {
@@ -151,6 +162,9 @@ export default {
         },
         editPost(postID) {
             this.$data.showEditPostModal = true;
+        },
+        compiledMarkdown(markdown) {
+            return marked(markdown, { sanitize: true });
         }
     },
     computed: {
@@ -167,6 +181,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-    
+<style lang="scss">
+    // For responsive images in Markdown.
+    img {
+        width: 100%;
+        height: auto;
+    }
 </style>
