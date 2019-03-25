@@ -1,32 +1,56 @@
 <template>
-    <div :id="comment.commentID" :class="['comment', getLevel]">
+    <div 
+        :id="comment.commentID" 
+        :class="['comment', getLevel]"
+    >
         <v-card class="mb-4">
             <v-container grid-list-md>
                 <v-layout row>
-                    <v-flex xs3 sm2 class="pt-4 pl-4">
+                    <v-flex 
+                        xs3 
+                        sm2 
+                        class="pt-4 pl-4"
+                    >
                         <v-avatar
-                        size="60px"
-                        color="grey lighten-4"
+                            size="60px"
+                            color="grey lighten-4"
                         >
-                            <v-img :src="comment.user.profileImageSrc" contain alt="avatar" :lazy-src="comment.user.profileImageSrc">
+                            <v-img 
+                                :src="comment.user.profileImageSrc" 
+                                contain 
+                                alt="avatar" 
+                                :lazy-src="comment.user.profileImageSrc"
+                            >
                                 <template v-slot:placeholder>
                                     <v-layout
-                                    fill-height
-                                    align-center
-                                    justify-center
-                                    ma-0
+                                        fill-height
+                                        align-center
+                                        justify-center
+                                        ma-0
                                     >
-                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                        <v-progress-circular 
+                                            indeterminate 
+                                            color="grey" 
+                                        />
                                     </v-layout>
                                 </template>
                             </v-img>
                         </v-avatar>
                         <h3 class="body-1 mt-1">{{ getFullname }}</h3>
                     </v-flex>
-                    <v-flex xs8 sm9 offset-xs1 offset-md0 class="mt-4">
+                    <v-flex 
+                        xs8 
+                        sm9 
+                        offset-xs1 
+                        offset-md0 
+                        class="mt-4"
+                    >
                         <!-- Thanks: https://forum.vuejs.org/t/how-to-handle-anchors-bookmarks-with-vue-router/14563/6 -->
-                        <router-link v-if="comment.replyToID" class="font-weight-regular font-italic caption"
-                        :to="getCommentID">
+                        <router-link 
+                            v-if="comment.replyToID" 
+                            class="font-weight-regular font-italic caption"
+                            :to="getCommentID"
+                        >
                             <div @click="scrollTo(getCommentID)">
                                 Reply to: {{ comment.replyToID }}
                             </div>
@@ -35,22 +59,37 @@
                             {{ comment.content }}
                         </div>
                         <br />
-                        <v-divider></v-divider>
+                        <v-divider />
                         <v-card-text class="font-weight-regular">
-                            <v-layout row justify-center>
-                                <v-btn round flat color="pink darken-1"
-                                @click="incrementLikesCounter">
+                            <v-layout 
+                                row 
+                                justify-center
+                            >
+                                <v-btn 
+                                    round 
+                                    flat 
+                                    color="pink darken-1"
+                                    @click="incrementLikesCounter"
+                                >
                                     <v-icon v-if="!likeComment">mdi-heart-outline</v-icon>&nbsp;
                                     <v-icon v-if="likeComment">mdi-heart</v-icon>&nbsp;
                                     {{ comment.likes }}&nbsp;
                                 </v-btn>
-                                <v-btn round flat color="blue darken-1"
-                                @click="addReplyFor(comment.commentID)">
+                                <v-btn 
+                                    round 
+                                    flat 
+                                    color="blue darken-1"
+                                    @click="addReplyFor(comment.commentID)"
+                                >
                                     <v-icon>mdi-message-reply-text</v-icon>&nbsp;{{ comment.replies.length }}&nbsp;
                                 </v-btn>
-                                <v-btn v-if="showEditComment(comment.createdByUserID)" 
-                                round flat color="grey darken-1"
-                                @click="editComment(comment.commentID)">
+                                <v-btn 
+                                    v-if="showEditComment(comment.createdByUserID)" 
+                                    round 
+                                    flat 
+                                    color="grey darken-1"
+                                    @click="editComment(comment.commentID)"
+                                >
                                     <v-icon>mdi-pencil</v-icon>&nbsp;
                                 </v-btn>
                             </v-layout>
@@ -60,38 +99,43 @@
             </v-container>
         </v-card>
         <WriteReply 
-        v-if="showCommentEqualID(comment.commentID) && !showEditCommentData" 
-        :level="getNextLevel" 
-        :comment="comment"
-        :showPostedReplySnackbar.sync="showPostedReplySnackbar"
-        @hideWriteReply="changeCurrentCommentID('')"
-        @updatedCommentReplies="scrollTo(getLastReplyID)"
+            v-if="showCommentEqualID(comment.commentID) && !showEditCommentData" 
+            :level="getNextLevel" 
+            :comment="comment"
+            :show-posted-reply-snackbar.sync="showPostedReplySnackbar"
+            @hideWriteReply="changeCurrentCommentID('')"
+            @updatedCommentReplies="scrollTo(getLastReplyID)"
         ></WriteReply>
         <EditComment 
-        v-if="showCommentEqualID(comment.commentID) && showEditCommentData" 
-        :level="getNextLevel" 
-        :comment.sync="comment"
-        :postComments="[comment]"
-        :showCancelButton="true" 
-        :showEditComment.sync="showEditCommentData"
-        :showEditedCommentSnackbar.sync="showEditedCommentSnackbar"
+            v-if="showCommentEqualID(comment.commentID) && showEditCommentData" 
+            :level="getNextLevel" 
+            :comment.sync="comment"
+            :post-comments="[comment]"
+            :show-cancel-button="true" 
+            :show-edit-comment.sync="showEditCommentData"
+            :show-edited-comment-snackbar.sync="showEditedCommentSnackbar"
         ></EditComment>
         <!-- https://vuejs.org/v2/guide/components-edge-cases.html#Recursive-Components -->
-        <Comment v-for="(reply, id) in comment.replies" :key="id" :comment="reply" :level="getNextLevel" 
-        class="reply"></Comment>
+        <PostComment 
+            v-for="(reply, id) in comment.replies" 
+            :key="id" 
+            :comment="reply" 
+            :level="getNextLevel" 
+            class="reply"
+        ></PostComment>
         <Snackbar 
-        :show.sync="showEditedCommentSnackbar" 
-        snackbarColor="grey darken-1" 
-        snackbarText="Comment was updated!" 
-        :snackbarCloseTime="6000"
-        snackbarCloseText="Close"
+            :show.sync="showEditedCommentSnackbar" 
+            snackbar-color="grey darken-1" 
+            snackbar-text="Comment was updated!" 
+            :snackbar-close-time="6000"
+            snackbar-close-text="Close"
         ></Snackbar>
         <Snackbar 
-        :show.sync="showPostedReplySnackbar" 
-        snackbarColor="grey darken-1" 
-        snackbarText="Reply was posted!" 
-        :snackbarCloseTime="6000"
-        snackbarCloseText="Close"
+            :show.sync="showPostedReplySnackbar" 
+            snackbar-color="grey darken-1" 
+            snackbar-text="Reply was posted!" 
+            :snackbar-close-time="6000"
+            snackbar-close-text="Close"
         ></Snackbar>
     </div>
 </template>
@@ -103,7 +147,12 @@ import Snackbar from './Snackbar.vue';
 
 export default {
     // For Recursive Components.
-    name: 'Comment',
+    name: 'PostComment',
+    components: {
+        WriteReply,
+        EditComment,
+        Snackbar
+    },
     props: {
         comment: {
             type: Object,
@@ -121,6 +170,25 @@ export default {
         showEditedCommentSnackbar: false,
         showPostedReplySnackbar: false
     }),
+    computed: {
+        getFullname() {
+            return this.$props.comment.user.name + ' ' + this.$props.comment.user.lastname;
+        },
+        getCommentID() {
+            return this.$props.comment.replyToID;
+        },
+        getLevel() {
+            return 'level-' + this.$props.level;
+        },
+        getNextLevel() {
+            var nextLevel = this.$props.level;
+            return ((++nextLevel) > 10 ? 0 : nextLevel);
+        },
+        getLastReplyID() {
+            var repliesLength = this.$props.comment.replies.length;
+            return this.$props.comment.replies[repliesLength - 1].commentID;
+        }
+    },
     methods: {
         scrollTo(ref) {
             this.$nextTick(function() {
@@ -158,30 +226,6 @@ export default {
         changeCurrentCommentID(commentID) {
             this.$store.commit('changeCurrentCommentID', commentID);
         }
-    },
-    computed: {
-        getFullname() {
-            return this.$props.comment.user.name + ' ' + this.$props.comment.user.lastname;
-        },
-        getCommentID() {
-            return this.$props.comment.replyToID;
-        },
-        getLevel() {
-            return 'level-' + this.$props.level;
-        },
-        getNextLevel() {
-            var nextLevel = this.$props.level;
-            return ((++nextLevel) > 10 ? 0 : nextLevel);
-        },
-        getLastReplyID() {
-            var repliesLength = this.$props.comment.replies.length;
-            return this.$props.comment.replies[repliesLength - 1].commentID;
-        }
-    },
-    components: {
-        WriteReply,
-        EditComment,
-        Snackbar
     }
 };
 </script>

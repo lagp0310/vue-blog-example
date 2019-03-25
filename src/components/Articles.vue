@@ -1,8 +1,18 @@
 <template>
-    <v-container grid-list-md text-xs-center>
-        <v-layout row wrap>
+    <v-container 
+        grid-list-md 
+        text-xs-center
+    >
+        <v-layout 
+            row 
+            wrap
+        >
             <v-flex xs12>
-                <Article v-for="(article, id) in articles" :key="id" :article="article"></Article>
+                <Article 
+                    v-for="(article, id) in articles" 
+                    :key="id" 
+                    :article="article" 
+                />
                 <br />
             </v-flex>
         </v-layout>
@@ -13,6 +23,9 @@
 import Article from './Article.vue'
 
 export default {
+    components: {
+        Article
+    },
     data: () => ({
         articles: [
             {
@@ -70,10 +83,7 @@ export default {
                 profileImageSrc: 'https://randomuser.me/api/portraits/men/15.jpg'
             }
         ]
-    }),
-    components: {
-        Article
-    }
+    })
 };
 </script>
 

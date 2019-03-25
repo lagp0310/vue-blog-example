@@ -3,93 +3,120 @@
         <v-stepper v-model="stepNumber">
             <v-stepper-header>
                 <v-stepper-step step="1">Basic Information</v-stepper-step>
-                <v-divider></v-divider>
+                <v-divider />
                 <v-stepper-step step="2">Terms Of Service</v-stepper-step>
-                <v-divider></v-divider>
+                <v-divider />
                 <v-stepper-step step="3">Preferences</v-stepper-step>
-                <v-divider></v-divider>
+                <v-divider />
                 <v-stepper-step step="4">Signup Completed!</v-stepper-step>
             </v-stepper-header>
             <v-stepper-items>
                 <v-stepper-content step="1">
                     <v-container>
                         <v-layout>
-                            <v-flex sm3 md3></v-flex>
-                            <v-flex xs12 sm6 md6>
+                            <v-flex 
+                                sm3 
+                                md3 
+                            />
+                            <v-flex 
+                                xs12 
+                                sm6 
+                                md6
+                            >
                                 <v-form
-                                ref="form"
-                                v-model="isFormValid"
-                                lazy-validation
+                                    ref="form"
+                                    v-model="isFormValid"
+                                    lazy-validation
                                 >
                                     <v-text-field
-                                    v-model="name"
-                                    :rules="nameRules"
-                                    label="Name"
-                                    required
-                                    @keydown.enter="validate"
-                                    @keydown.esc="blurInput($event)"
+                                        v-model="name"
+                                        :rules="nameRules"
+                                        label="Name"
+                                        required
+                                        @keydown.enter="validate"
+                                        @keydown.esc="blurInput($event)"
                                     ></v-text-field>
 
                                     <v-text-field
-                                    v-model="lastname"
-                                    :rules="lastnameRules"
-                                    label="Lastname"
-                                    required
-                                    @keydown.enter="validate"
-                                    @keydown.esc="blurInput($event)"
+                                        v-model="lastname"
+                                        :rules="lastnameRules"
+                                        label="Lastname"
+                                        required
+                                        @keydown.enter="validate"
+                                        @keydown.esc="blurInput($event)"
                                     ></v-text-field>
 
                                     <v-text-field
-                                    v-model="email"
-                                    :rules="emailRules"
-                                    label="E-mail"
-                                    required
-                                    @keydown.enter="validate"
-                                    @keydown.esc="blurInput($event)"
+                                        v-model="email"
+                                        :rules="emailRules"
+                                        label="E-mail"
+                                        required
+                                        @keydown.enter="validate"
+                                        @keydown.esc="blurInput($event)"
                                     ></v-text-field>
 
                                     <v-text-field
-                                    :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-                                    :rules="[passwordRules.required, passwordRules.min, checkPasswordChange]"
-                                    :type="showPassword ? 'text' : 'password'"
-                                    v-model="password"
-                                    name="password"
-                                    label="Password"
-                                    hint="At least 8 characters"
-                                    value=""
-                                    class="input-group--focused"
-                                    @click:append="showPassword = !showPassword"
-                                    @keydown.enter="validate"
-                                    @keydown.esc="blurInput($event)"
+                                        :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+                                        :rules="[passwordRules.required, passwordRules.min, checkPasswordChange]"
+                                        :type="showPassword ? 'text' : 'password'"
+                                        v-model="password"
+                                        name="password"
+                                        label="Password"
+                                        hint="At least 8 characters"
+                                        value=""
+                                        class="input-group--focused"
+                                        @click:append="showPassword = !showPassword"
+                                        @keydown.enter="validate"
+                                        @keydown.esc="blurInput($event)"
                                     ></v-text-field>
 
                                     <v-text-field
-                                    :append-icon="showPasswordConfirmation ? 'mdi-eye-off' : 'mdi-eye'"
-                                    :rules="[passwordRules.required, passwordRules.min, doPasswordsMatch]"
-                                    :type="showPasswordConfirmation ? 'text' : 'password'"
-                                    v-model="passwordConfirmation"
-                                    name="passwordConfirmation"
-                                    label="Confirm Password"
-                                    hint="At least 8 characters."
-                                    value=""
-                                    class="input-group--focused"
-                                    @click:append="showPasswordConfirmation = !showPasswordConfirmation"
-                                    @keydown.enter="validate"
-                                    @keydown.esc="blurInput($event)"
+                                        :append-icon="showPasswordConfirmation ? 'mdi-eye-off' : 'mdi-eye'"
+                                        :rules="[passwordRules.required, passwordRules.min, doPasswordsMatch]"
+                                        :type="showPasswordConfirmation ? 'text' : 'password'"
+                                        v-model="passwordConfirmation"
+                                        name="passwordConfirmation"
+                                        label="Confirm Password"
+                                        hint="At least 8 characters."
+                                        value=""
+                                        class="input-group--focused"
+                                        @click:append="showPasswordConfirmation = !showPasswordConfirmation"
+                                        @keydown.enter="validate"
+                                        @keydown.esc="blurInput($event)"
                                     ></v-text-field>
                                     <v-container>
-                                        <v-layout row wrap>
-                                            <v-flex xs8 sm10>
-                                                <v-radio-group row :rules="[genderSelectorRules.required]">
-                                                    <v-radio label="Male" value="male" color="info"></v-radio>
-                                                    <v-radio label="Female" value="female" color="pink"></v-radio>
+                                        <v-layout 
+                                            row 
+                                            wrap
+                                        >
+                                            <v-flex 
+                                                xs8 
+                                                sm10
+                                            >
+                                                <v-radio-group 
+                                                    row 
+                                                    :rules="[genderSelectorRules.required]"
+                                                >
+                                                    <v-radio 
+                                                        label="Male" 
+                                                        value="male" 
+                                                        color="info" 
+                                                    />
+                                                    <v-radio 
+                                                        label="Female" 
+                                                        value="female" 
+                                                        color="pink" 
+                                                    />
                                                 </v-radio-group>
                                             </v-flex>
-                                            <v-flex xs4 sm2>
+                                            <v-flex 
+                                                xs4 
+                                                sm2
+                                            >
                                                 <v-btn
-                                                color="primary"
-                                                :disabled="!isFormValid"
-                                                @click="validate"
+                                                    color="primary"
+                                                    :disabled="!isFormValid"
+                                                    @click="validate"
                                                 >
                                                     Continue
                                                 </v-btn>
@@ -98,37 +125,58 @@
                                     </v-container>
                                 </v-form>
                             </v-flex>
-                            <v-flex sm3 md3></v-flex>
+                            <v-flex 
+                                sm3 
+                                md3 
+                            />
                         </v-layout>
                     </v-container>
                 </v-stepper-content>
                 <v-stepper-content step="2">
                     <v-container>
-                        <v-layout row wrap justify-center>
+                        <v-layout 
+                            row 
+                            wrap 
+                            justify-center
+                        >
                             <v-form
-                            ref="form1"
-                            v-model="isFormValid"
-                            lazy-validation
+                                ref="form1"
+                                v-model="isFormValid"
+                                lazy-validation
                             >
                                 <v-checkbox
-                                v-model="doesAgree"
-                                :rules="[v => !!v || 'You must agree to continue!']"
-                                color="green"
-                                required
+                                    v-model="doesAgree"
+                                    :rules="[v => !!v || 'You must agree to continue!']"
+                                    color="green"
+                                    required
                                 >
                                     <div slot="label">
                                         Do you accept our
-                                        <a href="javascript:;" @click.stop="terms = true">Terms Of Service?</a>
+                                        <a 
+                                            href="javascript:;" 
+                                            @click.stop="terms = true"
+                                        >
+                                            Terms Of Service?
+                                        </a>
                                     </div>
                                 </v-checkbox>
                             </v-form>
                         </v-layout>
-                        <v-layout row wrap justify-end>
-                            <v-btn flat @click="stepNumber = 1, isFormValid = true">Go back</v-btn>
+                        <v-layout 
+                            row 
+                            wrap 
+                            justify-end
+                        >
+                            <v-btn 
+                                flat 
+                                @click="stepNumber = 1, isFormValid = true"
+                            >
+                                Go back
+                            </v-btn>
                             <v-btn
-                            color="primary"
-                            :disabled="!isFormValid"
-                            @click="validate"
+                                color="primary"
+                                :disabled="!isFormValid"
+                                @click="validate"
                             >
                                 Continue
                             </v-btn>
@@ -137,27 +185,31 @@
                 </v-stepper-content>
                 <v-stepper-content step="3">
                     <v-container>
-                        <v-layout row wrap justify-center>
+                        <v-layout 
+                            row 
+                            wrap 
+                            justify-center
+                        >
                             <v-form ref="form2">
                                 <v-checkbox
-                                v-model="emailNewContent"
-                                color="blue darken-1"
+                                    v-model="emailNewContent"
+                                    color="blue darken-1"
                                 >
                                     <div slot="label">
                                         Send me an email with new content each week.
                                     </div>
                                 </v-checkbox>
                                 <v-checkbox
-                                v-model="emailCommentPost"
-                                color="blue darken-1"
+                                    v-model="emailCommentPost"
+                                    color="blue darken-1"
                                 >
                                     <div slot="label">
                                         Send me an email when someone writes a Comment in one of my Posts.
                                     </div>
                                 </v-checkbox>
                                 <v-checkbox
-                                v-model="emailReplyComment"
-                                color="blue darken-1"
+                                    v-model="emailReplyComment"
+                                    color="blue darken-1"
                                 >
                                     <div slot="label">
                                         Send me an email when someone replies one of my Comments.
@@ -165,33 +217,51 @@
                                 </v-checkbox>
                             </v-form>
                         </v-layout>
-                        <v-layout row wrap justify-end>
-                            <v-btn flat @click="stepNumber = 2, isFormValid = true">Go back</v-btn>
-                            <v-btn color="primary" @click="validate">
+                        <v-layout 
+                            row 
+                            wrap 
+                            justify-end
+                        >
+                            <v-btn 
+                                flat 
+                                @click="stepNumber = 2, isFormValid = true"
+                            >
+                                Go back
+                            </v-btn>
+                            <v-btn 
+                                color="primary" 
+                                @click="validate"
+                            >
                                 Complete Signup
                             </v-btn>
                         </v-layout>
                     </v-container>
                 </v-stepper-content>
                 <v-stepper-content step="4">
-                    <v-container grid-list-md text-xs-center>
+                    <v-container 
+                        grid-list-md 
+                        text-xs-center
+                    >
                         <v-layout justify-center>
                             <v-flex xs12>
                                 <v-img 
-                                src="/public/images/illustrations/undraw_press_play_bx2d.png" 
-                                alt="Blog Content Illustration"
-                                lazy-src="/public/images/illustrations/undraw_press_play_bx2d.png"
-                                max-height="300px"
-                                contain
+                                    src="/public/images/illustrations/undraw_press_play_bx2d.png" 
+                                    alt="Blog Content Illustration"
+                                    lazy-src="/public/images/illustrations/undraw_press_play_bx2d.png"
+                                    max-height="300px"
+                                    contain
                                 >
                                     <template v-slot:placeholder>
                                         <v-layout
-                                        fill-height
-                                        align-center
-                                        justify-center
-                                        ma-0
+                                            fill-height
+                                            align-center
+                                            justify-center
+                                            ma-0
                                         >
-                                            <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                            <v-progress-circular 
+                                                indeterminate 
+                                                color="grey" 
+                                            />
                                         </v-layout>
                                     </template>
                                 </v-img>
@@ -204,8 +274,15 @@
                             </v-flex>
                         </v-layout>
                         <br />
-                        <v-layout row wrap justify-center>
-                            <v-btn color="primary" @click="signup('/')">
+                        <v-layout 
+                            row 
+                            wrap 
+                            justify-center
+                        >
+                            <v-btn 
+                                color="primary" 
+                                @click="signup('/')"
+                            >
                                 Start Blogging!
                             </v-btn>
                         </v-layout>
@@ -214,7 +291,11 @@
             </v-stepper-items>
         </v-stepper>
         <!-- https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier -->
-        <TermsOfServiceModal v-if="terms" :agree.sync="doesAgree" :showTerms.sync="terms"></TermsOfServiceModal>
+        <TermsOfServiceModal 
+            v-if="terms" 
+            :agree.sync="doesAgree" 
+            :show-terms.sync="terms" 
+        />
     </div>
 </template>
 
@@ -222,6 +303,9 @@
 import TermsOfServiceModal from './TermsOfServiceModal.vue';
 
 export default {
+    components: {
+        TermsOfServiceModal
+    },
     data: () => ({
         stepNumber: 0,
         isFormValid: false,
@@ -284,9 +368,6 @@ export default {
         doPasswordsMatch() {
             return (this.password === this.passwordConfirmation ? true : 'Passwords do not match!');
         }
-    },
-    components: {
-        TermsOfServiceModal
     }
 }
 </script>

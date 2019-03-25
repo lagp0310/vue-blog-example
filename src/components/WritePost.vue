@@ -1,106 +1,170 @@
 <template>
     <v-container>
-        <v-layout row justify-center>
-            <v-dialog v-model="showDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+        <v-layout 
+            row 
+            justify-center
+        >
+            <v-dialog 
+                v-model="showDialog" 
+                fullscreen 
+                hide-overlay 
+                transition="dialog-bottom-transition"
+            >
                 <v-card>
-                    <v-toolbar dark :color="getSidenavElementsColorAccordingTheme">
-                        <v-btn icon dark @click="$emit('update:showDialog', false)">
+                    <v-toolbar 
+                        dark 
+                        :color="getSidenavElementsColorAccordingTheme"
+                    >
+                        <v-btn 
+                            icon 
+                            dark 
+                            @click="$emit('update:showDialog', false)"
+                        >
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
                         <v-toolbar-title>New Post</v-toolbar-title>
-                        <v-spacer></v-spacer>
+                        <v-spacer />
                         <v-toolbar-items>
-                            <v-btn :disabled="!allFieldsValid" dark flat 
-                            @click="validate()">Create Post</v-btn>
+                            <v-btn 
+                                :disabled="!allFieldsValid" 
+                                dark 
+                                flat 
+                                @click="validate()"
+                            >
+                                Create Post
+                            </v-btn>
                         </v-toolbar-items>
                     </v-toolbar>
-                    <v-list three-line subheader>
+                    <v-list 
+                        three-line 
+                        subheader
+                    >
                         <v-subheader>Title</v-subheader>
                         <v-container>
-                            <v-layout row wrap>
+                            <v-layout 
+                                row 
+                                wrap
+                            >
                                 <v-flex xs12>
                                     <v-form
-                                    ref="title"
-                                    v-model="isTitleFormValid"
-                                    lazy-validation
+                                        ref="title"
+                                        v-model="isTitleFormValid"
+                                        lazy-validation
                                     >
                                         <v-text-field
-                                        v-model="postTitle"
-                                        :rules="postTitleRules"
-                                        label="Post Title"
-                                        required
-                                        @keydown.esc="blurInput($event)"
+                                            v-model="postTitle"
+                                            :rules="postTitleRules"
+                                            label="Post Title"
+                                            required
+                                            @keydown.esc="blurInput($event)"
                                         ></v-text-field>
                                     </v-form>
                                 </v-flex>
                             </v-layout>
                         </v-container>
                     </v-list>
-                    <v-divider></v-divider>
-                    <v-list three-line subheader>
+                    <v-divider />
+                    <v-list 
+                        three-line 
+                        subheader
+                    >
                         <v-subheader>Body</v-subheader>
-                        <v-container grid-list-md text-xs-center>
-                            <v-layout row wrap justify-center>
-                                <v-flex xs12 md5>
+                        <v-container 
+                            grid-list-md 
+                            text-xs-center
+                        >
+                            <v-layout 
+                                row 
+                                wrap 
+                                justify-center
+                            >
+                                <v-flex 
+                                    xs12 
+                                    md5
+                                >
                                     <v-form
-                                    ref="body"
-                                    v-model="isBodyFormValid"
-                                    lazy-validation
+                                        ref="body"
+                                        v-model="isBodyFormValid"
+                                        lazy-validation
                                     >
                                         <v-textarea
-                                        v-model="postBody"
-                                        name="postBody"
-                                        counter
-                                        label="Body"
-                                        auto-grow
-                                        value=""
-                                        hint="Post Content"
-                                        persistent-hint
-                                        placeholder="Post Body"
-                                        :rules="postBodyRules"
-                                        @keydown.esc="blurInput($event)"
+                                            v-model="postBody"
+                                            name="postBody"
+                                            counter
+                                            label="Body"
+                                            auto-grow
+                                            value=""
+                                            hint="Post Content"
+                                            persistent-hint
+                                            placeholder="Post Body"
+                                            :rules="postBodyRules"
+                                            @keydown.esc="blurInput($event)"
                                         ></v-textarea>
                                     </v-form>
                                 </v-flex>
-                                <v-flex md1></v-flex>
-                                <v-flex xs12 md6>
+                                <v-flex md1 />
+                                <v-flex 
+                                    xs12 
+                                    md6
+                                >
                                     <v-list-tile-sub-title>Post Body Preview</v-list-tile-sub-title>
-                                    <div v-html="compiledMarkdown(postBody)"></div>
+                                    <div v-html="compiledMarkdown(postBody)" />
                                 </v-flex>
                             </v-layout>
                         </v-container>
                     </v-list>
-                    <v-list three-line subheader>
+                    <v-list 
+                        three-line 
+                        subheader
+                    >
                         <v-subheader>Tags</v-subheader>
-                        <v-container grid-list-md text-xs-center>
-                            <v-layout row wrap justify-center>
-                                <v-flex xs12 md5>
+                        <v-container 
+                            grid-list-md 
+                            text-xs-center
+                        >
+                            <v-layout 
+                                row 
+                                wrap 
+                                justify-center
+                            >
+                                <v-flex 
+                                    xs12 
+                                    md5
+                                >
                                     <v-form
-                                    ref="tags"
-                                    v-model="isTagsFormValid"
-                                    lazy-validation
+                                        ref="tags"
+                                        v-model="isTagsFormValid"
+                                        lazy-validation
                                     >
                                         <v-text-field
-                                        v-model="newTag"
-                                        :rules="postTagsRules"
-                                        label="New Tag"
-                                        prefix="#"
-                                        @keydown.enter.prevent="addTag(newTag)"
-                                        @keydown.esc="blurInput($event)"
+                                            v-model="newTag"
+                                            :rules="postTagsRules"
+                                            label="New Tag"
+                                            prefix="#"
+                                            @keydown.enter.prevent="addTag(newTag)"
+                                            @keydown.esc="blurInput($event)"
                                         ></v-text-field>
                                         <v-btn
-                                        color="primary"
-                                        @click="addTag(newTag)"
+                                            color="primary"
+                                            @click="addTag(newTag)"
                                         >
                                             Add Tag
                                         </v-btn>
                                     </v-form>
                                 </v-flex>
-                                <v-flex md1></v-flex>
-                                <v-flex xs12 md6>
+                                <v-flex md1 />
+                                <v-flex 
+                                    xs12 
+                                    md6
+                                >
                                     <v-list-tile-sub-title>Post Tags</v-list-tile-sub-title>
-                                    <v-chip v-for="(tag, id) in postTags" :key="id" v-model="tag.show" close
-                                    @input="removeTag(tag)">
+                                    <v-chip 
+                                        v-for="(tag, id) in postTags" 
+                                        :key="id" 
+                                        v-model="tag.show" 
+                                        close
+                                        @input="removeTag(tag)"
+                                    >
                                         {{ tag.tagName }}
                                     </v-chip>
                                 </v-flex>
@@ -111,18 +175,18 @@
             </v-dialog>
         </v-layout>
         <Snackbar 
-        :show.sync="showEmptySnackbar" 
-        snackbarColor="grey darken-1" 
-        snackbarText="Tag cannot be empty!" 
-        :snackbarCloseTime="6000"
-        snackbarCloseText="Close"
+            :show.sync="showEmptySnackbar" 
+            snackbar-color="grey darken-1" 
+            snackbar-text="Tag cannot be empty!" 
+            :snackbar-close-time="6000"
+            snackbar-close-text="Close"
         ></Snackbar>
         <Snackbar 
-        :show.sync="showRepeatedTagSnackbar" 
-        snackbarColor="grey darken-1" 
-        snackbarText="Tag is already in the List!" 
-        :snackbarCloseTime="6000"
-        snackbarCloseText="Close"
+            :show.sync="showRepeatedTagSnackbar" 
+            snackbar-color="grey darken-1" 
+            snackbar-text="Tag is already in the List!" 
+            :snackbar-close-time="6000"
+            snackbar-close-text="Close"
         ></Snackbar>
     </v-container>
 </template>
@@ -133,6 +197,9 @@ import Snackbar from './Snackbar.vue';
 import marked from 'marked';
 
 export default {
+    components: {
+        Snackbar
+    },
     props: {
         showDialog: {
             type: Boolean,
@@ -165,6 +232,11 @@ export default {
             v => /^[a-z0-9]*$/gi.test(v) || 'Tags contain invalid characters.'
         ]
     }),
+    computed: {
+        getSidenavElementsColorAccordingTheme() {
+            return(this.$store.state.theme === 'dark' ? 'grey darken-3' : 'primary');
+        }
+    },
     methods: {
         blurInput(event) {
             event.target.blur();
@@ -226,14 +298,6 @@ export default {
         compiledMarkdown(markdown) {
             return marked(markdown, { sanitize: true });
         }
-    },
-    computed: {
-        getSidenavElementsColorAccordingTheme() {
-            return(this.$store.state.theme === 'dark' ? 'grey darken-3' : 'primary');
-        }
-    },
-    components: {
-        Snackbar
     }
 };
 </script>

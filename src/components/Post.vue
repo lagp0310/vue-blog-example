@@ -1,56 +1,67 @@
 <template>
     <div>
         <v-container>
-            <v-layout row wrap>
+            <v-layout 
+                row 
+                wrap
+            >
                 <v-flex xs12>
                     <v-card>
                         <v-card-title primary-title>
                             <div>
-                                <h3 
-                                class="title mb-0"
-                                >
-                                    {{ post.title }}
-                                </h3>
+                                <h3 class="title mb-0">{{ post.title }}</h3>
                             </div>
                         </v-card-title>
-                        <v-divider></v-divider>
+                        <v-divider />
                         <v-card-text 
-                        v-html="compiledMarkdown(post.body)" 
-                        class="font-weight-regular body-1"
+                            class="font-weight-regular body-1" 
+                            v-html="compiledMarkdown(post.body)" 
                         ></v-card-text>
-                        <v-divider></v-divider>
+                        <v-divider />
                         <v-card-text class="font-weight-light">
-                            <v-chip v-for="tag in post.tags" :key="tag.id" v-ripple>
+                            <v-chip 
+                                v-for="tag in post.tags" 
+                                :key="tag.id" 
+                                v-ripple
+                            >
                                 {{ tag }}
                             </v-chip>
                         </v-card-text>
-                        <v-divider></v-divider>
+                        <v-divider />
                         <v-card-title primary-title>
                             <div>
                                 <v-layout row>
                                     <v-flex xs2>
                                         <v-avatar
-                                        size="80px"
-                                        color="grey lighten-4"
+                                            size="80px"
+                                            color="grey lighten-4"
                                         >
-                                            <v-img :src="author.profileImageSrc" 
-                                            contain 
-                                            alt="avatar" 
-                                            :lazy-src="author.profileImageSrc">
+                                            <v-img 
+                                                :src="author.profileImageSrc" 
+                                                contain 
+                                                alt="avatar" 
+                                                :lazy-src="author.profileImageSrc"
+                                            >
                                                 <template v-slot:placeholder>
                                                     <v-layout
-                                                    fill-height
-                                                    align-center
-                                                    justify-center
-                                                    ma-0
+                                                        fill-height
+                                                        align-center
+                                                        justify-center
+                                                        ma-0
                                                     >
-                                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                                        <v-progress-circular 
+                                                            indeterminate 
+                                                            color="grey" 
+                                                        />
                                                     </v-layout>
                                                 </template>
                                             </v-img>
                                         </v-avatar>
                                     </v-flex>
-                                    <v-flex xs8 offset-xs1>
+                                    <v-flex 
+                                        xs8 
+                                        offset-xs1
+                                    >
                                         <h3 class="title mb-0">{{ getUserFullname }}</h3>
                                         <br />
                                         <div class="font-weight-regular body-1">
@@ -62,29 +73,48 @@
                                 </v-layout>
                             </div>
                         </v-card-title>
-                        <v-divider></v-divider>
+                        <v-divider />
                         <v-card-text class="font-weight-regular">
-                            <v-container grid-list-md text-xs-center>
+                            <v-container 
+                                grid-list-md 
+                                text-xs-center
+                            >
                                 <v-layout row>
                                     <v-flex xs12>
-                                        <v-btn flat round color="pink darken-1"
-                                        @click="incrementLikesCounter">
+                                        <v-btn 
+                                            flat 
+                                            round 
+                                            color="pink darken-1"
+                                            @click="incrementLikesCounter"
+                                        >
                                             <v-icon v-if="!likePost">mdi-heart-outline</v-icon>&nbsp;
                                             <v-icon v-if="likePost">mdi-heart</v-icon>&nbsp;
                                             {{ post.likes }}
                                         </v-btn>
-                                        <v-btn flat round color="blue darken-1" 
-                                        @click="$vuetify.goTo('#write-post-comment'), goToRef('#write-post-comment')">
+                                        <v-btn 
+                                            flat 
+                                            round 
+                                            color="blue darken-1" 
+                                            @click="$vuetify.goTo('#write-post-comment'), goToRef('#write-post-comment')"
+                                        >
                                             <v-icon>mdi-message-reply-text</v-icon>&nbsp;
                                             {{ post.comments.length }}
                                         </v-btn>
-                                        <v-btn v-if="showEditPost(author.authorID)" 
-                                        round flat color="grey darken-1"
-                                        @click="editPost(post.postID)">
+                                        <v-btn 
+                                            v-if="showEditPost(author.authorID)" 
+                                            round 
+                                            flat 
+                                            color="grey darken-1"
+                                            @click="editPost(post.postID)"
+                                        >
                                             <v-icon>mdi-pencil</v-icon>&nbsp;
                                         </v-btn>
-                                        <v-btn flat round color="green darken-1"
-                                        @click="showSharePost = !showSharePost">
+                                        <v-btn 
+                                            flat 
+                                            round 
+                                            color="green darken-1"
+                                            @click="showSharePost = !showSharePost"
+                                        >
                                             <v-icon>mdi-share-variant</v-icon>
                                         </v-btn>
                                     </v-flex>
@@ -92,23 +122,33 @@
                             </v-container>
                         </v-card-text>
                     </v-card>
-                    <v-divider></v-divider>
+                    <v-divider />
                     <br />
-                    <WriteComment id="write-post-comment" :postComments.sync="post.comments" 
-                    @updatedComments="$forceUpdate(), scrollToLastPostedComment()"></WriteComment>
-                    <Comment v-for="(comment, id) in post.comments" :key="id" :comment="comment" 
-                    :level="startingCommentLevel"></Comment>
-                    <v-divider></v-divider>
+                    <WriteComment 
+                        id="write-post-comment" 
+                        :post-comments.sync="post.comments" 
+                        @updatedComments="$forceUpdate(), scrollToLastPostedComment()"
+                    ></WriteComment>
+                    <PostComment 
+                        v-for="(comment, id) in post.comments" 
+                        :key="id" 
+                        :comment="comment" 
+                        :level="startingCommentLevel"
+                    ></PostComment>
+                    <v-divider />
                 </v-flex>
             </v-layout>
         </v-container>
-        <EditPost :post.sync="post" :showDialog.sync="showEditPostModal"></EditPost>
-        <Share :show.sync="showSharePost"></Share>
+        <EditPost 
+            :post.sync="post" 
+            :show-dialog.sync="showEditPostModal" 
+        />
+        <Share :show.sync="showSharePost" />
     </div>
 </template>
 
 <script>
-import Comment from './Comment.vue';
+import PostComment from './PostComment.vue';
 import Share from './Share.vue';
 import WriteComment from './WriteComment.vue';
 import EditPost from './EditPost.vue';
@@ -116,6 +156,12 @@ import EditPost from './EditPost.vue';
 import marked from 'marked';
 
 export default {
+    components: {
+        PostComment,
+        Share,
+        WriteComment,
+        EditPost
+    },
     props: {
         author: {
             type: Object,
@@ -135,6 +181,11 @@ export default {
         likePost: false,
         showEditPostModal: false
     }),
+    computed: {
+        getUserFullname() {
+            return this.$props.author.name + ' ' + this.$props.author.lastname;
+        }
+    },
     methods: {
         scrollToLastPostedComment() {
             this.$nextTick(function() {
@@ -166,17 +217,6 @@ export default {
         compiledMarkdown(markdown) {
             return marked(markdown, { sanitize: true });
         }
-    },
-    computed: {
-        getUserFullname() {
-            return this.$props.author.name + ' ' + this.$props.author.lastname;
-        }
-    },
-    components: {
-        Comment,
-        Share,
-        WriteComment,
-        EditPost
     }
 };
 </script>

@@ -3,74 +3,98 @@
         <v-card class="mb-4">
             <v-container justify-center>
                 <v-layout row>
-                    <v-flex xs3 sm2 class="pt-4 pl-4">
+                    <v-flex 
+                        xs3 
+                        sm2 
+                        class="pt-4 pl-4"
+                    >
                         <v-avatar
-                        size="60px"
-                        color="grey lighten-4"
+                            size="60px"
+                            color="grey lighten-4"
                         >
-                            <v-img :src="getProfileImageSrc" contain alt="avatar" :lazy-src="getProfileImageSrc">
+                            <v-img 
+                                :src="getProfileImageSrc" 
+                                contain 
+                                alt="avatar" 
+                                :lazy-src="getProfileImageSrc"
+                            >
                                 <template v-slot:placeholder>
                                     <v-layout
-                                    fill-height
-                                    align-center
-                                    justify-center
-                                    ma-0
+                                        fill-height
+                                        align-center
+                                        justify-center
+                                        ma-0
                                     >
-                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                        <v-progress-circular 
+                                            indeterminate 
+                                            color="grey" 
+                                        />
                                     </v-layout>
                                 </template>
                             </v-img>
                         </v-avatar>
                         <h3 class="body-1 mt-1">{{ getFullname }}</h3>
                     </v-flex>
-                    <v-flex xs8 sm9 offset-xs1 offset-md0 class="mt-4">
+                    <v-flex 
+                        xs8 
+                        sm9 
+                        offset-xs1 
+                        offset-md0 
+                        class="mt-4"
+                    >
                         <div class="font-weight-regular body-1">
                             <v-form
-                            ref="form"
-                            v-model="isFormValid"
-                            lazy-validation
+                                ref="form"
+                                v-model="isFormValid"
+                                lazy-validation
                             >
                                 <v-textarea
-                                v-model="textareaReply"
-                                name="textareaReply"
-                                counter
-                                label="Comment"
-                                auto-grow
-                                value=""
-                                hint="Your comment here."
-                                persistent-hint
-                                placeholder="Your comment here."
-                                :rules="textareaReplyRules"
-                                @keydown.enter="validate"
-                                @keydown.esc="blurInput($event)"
+                                    v-model="textareaReply"
+                                    name="textareaReply"
+                                    counter
+                                    label="Comment"
+                                    auto-grow
+                                    value=""
+                                    hint="Your comment here."
+                                    persistent-hint
+                                    placeholder="Your comment here."
+                                    :rules="textareaReplyRules"
+                                    @keydown.enter="validate"
+                                    @keydown.esc="blurInput($event)"
                                 ></v-textarea>
                             </v-form>
                         </div>
                     </v-flex>
                 </v-layout>
             </v-container>
-            <v-container grid-list-md text-xs-right>
-                <v-layout row wrap>
+            <v-container 
+                grid-list-md 
+                text-xs-right
+            >
+                <v-layout 
+                    row 
+                    wrap
+                >
                     <v-flex xs11>
                         <v-btn
-                        flat
-                        color="grey"
-                        @click="changeCurrentCommentID(''), $emit('hideWriteReply');"
-                        class="mb-3"
+                            flat
+                            color="grey"
+                            class="mb-3"
+                            @click="changeCurrentCommentID(''), $emit('hideWriteReply');"
                         >
                             Cancel
                         </v-btn>
                         <v-btn
-                        :disabled="!isFormValid"
-                        flat
-                        color="primary"
-                        @click="validate()"
-                        class="mb-3"
+                            :disabled="!isFormValid"
+                            flat
+                            color="primary"
+                            class="mb-3"
+                            @click="validate()"
                         >
                             Publish Reply
                         </v-btn>
                     </v-flex>
-                    <v-flex xs1></v-flex>
+                    <v-flex xs1 />
                 </v-layout>
             </v-container>
         </v-card>
@@ -81,6 +105,9 @@
 import Snackbar from './Snackbar.vue';
 
 export default {
+    components: {
+        Snackbar
+    },
     props: {
         level: {
             type: Number,
@@ -103,6 +130,17 @@ export default {
             v => (v && v.length <= 1000) || 'Reply cannot exceed 1000 characters.'
         ]
     }),
+    computed: {
+        getLevel() {
+            return this.$props.level;
+        },
+        getFullname() {
+            return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
+        },
+        getProfileImageSrc() {
+            return this.$store.state.user.profileImageSrc;
+        }
+    },
     methods: {
         blurInput(event) {
             event.target.blur();
@@ -145,20 +183,6 @@ export default {
         changeCurrentCommentID(commentID) {
             this.$store.commit('changeCurrentCommentID', commentID);
         }
-    },
-    computed: {
-        getLevel() {
-            return this.$props.level;
-        },
-        getFullname() {
-            return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
-        },
-        getProfileImageSrc() {
-            return this.$store.state.user.profileImageSrc;
-        }
-    },
-    components: {
-        Snackbar
     }
 };
 </script>

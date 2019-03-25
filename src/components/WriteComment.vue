@@ -3,46 +3,64 @@
         <v-card class="mb-4">
             <v-container justify-center>
                 <v-layout row>
-                    <v-flex xs3 sm2 class="pt-4 pl-4">
+                    <v-flex 
+                        xs3 
+                        sm2 
+                        class="pt-4 pl-4"
+                    >
                         <v-avatar
-                        size="60px"
-                        color="grey lighten-4"
+                            size="60px"
+                            color="grey lighten-4"
                         >
-                            <v-img :src="getProfileImageSrc" contain alt="avatar" :lazy-src="getProfileImageSrc">
+                            <v-img 
+                                :src="getProfileImageSrc" 
+                                contain 
+                                alt="avatar" 
+                                :lazy-src="getProfileImageSrc"
+                            >
                                 <template v-slot:placeholder>
                                     <v-layout
-                                    fill-height
-                                    align-center
-                                    justify-center
-                                    ma-0
+                                        fill-height
+                                        align-center
+                                        justify-center
+                                        ma-0
                                     >
-                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                        <v-progress-circular 
+                                            indeterminate 
+                                            color="grey" 
+                                        />
                                     </v-layout>
                                 </template>
                             </v-img>
                         </v-avatar>
                         <h3 class="body-1 mt-1">{{ getFullname }}</h3>
                     </v-flex>
-                    <v-flex xs8 sm9 offset-xs1 offset-md0 class="mt-4">
+                    <v-flex 
+                        xs8 
+                        sm9 
+                        offset-xs1 
+                        offset-md0 
+                        class="mt-4"
+                    >
                         <div class="font-weight-regular body-1">
                             <v-form
-                            ref="form"
-                            v-model="isFormValid"
-                            lazy-validation
+                                ref="form"
+                                v-model="isFormValid"
+                                lazy-validation
                             >
                                 <v-textarea
-                                v-model="textareaComment"
-                                name="textareaComment"
-                                counter
-                                label="Comment"
-                                auto-grow
-                                value=""
-                                hint="Your comment here."
-                                persistent-hint
-                                placeholder="Your comment here."
-                                :rules="textareaCommentRules"
-                                @keydown.enter="validate"
-                                @keydown.esc="blurInput($event)"
+                                    v-model="textareaComment"
+                                    name="textareaComment"
+                                    counter
+                                    label="Comment"
+                                    auto-grow
+                                    value=""
+                                    hint="Your comment here."
+                                    persistent-hint
+                                    placeholder="Your comment here."
+                                    :rules="textareaCommentRules"
+                                    @keydown.enter="validate"
+                                    @keydown.esc="blurInput($event)"
                                 ></v-textarea>
                                 <br />
                             </v-form>
@@ -50,29 +68,35 @@
                     </v-flex>
                 </v-layout>
             </v-container>
-            <v-container grid-list-md text-xs-right>
-                <v-layout row wrap>
+            <v-container 
+                grid-list-md 
+                text-xs-right
+            >
+                <v-layout 
+                    row 
+                    wrap
+                >
                     <v-flex xs11>
                         <v-btn
-                        :disabled="!isFormValid"
-                        flat
-                        color="primary"
-                        @click="validate()"
-                        class="mb-3"
+                            :disabled="!isFormValid"
+                            flat
+                            color="primary"
+                            class="mb-3"
+                            @click="validate()"
                         >
                             Publish Comment
                         </v-btn>
                     </v-flex>
-                    <v-flex xs1></v-flex>
+                    <v-flex xs1 />
                 </v-layout>
             </v-container>
         </v-card>
         <Snackbar 
-        :show.sync="showPostedCommentSnackbar" 
-        snackbarColor="grey darken-1" 
-        snackbarText="Comment was posted!" 
-        :snackbarCloseTime="6000"
-        snackbarCloseText="Close"
+            :show.sync="showPostedCommentSnackbar" 
+            snackbar-color="grey darken-1" 
+            snackbar-text="Comment was posted!" 
+            :snackbar-close-time="6000"
+            snackbar-close-text="Close"
         ></Snackbar>
     </div>
 </template>
@@ -81,6 +105,9 @@
 import Snackbar from './Snackbar.vue';
 
 export default {
+    components: {
+        Snackbar
+    },
     props: {
         postComments: {
             type: Array,
@@ -96,6 +123,14 @@ export default {
             v => (v && v.length <= 1000) || 'Comment cannot exceed 1000 characters.'
         ]
     }),
+    computed: {
+        getFullname() {
+            return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
+        },
+        getProfileImageSrc() {
+            return this.$store.state.user.profileImageSrc;
+        }
+    },
     methods: {
         blurInput(event) {
             event.target.blur();
@@ -137,17 +172,6 @@ export default {
         changeCurrentCommentID(commentID) {
             this.$store.commit('changeCurrentCommentID', commentID);
         }
-    },
-    computed: {
-        getFullname() {
-            return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
-        },
-        getProfileImageSrc() {
-            return this.$store.state.user.profileImageSrc;
-        }
-    },
-    components: {
-        Snackbar
     }
 };
 </script>

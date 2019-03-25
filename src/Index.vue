@@ -1,7 +1,6 @@
 <template>
     <!-- Some useful links to check out: 
 
-        https://vuejs.org/v2/style-guide/
         https://vuetifyjs.com/en/directives/touch-support
         https://vuetifyjs.com/en/framework/internationalization#internationalization
         https://vuejs.org/v2/guide/deployment.html
@@ -15,14 +14,22 @@
     <!-- TODO: Illustration improvements on dark theme. -->
     <!-- TODO: Backend for testing. -->
     <v-app :dark="useDarkTheme">
-        <Navbar @showSidenav="showSidenav = true" @showWritePost="showWritePost = true"></Navbar>
+        <Navbar 
+            @showSidenav="showSidenav = true" 
+            @showWritePost="showWritePost = true" 
+        />
         <!-- This is handled by vue-router module. -->
         <!-- route outlet -->
         <!-- component matched by the route will render here -->
-        <router-view></router-view>
+        <router-view />
         <!-- Sidenav just shows on small screens. -->
-        <Sidenav :show.sync="showSidenav" @showWritePost="showWritePost = true"></Sidenav>
-        <WritePost :showDialog.sync="showWritePost"></WritePost>
+        <Sidenav 
+            :show.sync="showSidenav" 
+            @showWritePost="showWritePost = true" 
+        />
+        <WritePost 
+            :show-dialog.sync="showWritePost" 
+        />
     </v-app>
 </template>
 
@@ -33,6 +40,12 @@ import Snackbar from './components/Snackbar.vue';
 import WritePost from './components/WritePost.vue';
 
 export default {
+    components: {
+        Navbar,
+        Sidenav,
+        Snackbar,
+        WritePost
+    },
     data: () => ({
         showEditedCommentSnackbar: false,
         showSidenav: false,
@@ -42,12 +55,6 @@ export default {
         useDarkTheme() {
             return(this.$store.state.theme === 'dark' ? true : false);
         }
-    },
-    components: {
-        Navbar,
-        Sidenav,
-        Snackbar,
-        WritePost
     }
 };
 </script>

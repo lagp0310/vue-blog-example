@@ -1,21 +1,31 @@
 <template>
-    <v-container grid-list-md text-xs-center>
+    <v-container 
+        grid-list-md 
+        text-xs-center
+    >
         <v-layout>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex 
+                xs12 
+                sm6 
+                offset-sm3
+            >
                 <v-card>
                     <v-img
-                    src="https://picsum.photos/500/?image=4"
-                    lazy-src="https://picsum.photos/500/?image=4"
-                    aspect-ratio="2.75"
+                        src="https://picsum.photos/500/?image=4"
+                        lazy-src="https://picsum.photos/500/?image=4"
+                        aspect-ratio="2.75"
                     >
                         <template v-slot:placeholder>
                             <v-layout
-                            fill-height
-                            align-center
-                            justify-center
-                            ma-0
+                                fill-height
+                                align-center
+                                justify-center
+                                ma-0
                             >
-                                <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                <v-progress-circular 
+                                    indeterminate 
+                                    color="grey" 
+                                />
                             </v-layout>
                         </template>
                     </v-img>
@@ -28,50 +38,57 @@
                                 Fill the following Form describing your situation.
                                 We'll answer as soon as we can.
                             </p>
-                            <v-container grid-list-md text-xs-center>
-                                <v-layout row wrap justify-center>
+                            <v-container 
+                                grid-list-md 
+                                text-xs-center
+                            >
+                                <v-layout 
+                                    row 
+                                    wrap 
+                                    justify-center
+                                >
                                     <v-flex xs12>
                                         <v-form
-                                        ref="form"
-                                        v-model="isFormValid"
-                                        lazy-validation
+                                            ref="form"
+                                            v-model="isFormValid"
+                                            lazy-validation
                                         >
                                             <v-text-field
-                                            v-model="fullName"
-                                            :rules="fullNameRules"
-                                            label="Full Name"
-                                            required
-                                            @keydown.enter="validate"
-                                            @keydown.esc="blurInput($event)"
+                                                v-model="fullName"
+                                                :rules="fullNameRules"
+                                                label="Full Name"
+                                                required
+                                                @keydown.enter="validate"
+                                                @keydown.esc="blurInput($event)"
                                             ></v-text-field>
                                             <v-text-field
-                                            v-model="email"
-                                            :rules="emailRules"
-                                            label="E-mail"
-                                            required
-                                            @keydown.enter="validate"
-                                            @keydown.esc="blurInput($event)"
+                                                v-model="email"
+                                                :rules="emailRules"
+                                                label="E-mail"
+                                                required
+                                                @keydown.enter="validate"
+                                                @keydown.esc="blurInput($event)"
                                             ></v-text-field>
                                             <v-textarea
-                                            v-model="textareaContact"
-                                            name="textareaContact"
-                                            counter
-                                            label="Contact Reason"
-                                            auto-grow
-                                            value=""
-                                            hint="Reason here."
-                                            persistent-hint
-                                            placeholder="Your reason here."
-                                            :rules="textareaContactRules"
-                                            @keydown.enter="validate"
-                                            @keydown.esc="blurInput($event)"
+                                                v-model="textareaContact"
+                                                name="textareaContact"
+                                                counter
+                                                label="Contact Reason"
+                                                auto-grow
+                                                value=""
+                                                hint="Reason here."
+                                                persistent-hint
+                                                placeholder="Your reason here."
+                                                :rules="textareaContactRules"
+                                                @keydown.enter="validate"
+                                                @keydown.esc="blurInput($event)"
                                             ></v-textarea>
                                             <br />
                                             <v-btn
-                                            :disabled="!isFormValid"
-                                            color="success"
-                                            block
-                                            @click="validate"
+                                                :disabled="!isFormValid"
+                                                color="success"
+                                                block
+                                                @click="validate"
                                             >
                                                 Submit
                                             </v-btn>
@@ -82,17 +99,39 @@
                         </div>
                     </v-card-title>
                     <v-card-actions>
-                        <v-container grid-list-md text-xs-center>
-                            <v-layout row wrap justify-center>
+                        <v-container 
+                            grid-list-md 
+                            text-xs-center
+                        >
+                            <v-layout 
+                                row 
+                                wrap 
+                                justify-center
+                            >
                                 <v-flex xs12>
-                                    <v-btn class="px-0 text-capitalize font-weight-regular" flat round icon>
+                                    <v-btn 
+                                        class="px-0 text-capitalize font-weight-regular" 
+                                        flat 
+                                        round 
+                                        icon
+                                    >
                                         <v-icon color="indigo darken-3">mdi-facebook</v-icon>
                                     </v-btn>
-                                    <v-btn class="px-0 text-capitalize font-weight-regular" flat round icon>
+                                    <v-btn 
+                                        class="px-0 text-capitalize font-weight-regular" 
+                                        flat 
+                                        round 
+                                        icon
+                                    >
                                         <v-icon color="blue lighten-1">mdi-twitter</v-icon>
                                     </v-btn>
-                                    <v-btn class="px-0 text-capitalize font-weight-regular" flat round icon>
-                                        <v-img src="https://img.icons8.com/color/24/000000/instagram-new.png"></v-img>
+                                    <v-btn 
+                                        class="px-0 text-capitalize font-weight-regular" 
+                                        flat 
+                                        round 
+                                        icon
+                                    >
+                                        <v-img src="https://img.icons8.com/color/24/000000/instagram-new.png" />
                                     </v-btn>
                                 </v-flex>
                             </v-layout>
@@ -101,7 +140,12 @@
                 </v-card>
             </v-flex>
         </v-layout>
-        <a href="https://icons8.com/icon/32323/instagram" class="text-xs-center">Instagram icon by Icons8</a>
+        <a 
+            href="https://icons8.com/icon/32323/instagram" 
+            class="text-xs-center"
+        >
+            Instagram icon by Icons8
+        </a>
     </v-container>
 </template>
 

@@ -1,6 +1,13 @@
 <template>
-    <v-layout row justify-center>
-        <v-dialog v-model="dialog" width="80%" persistent>
+    <v-layout 
+        row 
+        justify-center
+    >
+        <v-dialog 
+            v-model="dialog" 
+            width="80%" 
+            persistent
+        >
             <v-card>
                 <v-card-title>
                     <span class="headline">Do you accept our Terms of Service?</span>
@@ -17,9 +24,21 @@
                 Semper wisi et, sollicitudin nunc vestibulum, cursus accumsan nunc pede tempus mi ipsum, ligula sed. Non condimentum ac dolor sit. Mollis eu aliquam, vel mattis mollis massa ut dolor ante, tempus lacinia arcu. Urna vestibulum lorem, nulla fermentum, iaculis ut congue ac vivamus. Nam libero orci, pulvinar nulla, enim pellentesque consectetuer leo, feugiat rhoncus rhoncus vel. Magna sociosqu donec, dictum cursus ullamcorper viverra. Ultricies quis orci lorem, suspendisse ut vestibulum integer, purus sed lorem pulvinar habitasse turpis.
                 </v-card-text>
                 <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="grey darken-1" flat @click="doesAgree(false)">Disagree</v-btn>
-                    <v-btn color="green darken-1" flat @click="doesAgree(true)">Agree</v-btn>
+                    <v-spacer />
+                    <v-btn 
+                        color="grey darken-1" 
+                        flat 
+                        @click="doesAgree(false)"
+                    >
+                        Disagree
+                    </v-btn>
+                    <v-btn 
+                        color="green darken-1" 
+                        flat 
+                        @click="doesAgree(true)"
+                    >
+                        Agree
+                    </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>

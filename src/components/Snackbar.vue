@@ -1,17 +1,17 @@
 <template>
     <!-- Input event: https://github.com/vuetifyjs/vuetify/issues/756#issuecomment-452905069 -->
     <v-snackbar
-    v-model="showSnackbar"
-    :color="snackbarColor"
-    :timeout="snackbarCloseTime"
-    left
-    @input="$emit('update:show', false)"
+        v-model="showSnackbar"
+        :color="snackbarColor"
+        :timeout="snackbarCloseTime"
+        left
+        @input="$emit('update:show', false)"
     >
         {{ snackbarText }}
         <v-btn
-        dark
-        flat
-        @click="$emit('update:show', false)"
+            dark
+            flat
+            @click="$emit('update:show', false)"
         >
             {{ snackbarCloseText }}
         </v-btn>

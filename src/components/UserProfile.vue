@@ -1,93 +1,143 @@
 <template>
     <div>
         <v-container>
-            <v-layout row wrap>
-                <v-flex sm4 md3></v-flex>
-                <v-flex xs12 sm4 md6>
-                    <v-layout row justify-center>
+            <v-layout 
+                row 
+                wrap
+            >
+                <v-flex 
+                    sm4 
+                    md3 
+                />
+                <v-flex 
+                    xs12 
+                    sm4 
+                    md6
+                >
+                    <v-layout 
+                        row 
+                        justify-center
+                    >
                         <v-avatar
-                        size="200px"
-                        color="grey lighten-4"
+                            size="200px"
+                            color="grey lighten-4"
                         >
-                            <v-img :src="profileImageSrc" contain alt="avatar" :lazy-src="profileImageSrc">
+                            <v-img 
+                                :src="profileImageSrc" 
+                                contain 
+                                alt="avatar" 
+                                :lazy-src="profileImageSrc"
+                            >
                                 <template v-slot:placeholder>
                                     <v-layout
-                                    fill-height
-                                    align-center
-                                    justify-center
-                                    ma-0
+                                        fill-height
+                                        align-center
+                                        justify-center
+                                        ma-0
                                     >
-                                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                        <v-progress-circular 
+                                            indeterminate 
+                                            color="grey" 
+                                        />
                                     </v-layout>
                                 </template>
                             </v-img>
                         </v-avatar>
                     </v-layout>
-                    <v-layout row justify-center>
+                    <v-layout 
+                        row 
+                        justify-center
+                    >
                         <!-- Check: https://vuetifyjs.com/en/components/buttons#loaders -->
                         <v-btn
-                        flat
-                        :loading="loading"
-                        :disabled="loading"
-                        color="blue-grey"
-                        class="white--text"
-                        @click="loader = 'loading'"
+                            flat
+                            :loading="loading"
+                            :disabled="loading"
+                            color="blue-grey"
+                            class="white--text"
+                            @click="loader = 'loading'"
                         >
                             <v-icon dark>mdi-cloud-upload</v-icon>&nbsp;
                             Upload Profile Picture
                         </v-btn>
                     </v-layout>
                     <v-form
-                    ref="form"
-                    v-model="isFormValid"
-                    lazy-validation
+                        ref="form"
+                        v-model="isFormValid"
+                        lazy-validation
                     >
                         <v-text-field
-                        v-model="name"
-                        :rules="nameRules"
-                        label="Name"
-                        required
-                        @keydown.enter="updateUsersProfile()"
-                        @keydown.esc="blurInput($event)"
+                            v-model="name"
+                            :rules="nameRules"
+                            label="Name"
+                            required
+                            @keydown.enter="updateUsersProfile()"
+                            @keydown.esc="blurInput($event)"
                         ></v-text-field>
                         <v-text-field
-                        v-model="lastname"
-                        :rules="lastnameRules"
-                        label="Lastname"
-                        required
-                        @keydown.enter="updateUsersProfile()"
-                        @keydown.esc="blurInput($event)"
+                            v-model="lastname"
+                            :rules="lastnameRules"
+                            label="Lastname"
+                            required
+                            @keydown.enter="updateUsersProfile()"
+                            @keydown.esc="blurInput($event)"
                         ></v-text-field>
                         <v-text-field
-                        v-model="email"
-                        :rules="emailRules"
-                        label="E-mail"
-                        required
-                        @keydown.enter="updateUsersProfile()"
-                        @keydown.esc="blurInput($event)"
+                            v-model="email"
+                            :rules="emailRules"
+                            label="E-mail"
+                            required
+                            @keydown.enter="updateUsersProfile()"
+                            @keydown.esc="blurInput($event)"
                         ></v-text-field>
-                        <v-radio-group v-model="gender" row :rules="[genderSelectorRules.required]">
-                            <v-radio label="Male" value="male" color="info"></v-radio>
-                            <v-radio label="Female" value="female" color="pink"></v-radio>
+                        <v-radio-group 
+                            v-model="gender" 
+                            row 
+                            :rules="[genderSelectorRules.required]"
+                        >
+                            <v-radio 
+                                label="Male" 
+                                value="male" 
+                                color="info" 
+                            />
+                            <v-radio 
+                                label="Female" 
+                                value="female" 
+                                color="pink" 
+                            />
                         </v-radio-group>
-                        <v-divider></v-divider>
+                        <v-divider />
                         <v-layout justify-center>
-                            <v-btn flat @click="showChangePasswordDialog = !showChangePasswordDialog">
+                            <v-btn 
+                                flat 
+                                @click="showChangePasswordDialog = !showChangePasswordDialog"
+                            >
                                 <v-icon>mdi-lock</v-icon>&nbsp;
                                 Change Password
                             </v-btn>
                         </v-layout>
                     </v-form>
-                    <v-btn color="info" block @click="updateUsersProfile()">
+                    <v-btn 
+                        color="info" 
+                        block 
+                        @click="updateUsersProfile()"
+                    >
                         Update Profile
                     </v-btn>
                 </v-flex>
-                <v-flex sm4 md3></v-flex>
+                <v-flex 
+                    sm4 
+                    md3 
+                />
             </v-layout>
         </v-container>
         <v-container justify-center>
             <v-layout row>
-                <v-dialog v-model="showChangePasswordDialog" persistent max-width="600px">
+                <v-dialog 
+                    v-model="showChangePasswordDialog" 
+                    persistent 
+                    max-width="600px"
+                >
                     <v-card>
                         <v-card-title>
                             <v-layout justify-center>
@@ -96,34 +146,38 @@
                         </v-card-title>
                         <v-card-text>
                             <v-container grid-list-md>
-                                <v-layout row wrap justify-center>
+                                <v-layout 
+                                    row 
+                                    wrap 
+                                    justify-center
+                                >
                                     <v-flex xs12>
                                         <v-form
-                                        ref="form"
-                                        v-model="isFormValid"
-                                        lazy-validation
+                                            ref="form"
+                                            v-model="isFormValid"
+                                            lazy-validation
                                         >
                                             <v-text-field
-                                            :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-                                            :rules="[passwordRules.required, passwordRules.min, checkPasswordChange]"
-                                            :type="showPassword ? 'text' : 'password'"
-                                            v-model="password"
-                                            label="New Password"
-                                            hint="At least 8 characters"
-                                            value=""
-                                            class="input-group--focused"
-                                            @click:append="showPassword = !showPassword"
+                                                :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+                                                :rules="[passwordRules.required, passwordRules.min, checkPasswordChange]"
+                                                :type="showPassword ? 'text' : 'password'"
+                                                v-model="password"
+                                                label="New Password"
+                                                hint="At least 8 characters"
+                                                value=""
+                                                class="input-group--focused"
+                                                @click:append="showPassword = !showPassword"
                                             ></v-text-field>
                                             <v-text-field
-                                            :append-icon="showPasswordConfirmation ? 'mdi-eye-off' : 'mdi-eye'"
-                                            :rules="[passwordRules.required, passwordRules.min, doPasswordsMatch]"
-                                            :type="showPasswordConfirmation ? 'text' : 'password'"
-                                            v-model="passwordConfirmation"
-                                            label="Confirm New Password"
-                                            hint="At least 8 characters."
-                                            value=""
-                                            class="input-group--focused"
-                                            @click:append="showPasswordConfirmation = !showPasswordConfirmation"
+                                                :append-icon="showPasswordConfirmation ? 'mdi-eye-off' : 'mdi-eye'"
+                                                :rules="[passwordRules.required, passwordRules.min, doPasswordsMatch]"
+                                                :type="showPasswordConfirmation ? 'text' : 'password'"
+                                                v-model="passwordConfirmation"
+                                                label="Confirm New Password"
+                                                hint="At least 8 characters."
+                                                value=""
+                                                class="input-group--focused"
+                                                @click:append="showPasswordConfirmation = !showPasswordConfirmation"
                                             ></v-text-field>
                                         </v-form>
                                     </v-flex>
@@ -131,11 +185,19 @@
                             </v-container>
                         </v-card-text>
                         <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="grey" flat @click="showChangePasswordDialog = false">
+                            <v-spacer />
+                            <v-btn 
+                                color="grey" 
+                                flat 
+                                @click="showChangePasswordDialog = false"
+                            >
                                 Cancel
                             </v-btn>
-                            <v-btn color="blue darken-1" flat @click="changePassword()">
+                            <v-btn 
+                                color="blue darken-1" 
+                                flat 
+                                @click="changePassword()"
+                            >
                                 Change Password
                             </v-btn>
                         </v-card-actions>
@@ -144,11 +206,11 @@
             </v-layout>
         </v-container>
         <Snackbar 
-        :show.sync="showProfileUpdatedSnackbar" 
-        snackbarColor="grey darken-1" 
-        snackbarText="Profile was updated!" 
-        :snackbarCloseTime="6000"
-        snackbarCloseText="Close"
+            :show.sync="showProfileUpdatedSnackbar" 
+            snackbar-color="grey darken-1" 
+            snackbar-text="Profile was updated!" 
+            :snackbar-close-time="6000"
+            snackbar-close-text="Close"
         ></Snackbar>
     </div>
 </template>
@@ -157,6 +219,9 @@
 import Snackbar from './Snackbar.vue';
 
 export default {
+    components: {
+        Snackbar
+    },
     data: () => ({
         showChangePasswordDialog: false,
         showProfileUpdatedSnackbar: false,
@@ -191,6 +256,14 @@ export default {
         },
         profileImageSrc: ''
     }),
+    watch: {
+        loader() {
+            const l = this.loader;
+            this[l] = !this[l];
+            setTimeout(() => (this[l] = false), 3000);
+            this.loader = null;
+        }
+    },
     mounted() {
         this.name = this.$store.state.user.name;
         this.lastname = this.$store.state.user.lastname;
@@ -232,17 +305,6 @@ export default {
             });
             this.$data.showProfileUpdatedSnackbar = true;
         }
-    },
-    watch: {
-        loader() {
-            const l = this.loader;
-            this[l] = !this[l];
-            setTimeout(() => (this[l] = false), 3000);
-            this.loader = null;
-        }
-    },
-    components: {
-        Snackbar
     }
 }
 </script>

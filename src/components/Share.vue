@@ -1,16 +1,25 @@
 <template>
     <div class="text-xs-center">
-        <v-bottom-sheet v-model="showShare" inset>
+        <v-bottom-sheet 
+            v-model="showShare" 
+            inset
+        >
             <v-list>
                 <v-subheader>Share with</v-subheader>
                 <v-list-tile
-                v-for="tile in tiles"
-                :key="tile.title"
-                @click="showShare = false"
+                    v-for="tile in tiles"
+                    :key="tile.id"
+                    @click="showShare = false"
                 >
                     <v-list-tile-avatar v-if="tile.src">
-                        <v-avatar size="32px" tile>
-                            <v-img :src="tile.img" :alt="tile.title"></v-img>
+                        <v-avatar 
+                            size="32px" 
+                            tile
+                        >
+                            <v-img 
+                                :src="tile.img" 
+                                :alt="tile.title" 
+                            />
                         </v-avatar>
                     </v-list-tile-avatar>
                     <v-icon v-if="!tile.src">{{ tile.icon }}</v-icon>
