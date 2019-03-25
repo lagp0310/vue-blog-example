@@ -3,7 +3,7 @@
         <v-layout row justify-center>
             <v-dialog v-model="showDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
                 <v-card>
-                    <v-toolbar dark color="primary">
+                    <v-toolbar dark :color="getSidenavElementsColorAccordingTheme">
                         <v-btn icon dark @click="$emit('update:showDialog', false), resetEditPostContent()">
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
@@ -252,6 +252,11 @@ export default {
         },
         compiledMarkdown(markdown) {
             return marked(markdown, { sanitize: true });
+        }
+    },
+    computed: {
+        getSidenavElementsColorAccordingTheme() {
+            return(this.$store.state.theme === 'dark' ? 'grey darken-3' : 'primary');
         }
     },
     components: {

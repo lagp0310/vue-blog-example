@@ -30,6 +30,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
+        theme: 'light',
         isLoggedIn: false,
         user: {
             userID: 1,
@@ -43,6 +44,13 @@ const store = new Vuex.Store({
         lastWrittenCommentID: 7
     },
     mutations: {
+        changeTheme(state) {
+            if(state.theme === 'light') {
+                state.theme = 'dark';
+            } else if (state.theme === 'dark') {
+                state.theme = 'light';
+            }
+        },
         changeLoggedInStatus(state) {
             state.isLoggedIn = !state.isLoggedIn;
         },

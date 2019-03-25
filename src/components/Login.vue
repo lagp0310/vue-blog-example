@@ -28,7 +28,27 @@
                     <v-container grid-list-md text-xs-center>
                         <v-layout row wrap>
                             <v-flex xs12>
-                                <v-img src="/public/images/logos/2/logo_transparent.png" max-height="120px" alt="Bloggy Logo" lazy-src="/public/images/logos/2/logo_transparent.png">
+                                <v-img v-if="getCurrentTheme === 'light'" 
+                                src="/public/images/logos/2/logo_transparent.png" 
+                                max-height="120px" 
+                                alt="Bloggy Logo" 
+                                lazy-src="/public/images/logos/2/logo_transparent.png">
+                                    <template v-slot:placeholder>
+                                        <v-layout
+                                        fill-height
+                                        align-center
+                                        justify-center
+                                        ma-0
+                                        >
+                                            <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                        </v-layout>
+                                    </template>
+                                </v-img>
+                                <v-img v-if="getCurrentTheme === 'dark'" 
+                                src="/public/images/logos/1/logo_transparent.png" 
+                                max-height="120px" 
+                                alt="Bloggy Logo" 
+                                lazy-src="/public/images/logos/1/logo_transparent.png">
                                     <template v-slot:placeholder>
                                         <v-layout
                                         fill-height
@@ -148,6 +168,11 @@ export default {
                 this.$router.replace('/');
                 return true;
             }
+        }
+    },
+    computed: {
+        getCurrentTheme() {
+            return this.$store.state.theme;
         }
     }
 }

@@ -8,7 +8,7 @@
             >
                 <v-list class="pa-1">
                     <div v-if="isLoggedIn">
-                        <v-list-tile avatar class="white v-btn--flat">
+                        <v-list-tile avatar :class="[getSidenavElementsColorAccordingTheme, 'v-btn--flat']">
                             <v-list-tile-avatar>
                                 <v-img :src="usersProfilePictureSrc" alt="User Profile Picture" :lazy-src="usersProfilePictureSrc">
                                     <template v-slot:placeholder>
@@ -32,11 +32,40 @@
                                 </v-btn>
                             </v-list-tile-action>
                         </v-list-tile>
+                        <v-divider></v-divider>
+                        <v-list-tile>
+                            <v-list-tile-title>{{ getEnableDisableDarkModeText }}</v-list-tile-title>
+                            <v-list-tile-action>
+                                <v-switch v-model="darkMode" color="blue"></v-switch>
+                            </v-list-tile-action>
+                        </v-list-tile>
                     </div>
                     <v-container v-if="!isLoggedIn" justify-center>
                         <v-layout row>
                             <v-flex xs10>
-                                <v-img src="/public/images/logos/2/logo_transparent.png" alt="Bloggy Logo" max-height="120px" contain lazy-src="/public/images/logos/2/logo_transparent.png">
+                                <v-img v-if="getCurrentTheme === 'light'" 
+                                src="/public/images/logos/2/logo_transparent.png" 
+                                alt="Bloggy Logo" 
+                                max-height="120px" 
+                                contain 
+                                lazy-src="/public/images/logos/2/logo_transparent.png">
+                                    <template v-slot:placeholder>
+                                        <v-layout
+                                        fill-height
+                                        align-center
+                                        justify-center
+                                        ma-0
+                                        >
+                                            <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                                        </v-layout>
+                                    </template>
+                                </v-img>
+                                <v-img v-if="getCurrentTheme === 'dark'" 
+                                src="/public/images/logos/1/logo_transparent.png" 
+                                alt="Bloggy Logo" 
+                                max-width="150px" 
+                                contain 
+                                lazy-src="/public/images/logos/1/logo_transparent.png">
                                     <template v-slot:placeholder>
                                         <v-layout
                                         fill-height
@@ -69,8 +98,13 @@
                     </v-list-tile>
                     <v-divider v-if="isLoggedIn"></v-divider>
                     <div v-for="item in items" :key="item.title">
-                        <v-list-tile v-if="showHideLink(item.showOnLoggedIn)"
-                        tag="a" :to="item.to" class="white v-btn--flat" @click="showSidenav = false">
+                        <v-list-tile 
+                        v-if="showHideLink(item.showOnLoggedIn)"
+                        tag="a" 
+                        :to="item.to" 
+                        :class="[getSidenavElementsColorAccordingTheme, 'v-btn--flat']" 
+                        @click="showSidenav = false"
+                        >
                             <v-list-tile-action>
                                 <v-icon>{{ item.icon }}</v-icon>
                             </v-list-tile-action>
@@ -104,6 +138,7 @@ export default {
     },
     data: function() {
         return {
+            darkMode: this.$store.state.theme === 'dark',
             showSidenav: this.show,
             items: [
                 { title: 'Articles', icon: 'mdi-view-dashboard', to: '/articles', showOnLoggedIn: true },
@@ -132,6 +167,9 @@ export default {
         },
         showSidenav: function(newValue) {
             this.$emit('update:show', newValue);
+        },
+        darkMode: function() {
+            this.$store.commit('changeTheme');
         }
     },
     computed: {
@@ -143,6 +181,15 @@ export default {
         },
         usersProfilePictureSrc() {
             return this.$store.state.user.profileImageSrc;
+        },
+        getCurrentTheme() {
+            return this.$store.state.theme;
+        },
+        getSidenavElementsColorAccordingTheme() {
+            return(this.$store.state.theme === 'dark' ? 'grey darken-3' : 'white');
+        },
+        getEnableDisableDarkModeText() {
+            return(this.$store.state.theme === 'dark' ? 'Disable Dark Mode' : 'Enable Dark Mode');
         }
     }
 }

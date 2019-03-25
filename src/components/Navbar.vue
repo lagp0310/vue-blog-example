@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-toolbar dark color="primary" class="mb-4">
+        <v-toolbar dark :color="getNavbarColorAccordingTheme" class="mb-4">
             <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="$emit('showSidenav');"></v-toolbar-side-icon>
             <v-img src="/public/images/logos/1/logo_transparent.png" alt="Bloggy Logo" max-width="150px" contain lazy-src="/public/images/logos/1/logo_transparent.png">
                 <template v-slot:placeholder>
@@ -20,14 +20,32 @@
                 <!-- use router-link component for navigation. -->
                 <!-- specify the link by passing the `to` prop. -->
                 <!-- `<router-link>` will be rendered as an `<a>` tag by default -->                    
-                <v-btn v-if="isLoggedIn" class="primary v-btn--flat" @click="$emit('showWritePost')">
+                <v-btn 
+                v-if="isLoggedIn" 
+                :class="[getNavbarColorAccordingTheme, 'v-btn--flat']" 
+                @click="$emit('showWritePost')">
                     New Post
                 </v-btn>
-                <router-link tag="v-btn" to="/articles" class="primary v-btn--flat">Articles</router-link>
-                <router-link tag="v-btn" to="/about" class="primary v-btn--flat">About Us</router-link>
-                <router-link tag="v-btn" to="/contact" class="primary v-btn--flat">Contact</router-link>
-                <router-link v-if="!isLoggedIn" tag="v-btn" to="/signup" class="primary v-btn--flat">Signup</router-link>
-                <router-link v-if="!isLoggedIn" tag="v-btn" to="/login" class="primary v-btn--flat">Login</router-link>
+                <router-link 
+                tag="v-btn" 
+                to="/articles" 
+                :class="[getNavbarColorAccordingTheme, 'v-btn--flat']">Articles</router-link>
+                <router-link 
+                tag="v-btn" 
+                to="/about" 
+                :class="[getNavbarColorAccordingTheme, 'v-btn--flat']">About Us</router-link>
+                <router-link 
+                tag="v-btn" 
+                to="/contact" 
+                :class="[getNavbarColorAccordingTheme, 'v-btn--flat']">Contact</router-link>
+                <router-link 
+                v-if="!isLoggedIn" 
+                tag="v-btn" to="/signup" 
+                :class="[getNavbarColorAccordingTheme, 'v-btn--flat']">Signup</router-link>
+                <router-link 
+                v-if="!isLoggedIn" 
+                tag="v-btn" to="/login" 
+                :class="[getNavbarColorAccordingTheme, 'v-btn--flat']">Login</router-link>
                 <v-menu
                 v-if="isLoggedIn"
                 transition="slide-y-transition"
@@ -77,16 +95,10 @@
                         <v-divider></v-divider>
                         <v-list>
                             <v-list-tile>
+                                <v-list-tile-title>{{ getEnableDisableDarkModeText }}</v-list-tile-title>
                                 <v-list-tile-action>
-                                    <v-switch v-model="notifications" color="blue"></v-switch>
+                                    <v-switch v-model="darkMode" color="blue"></v-switch>
                                 </v-list-tile-action>
-                                <v-list-tile-title>Enable Notifications</v-list-tile-title>
-                            </v-list-tile>
-                            <v-list-tile>
-                                <v-list-tile-action>
-                                <v-switch v-model="darkMode" color="blue"></v-switch>
-                                </v-list-tile-action>
-                                <v-list-tile-title>Enable Dark Mode</v-list-tile-title>
                             </v-list-tile>
                         </v-list>
                         <v-card-actions>
@@ -106,17 +118,23 @@
 
 <script>
 export default {
-    data: () => ({
-        darkMode: false,
-        notifications: false,
-        menu: false
-    }),
+    data: function() {
+        return {
+            darkMode: this.$store.state.theme === 'dark',
+            menu: false
+        }
+    },
     methods: {
         goToRoute(ref) {
             this.$router.replace(ref);
         },
         changeLoggedInState() {
             this.$store.commit('changeLoggedInStatus');
+        }
+    },
+    watch: {
+        darkMode: function() {
+            this.$store.commit('changeTheme');
         }
     },
     computed: {
@@ -128,6 +146,12 @@ export default {
         },
         usersProfilePictureSrc() {
             return this.$store.state.user.profileImageSrc;
+        },
+        getNavbarColorAccordingTheme() {
+            return(this.$store.state.theme === 'dark' ? 'grey darken-3' : 'primary');
+        },
+        getEnableDisableDarkModeText() {
+            return(this.$store.state.theme === 'dark' ? 'Disable Dark Mode' : 'Enable Dark Mode');
         }
     }
 };

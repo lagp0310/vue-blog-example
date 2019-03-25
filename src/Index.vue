@@ -8,12 +8,13 @@
         https://jestjs.io/docs/en/setup-teardown
         https://vuex.vuejs.org/guide/testing.html
 
-        https://vuejs.org/v2/examples/index.html
+        Thanks: https://vuejs.org/v2/examples/index.html
+        Thanks: https://undraw.co/illustrations
     -->
 
-    <!-- TODO: Implement light and dark themes. https://vuetifyjs.com/en/framework/theme -->
+    <!-- TODO: Illustration improvements on dark theme. -->
     <!-- TODO: Backend for testing. -->
-    <v-app>
+    <v-app :dark="useDarkTheme">
         <Navbar @showSidenav="showSidenav = true" @showWritePost="showWritePost = true"></Navbar>
         <!-- This is handled by vue-router module. -->
         <!-- route outlet -->
@@ -37,6 +38,11 @@ export default {
         showSidenav: false,
         showWritePost: false
     }),
+    computed: {
+        useDarkTheme() {
+            return(this.$store.state.theme === 'dark' ? true : false);
+        }
+    },
     components: {
         Navbar,
         Sidenav,
@@ -46,8 +52,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-    #app {
+<style lang="scss">
+    #app.theme--light {
         background-color: white;
+    }
+    #app.theme--dark {
+        background-color: #2d2d2d;
     }
 </style>
