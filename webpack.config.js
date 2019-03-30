@@ -6,7 +6,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
     devtool: "source-map",
-    mode: "development",
+    mode: "production",
     entry: "./src/index.js",
     output: {
         // options related to how webpack emits results

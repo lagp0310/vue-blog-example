@@ -1,19 +1,19 @@
 <template>
-    <!-- Some useful links to check out: 
-
-        https://vuetifyjs.com/en/directives/touch-support
-        https://vuetifyjs.com/en/framework/internationalization#internationalization
-        https://vuejs.org/v2/guide/deployment.html
-        https://jestjs.io/docs/en/setup-teardown
-        https://vuex.vuejs.org/guide/testing.html
-
-        Thanks: https://vuejs.org/v2/examples/index.html
-        Thanks: https://undraw.co/illustrations
+    <!-- 
+        Thanks: https://vuejs.org/v2/examples/index.html (Markdown Editor)
+        Thanks: https://undraw.co/illustrations (Illustrations)
     -->
 
-    <!-- TODO: Illustration improvements on dark theme. -->
-    <!-- TODO: Backend for testing. -->
-    <v-app :dark="useDarkTheme">
+    <!-- TODO: Internationalization: 
+        http://kazupon.github.io/vue-i18n/ 
+        https://vuetifyjs.com/en/framework/internationalization#create-translation
+    -->
+    <v-app 
+        :dark="useDarkTheme"
+        v-touch="{
+            left: () => toggleSidenav(false),
+            right: () => toggleSidenav(true)
+        }">
         <Navbar 
             @showSidenav="showSidenav = true" 
             @showWritePost="showWritePost = true" 
@@ -54,6 +54,11 @@ export default {
     computed: {
         useDarkTheme() {
             return(this.$store.state.theme === 'dark' ? true : false);
+        }
+    },
+    methods: {
+        toggleSidenav(showOrHide) {
+            this.$data.showSidenav = showOrHide;
         }
     }
 };
