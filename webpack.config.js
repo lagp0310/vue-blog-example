@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-    devtool: "source-map",
     mode: "production",
     entry: "./src/index.js",
     output: {
@@ -51,6 +50,16 @@ module.exports = {
                 ]
             }
         ]
+    },
+    performance: {
+        hints: false
+    },
+    optimization: {
+        minimize: true,
+        splitChunks: {
+            chunks: 'all',
+            maxSize: 250000
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({
