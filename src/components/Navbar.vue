@@ -1,4 +1,5 @@
 <template>
+    <!-- https://forum.vuejs.org/t/computed-properties-in-data/11231 -->
     <div>
         <v-toolbar 
             dark 
@@ -178,7 +179,7 @@
 export default {
     data: function() {
         return {
-            darkMode: this.isDarkThemeEnabled,
+            darkMode: false,
             menu: false
         }
     },
@@ -206,6 +207,9 @@ export default {
         darkMode: function() {
             this.$store.commit('changeTheme');
         }
+    },
+    created() {
+        this.$data.darkMode = this.isDarkThemeEnabled;
     },
     methods: {
         goToRoute(ref) {

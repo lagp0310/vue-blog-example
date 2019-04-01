@@ -1,4 +1,5 @@
 <template>
+    <!-- https://forum.vuejs.org/t/computed-properties-in-data/11231 -->
     <v-container>
         <v-layout wrap>
             <v-navigation-drawer
@@ -187,8 +188,8 @@ export default {
     },
     data: function() {
         return {
-            darkMode: this.$store.state.theme === 'dark',
-            showSidenav: this.show,
+            darkMode: false,
+            showSidenav: false,
             items: [
                 { title: 'Articles', icon: 'mdi-view-dashboard', to: '/articles', showOnLoggedIn: true },
                 { title: 'About Us', icon: 'mdi-information', to: '/about', showOnLoggedIn: true },
@@ -235,6 +236,10 @@ export default {
         darkMode: function() {
             this.$store.commit('changeTheme');
         }
+    },
+    created() {
+        this.$data.darkMode = this.isDarkThemeEnabled;
+        this.$data.showSidenav = this.show;
     },
     methods: {
         goToRoute(ref) {
