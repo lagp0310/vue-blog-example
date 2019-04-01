@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
-import Vuex from 'vuex';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Share from '../../src/components/Share.vue';
@@ -11,7 +10,6 @@ el.setAttribute('data-app', true);
 document.body.appendChild(el);
 
 Vue.use(VueRouter);
-Vue.use(Vuex);
 Vue.use(Vuetify);
 
 describe('Share', () => {
@@ -41,6 +39,17 @@ describe('Share', () => {
     it('has data correct data types', () => {
         expect(Share.data()).toEqual({
             tiles: expect.any(Array)
+        });
+    });
+
+    it('is watch an object', () => {
+        expect(typeof Share.watch).toBe('object');
+    });
+
+    it('has required watch methods', () => {
+        expect(Share.watch).toEqual({
+            show: expect.any(Function),
+            showShare: expect.any(Function)
         });
     });
 });

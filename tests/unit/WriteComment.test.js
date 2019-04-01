@@ -1,50 +1,21 @@
 import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
-import Vuex from 'vuex';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import WriteComment from '../../src/components/WriteComment.vue';
 import Snackbar from '../../src/components/Snackbar.vue';
 
-Vue.use(VueRouter);
-Vue.use(Vuex);
-Vue.use(Vuetify);
+// Store.
+import store from '../Store.js';
 
-const $store = new Vuex.Store({
-    state: {
-        isLoggedIn: false,
-        user: {
-            userID: 1,
-            name: 'Test',
-            lastname: 'Tested',
-            email: 'test@example.com',
-            gender: 'male',
-            profileImageSrc: 'https://randomuser.me/api/portraits/men/88.jpg',
-        },
-        currentCommentID: '',
-        lastWrittenCommentID: 7
-    },
-    mutations: {
-        changeLoggedInStatus(state) {
-            state.isLoggedIn = !state.isLoggedIn;
-        },
-        updateUsersProfile(state, data) {
-            state.user = data;
-        },
-        changeCurrentCommentID(state, commentID) {
-            state.currentCommentID = commentID;
-        },
-        incrementLastWrittenCommentID(state) {
-            state.lastWrittenCommentID++;
-        }
-    }
-});
+Vue.use(VueRouter);
+Vue.use(Vuetify);
 
 describe('WriteComment', () => {
     it('is a Vue instance', () => {
         const wrapper = shallowMount(WriteComment, {
             mocks: {
-                $store
+                $store: store
             },
             propsData: {
                 postComments: [
@@ -214,7 +185,7 @@ describe('WriteComment', () => {
         expect(typeof WriteComment.computed).toBe('object');
     });
 
-    it('has required computed methods', () => {
+    it('has required computed functions', () => {
         expect(WriteComment.computed).toEqual({
             getFullname: expect.any(Function),
             getProfileImageSrc: expect.any(Function)

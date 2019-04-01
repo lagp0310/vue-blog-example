@@ -1,10 +1,12 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
-import Vuex from 'vuex';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import EditPost from '../../src/components/EditPost.vue';
 import Snackbar from '../../src/components/Snackbar.vue';
+
+// Store.
+import store from '../Store.js';
 
 // https://github.com/vuetifyjs/vuetify/issues/3456
 const el = document.createElement('div');
@@ -12,12 +14,14 @@ el.setAttribute('data-app', true);
 document.body.appendChild(el);
 
 Vue.use(VueRouter);
-Vue.use(Vuex);
 Vue.use(Vuetify);
 
 describe('EditPost', () => {
     it('is a Vue instance', () => {
         const wrapper = mount(EditPost, {
+            mocks: {
+                $store: store
+            },
             propsData: {
                 post: {
                     postID: 1,
@@ -242,7 +246,8 @@ describe('EditPost', () => {
             removeTag: expect.any(Function),
             allFieldsValid: expect.any(Function),
             validate: expect.any(Function),
-            resetEditPostContent: expect.any(Function)
+            resetEditPostContent: expect.any(Function),
+            compiledMarkdown: expect.any(Function)
         });
     });
 
