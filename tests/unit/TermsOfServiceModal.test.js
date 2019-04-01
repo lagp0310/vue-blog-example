@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
-import Vuex from 'vuex';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import TermsOfServiceModal from '../../src/components/TermsOfServiceModal.vue';
@@ -11,7 +10,6 @@ el.setAttribute('data-app', true);
 document.body.appendChild(el);
 
 Vue.use(VueRouter);
-Vue.use(Vuex);
 Vue.use(Vuetify);
 
 describe('TermsOfServiceModal', () => {

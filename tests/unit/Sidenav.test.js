@@ -1,49 +1,20 @@
 import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
-import Vuex from 'vuex';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Sidenav from '../../src/components/Sidenav.vue';
 
-Vue.use(VueRouter);
-Vue.use(Vuex);
-Vue.use(Vuetify);
+// Store.
+import store from '../Store.js';
 
-const $store = new Vuex.Store({
-    state: {
-        isLoggedIn: false,
-        user: {
-            userID: 1,
-            name: 'Test',
-            lastname: 'Tested',
-            email: 'test@example.com',
-            gender: 'male',
-            profileImageSrc: 'https://randomuser.me/api/portraits/men/88.jpg',
-        },
-        currentCommentID: '',
-        lastWrittenCommentID: 7
-    },
-    mutations: {
-        changeLoggedInStatus(state) {
-            state.isLoggedIn = !state.isLoggedIn;
-        },
-        updateUsersProfile(state, data) {
-            state.user = data;
-        },
-        changeCurrentCommentID(state, commentID) {
-            state.currentCommentID = commentID;
-        },
-        incrementLastWrittenCommentID(state) {
-            state.lastWrittenCommentID++;
-        }
-    }
-});
+Vue.use(VueRouter);
+Vue.use(Vuetify);
 
 describe('Sidenav', () => {
     it('is a Vue instance', () => {
         const wrapper = shallowMount(Sidenav, {
             mocks: {
-                $store
+                $store: store
             },
             propsData: {
                 show: true
@@ -68,8 +39,14 @@ describe('Sidenav', () => {
 
     it('has data correct data types', () => {
         expect(Sidenav.data()).toEqual({
+            darkMode: expect.any(Boolean),
+            showSidenav: expect.any(Boolean),
             items: expect.any(Array)
         });
+    });
+
+    it('is created a function', () => {
+        expect(typeof Sidenav.created).toBe('function');
     });
 
     it('is methods an Object', () => {
@@ -88,11 +65,28 @@ describe('Sidenav', () => {
         expect(typeof Sidenav.computed).toBe('object');
     });
 
-    it('has required computed methods', () => {
+    it('has required computed functions', () => {
         expect(Sidenav.computed).toEqual({
             isLoggedIn: expect.any(Function),
             usersName: expect.any(Function),
-            usersProfilePictureSrc: expect.any(Function)
+            usersProfilePictureSrc: expect.any(Function),
+            getCurrentTheme: expect.any(Function),
+            getSidenavElementsColorAccordingTheme: expect.any(Function),
+            getEnableDisableDarkModeText: expect.any(Function),
+            isLightThemeEnabled: expect.any(Function),
+            isDarkThemeEnabled: expect.any(Function)
+        });
+    });
+
+    it('is watch an object', () => {
+        expect(typeof Sidenav.watch).toBe('object');
+    });
+
+    it('has required watch methods', () => {
+        expect(Sidenav.watch).toEqual({
+            show: expect.any(Function),
+            showSidenav: expect.any(Function),
+            darkMode: expect.any(Function)
         });
     });
 });

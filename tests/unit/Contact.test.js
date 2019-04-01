@@ -1,12 +1,10 @@
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
-import Vuex from 'vuex';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Contact from '../../src/components/Contact.vue';
 
 Vue.use(VueRouter);
-Vue.use(Vuex);
 Vue.use(Vuetify);
 
 describe('Contact', () => {
@@ -35,7 +33,6 @@ describe('Contact', () => {
         expect(typeof Contact.methods).toBe('object');
     });
 
-    // TODO: Write test to check which methods are in methods object (must be equal).
     it('has required methods', () => {
         expect(Contact.methods).toEqual({
             blurInput: expect.any(Function),

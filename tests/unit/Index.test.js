@@ -1,55 +1,35 @@
 import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
-import Vuex from 'vuex';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Index from '../../src/Index.vue';
 import Navbar from '../../src/components/Navbar.vue';
+import Sidenav from '../../src/components/Sidenav.vue';
 import Snackbar from '../../src/components/Snackbar.vue'; 
+import WritePost from '../../src/components/WritePost.vue';
+
+// Store.
+import store from '../Store.js';
+
+// Some information about Tests.
+// Cannot use Vuetify with localVue instance. 
+//   See https://github.com/vuejs/vue-test-utils/issues/1087
+//   See https://github.com/vuetifyjs/vuetify/issues/4068
+//   See https://github.com/vuetifyjs/vuetify/issues/4964
+// https://vue-test-utils.vuejs.org/guides/using-with-vuex.html
+// https://lmiller1990.github.io/vue-testing-handbook/vuex-in-components.html#using-a-mock-store
+// https://forum.vuejs.org/t/testing-with-jest-vue-test-utils-vuex/26060/4
 
 Vue.use(VueRouter);
-Vue.use(Vuex);
 Vue.use(Vuetify);
-
-const $store = new Vuex.Store({
-    state: {
-        isLoggedIn: false,
-        user: {
-            userID: 1,
-            name: 'Test',
-            lastname: 'Tested',
-            email: 'test@example.com',
-            gender: 'male',
-            profileImageSrc: 'https://randomuser.me/api/portraits/men/88.jpg',
-        },
-        currentCommentID: '',
-        lastWrittenCommentID: 7
-    },
-    mutations: {
-        changeLoggedInStatus(state) {
-            state.isLoggedIn = !state.isLoggedIn;
-        },
-        updateUsersProfile(state, data) {
-            state.user = data;
-        },
-        changeCurrentCommentID(state, commentID) {
-            state.currentCommentID = commentID;
-        },
-        incrementLastWrittenCommentID(state) {
-            state.lastWrittenCommentID++;
-        }
-    }
-});
 
 // https://vue-test-utils.vuejs.org/guides/#testing-components-that-use-router-link-or-router-view
 describe('Index', () => {
     it('is a Vue instance', () => {
         const wrapper = shallowMount(Index, {
             mocks: {
-                $store
+                $store: store
             }
-            // Not necessary because we're using Vue.use(VueRouter) and it installs router-link and router-view.
-            // stubs: ['router-link', 'router-view']
         });
         expect(wrapper.isVueInstance()).toBeTruthy();
     });
@@ -60,7 +40,9 @@ describe('Index', () => {
 
     it('has data correct data types', () => {
         expect(Index.data()).toEqual({
-            showEditedCommentSnackbar: expect.any(Boolean)
+            showEditedCommentSnackbar: expect.any(Boolean),
+            showSidenav: expect.any(Boolean),
+            showWritePost: expect.any(Boolean)
         });
     });
 
@@ -71,27 +53,9 @@ describe('Index', () => {
     it('has correct components', () => {
         expect(Index.components).toEqual({
             Navbar,
-            Snackbar
+            Sidenav,
+            Snackbar,
+            WritePost
         });
-    });
-
-    // TODO: Find a better way to do this.
-    it('are all components a Vue component', () => {
-        const navbarWrapper = shallowMount(Navbar, {
-            mocks: {
-                $store
-            }
-        });
-        const snackbarWrapper = shallowMount(Snackbar, {
-            propsData: {
-                show: true,
-                snackbarColor: 'grey',
-                snackbarText: 'Test',
-                snackbarCloseTime: 6000,
-                snackbarCloseText: 'Close'
-            }
-        });
-        expect(navbarWrapper.isVueInstance()).toBeTruthy();
-        expect(snackbarWrapper.isVueInstance()).toBeTruthy();
     });
 });

@@ -1,12 +1,10 @@
 import { mount } from '@vue/test-utils';
 import Vue from 'vue';
-import Vuex from 'vuex';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Snackbar from '../../src/components/Snackbar.vue';
 
 Vue.use(VueRouter);
-Vue.use(Vuex);
 Vue.use(Vuetify);
 
 describe('Snackbar', () => {
@@ -34,6 +32,17 @@ describe('Snackbar', () => {
             snackbarText: expect.any(Object),
             snackbarCloseTime: expect.any(Object),
             snackbarCloseText: expect.any(Object)
+        });
+    });
+
+    it('is watch an object', () => {
+        expect(typeof Snackbar.watch).toBe('object');
+    });
+
+    it('has required watch methods', () => {
+        expect(Snackbar.watch).toEqual({
+            show: expect.any(Function),
+            showSnackbar: expect.any(Function)
         });
     });
 });
