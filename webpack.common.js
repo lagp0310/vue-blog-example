@@ -1,11 +1,13 @@
+// https://webpack.js.org/guides/production/
+
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Plugins.
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-    mode: "production",
     entry: "./src/index.js",
     output: {
         // options related to how webpack emits results
@@ -51,40 +53,13 @@ module.exports = {
             }
         ]
     },
-    performance: {
-        hints: false
-    },
-    optimization: {
-        minimize: true,
-        splitChunks: {
-            chunks: 'all',
-            maxSize: 250000
-        }
-    },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
         }),
-        new VueLoaderPlugin(),
-    ],
-    devServer: {
-        // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
-        historyApiFallback: true,
-        // The url you want the webpack-dev-server to use for serving files.
-        host: '127.0.0.1',
-        // Can be the popular 8080 also.
-        port: 8080,
-        // gzip compression
-        compress: true,
-        // Open the browser window, set to false if you are in a headless browser environment.
-        open: false,
-        watchOptions: {
-            ignored: /node_modules/,
-            poll: true,
-        },
-        // The path you want webpack-dev-server to use for serving files
-        publicPath: '/',
-        // Reload for code changes to static assets.
-        watchContentBase: true,
-    }
+        new VueLoaderPlugin(), 
+        new CopyWebpackPlugin([
+            { from: 'public/images', to: 'public/images' }
+        ])
+    ]
 }
