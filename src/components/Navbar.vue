@@ -97,10 +97,10 @@
                             color="grey lighten-4"
                         >
                             <v-img 
-                                src="https://randomuser.me/api/portraits/men/86.jpg" 
+                                :src="usersProfilePictureSrc" 
                                 contain 
                                 alt="avatar" 
-                                lazy-src="https://randomuser.me/api/portraits/men/86.jpg"
+                                :lazy-src="usersProfilePictureSrc"
                             >
                                 <template v-slot:placeholder>
                                     <v-layout
