@@ -1,12 +1,10 @@
-FROM node:10-slim
+FROM node:11.13-slim
 
 WORKDIR /opt/bloggy
 
-COPY package*.json ./
-
-RUN npm install
-
 COPY . /opt/bloggy
+
+RUN npm install && npm run build
 
 EXPOSE 8080
 
