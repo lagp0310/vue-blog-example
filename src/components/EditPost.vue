@@ -36,37 +36,34 @@
                         </v-toolbar-items>
                     </v-toolbar>
                     <v-tabs 
-                        v-model="activeTab"
+                        v-model="activeTabIndex"
                         fixed-tabs
                         icons-and-text
                     >
                         <v-tab 
                             ripple
-                            href="#tab-0"
-                            @click="activeTab = 'tab-0'"
+                            @click="activeTabIndex = 0"
                         >
                             Edit Post
                             <v-icon>mdi-pencil-outline</v-icon>
                         </v-tab>
                         <v-tab 
                             ripple
-                            href="#tab-1"
-                            @click="activeTab = 'tab-1'"
+                            @click="activeTabIndex = 1"
                         >
                             Preview Post
                             <v-icon>mdi-file-find-outline</v-icon>
                         </v-tab>
                         <v-tab 
                             ripple
-                            href="#tab-2"
-                            @click="activeTab = 'tab-2'"
+                            @click="activeTabIndex = 2"
                         >
                             Help
                             <v-icon>mdi-help-circle-outline</v-icon>
                         </v-tab>
                     </v-tabs>
-                    <v-tabs-items v-model="activeTab">
-                        <v-tab-item value="tab-0">
+                    <v-tabs-items :value="activeTabIndex">
+                        <v-tab-item :value="0">
                             <v-container
                                 grid-list-md 
                                 text-xs-center
@@ -209,7 +206,7 @@
                                 </v-layout>
                             </v-container>
                         </v-tab-item>
-                        <v-tab-item value="tab-1">
+                        <v-tab-item :value="1">
                             <v-container
                                 grid-list-md 
                                 text-xs-center
@@ -254,7 +251,7 @@
                                 </v-layout>
                             </v-container>
                         </v-tab-item>
-                        <v-tab-item value="tab-2">
+                        <v-tab-item :value="2">
                             <v-container
                                 grid-list-md 
                                 text-xs-center
@@ -337,7 +334,7 @@ export default {
             v => /^[a-z0-9]*$/gi.test(v) || 'Tags contain invalid characters.'
         ],
         showHelpModal: false,
-        activeTab: 'tab-0'
+        activeTabIndex: 0
     }),
     computed: {
         getSidenavElementsColorAccordingTheme() {
