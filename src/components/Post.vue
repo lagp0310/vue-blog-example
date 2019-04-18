@@ -125,6 +125,7 @@
                     <v-divider />
                     <br />
                     <WriteComment 
+                        v-if="isLoggedIn"
                         id="write-post-comment" 
                         :post-comments.sync="post.comments" 
                         @updatedComments="$forceUpdate(), scrollToLastPostedComment()"
@@ -182,6 +183,9 @@ export default {
         showEditPostModal: false
     }),
     computed: {
+        isLoggedIn() {
+            return this.$store.state.isLoggedIn;
+        },
         getUserFullname() {
             return this.$props.author.name + ' ' + this.$props.author.lastname;
         }
@@ -209,7 +213,7 @@ export default {
             location.href = ref;
         },
         showEditPost(authorID) {
-            return this.$store.state.user.userID === authorID;
+            return this.$store.state.isLoggedIn && (this.$store.state.user.userID === authorID);
         },
         editPost(postID) {
             this.$data.showEditPostModal = true;
