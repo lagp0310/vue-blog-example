@@ -9,7 +9,6 @@ import ViewNotFound from './components/ViewNotFound.vue';
 import Signup from './components/Signup.vue';
 import Login from './components/Login.vue';
 import Post from './components/Post.vue';
-import PrivacyPolicy from './components/PrivacyPolicy.vue';
 import UserProfile from './components/UserProfile.vue';
 import About from './components/About.vue';
 import TermsOfServiceModal from './components/TermsOfServiceModal.vue';
@@ -82,7 +81,6 @@ const routes = [
     { path: '/articles', component: Articles },
     { path: '/about', component: About },
     { path: '/contact', component: Contact },
-    { path: '/privacy', component: PrivacyPolicy },
     { path: '/terms', component: TermsOfServiceModal },
     { path: '/signup', component: Signup },
     { path: '/login', component: Login },
