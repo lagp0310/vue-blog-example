@@ -4,6 +4,7 @@ import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import EditPost from '../../src/components/EditPost.vue';
 import Snackbar from '../../src/components/Snackbar.vue';
+import PostHelp from '../../src/components/PostHelp.vue';
 
 // Store.
 import store from '../Store.js';
@@ -225,7 +226,9 @@ describe('EditPost', () => {
             postBodyRules: expect.any(Array),
             newTag: expect.any(String),
             postTags: expect.any(Array),
-            postTagsRules: expect.any(Array)
+            postTagsRules: expect.any(Array),
+            showHelpModal: expect.any(Boolean),
+            activeTabIndex: expect.any(Number)
         });
     });
 
@@ -257,7 +260,8 @@ describe('EditPost', () => {
 
     it('has correct components', () => {
         expect(EditPost.components).toEqual({
-            Snackbar
+            Snackbar,
+            PostHelp
         });
     });
 
