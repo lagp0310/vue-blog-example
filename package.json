@@ -4,8 +4,9 @@
 	"description": "A Blog made with Vue and Vue Router.",
 	"private": true,
 	"scripts": {
-		"build": "webpack --config webpack.config.js",
-		"start:dev": "webpack-dev-server --color --progress --config webpack.config.js",
+		"build": "webpack --config webpack.prod.js",
+		"start:prod": "http-server ./dist --cors --utc",
+		"start:dev": "webpack-dev-server --color --progress --config webpack.dev.js",
 		"test": "jest"
 	},
 	"keywords": [
@@ -24,7 +25,9 @@
 		"@fortawesome/free-solid-svg-icons": "^5.6.3",
 		"@fortawesome/vue-fontawesome": "^0.1.5",
 		"body-parser": "^1.18.3",
+		"copy-webpack-plugin": "^5.0.2",
 		"express": "^4.16.4",
+		"http-server": "^0.11.1",
 		"lodash": "^4.17.11",
 		"marked": "^0.6.1",
 		"material-design-icons-iconfont": "^4.0.4",
@@ -52,7 +55,8 @@
 		"vue-template-compiler": "^2.5.22",
 		"webpack": "^4.29.0",
 		"webpack-cli": "^3.2.1",
-		"webpack-dev-server": "^3.1.14"
+		"webpack-dev-server": "^3.1.14",
+		"webpack-merge": "^4.2.1"
 	},
 	"jest": {
 		"bail": false,
