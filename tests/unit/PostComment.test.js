@@ -82,6 +82,7 @@ describe('PostComment', () => {
     it('has required methods', () => {
         expect(PostComment.methods).toEqual({
             scrollTo: expect.any(Function),
+            scrollToTop: expect.any(Function),
             goToRef: expect.any(Function),
             incrementLikesCounter: expect.any(Function),
             addReplyFor: expect.any(Function),
@@ -102,7 +103,9 @@ describe('PostComment', () => {
             getCommentID: expect.any(Function),
             getLevel: expect.any(Function),
             getNextLevel: expect.any(Function),
-            getLastReplyID: expect.any(Function)
+            getLastReplyID: expect.any(Function),
+            getUserProfileURL: expect.any(Function),
+            getProfileButtonText: expect.any(Function)
         });
     });
 

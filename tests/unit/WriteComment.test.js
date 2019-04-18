@@ -177,7 +177,8 @@ describe('WriteComment', () => {
         expect(WriteComment.methods).toEqual({
             blurInput: expect.any(Function),
             validate: expect.any(Function),
-            changeCurrentCommentID: expect.any(Function)
+            changeCurrentCommentID: expect.any(Function),
+            scrollToTop: expect.any(Function)
         });
     });
 
@@ -188,7 +189,8 @@ describe('WriteComment', () => {
     it('has required computed functions', () => {
         expect(WriteComment.computed).toEqual({
             getFullname: expect.any(Function),
-            getProfileImageSrc: expect.any(Function)
+            getProfileImageSrc: expect.any(Function),
+            getUserProfileURL: expect.any(Function)
         });
     });
 
