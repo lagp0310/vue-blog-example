@@ -11,9 +11,9 @@
                 lg7
             >
                 <v-img 
-                    src="/public/images/illustrations/undraw_content_vbqo.png" 
+                    src="/public/images/illustrations/undraw_content_vbqo.svg" 
                     alt="Blog Content Illustration"
-                    lazy-src="/public/images/illustrations/undraw_content_vbqo.png"
+                    lazy-src="/public/images/illustrations/undraw_content_vbqo.svg"
                     class="hidden-sm-and-down"
                 >
                     <template v-slot:placeholder>
@@ -161,7 +161,7 @@
                                     class="px-0 text-capitalize font-weight-regular" 
                                     flat
                                 >
-                                    <v-img src="https://img.icons8.com/color/48/000000/google-logo.png" />&nbsp;
+                                    <v-icon color="orange darken-1">mdi-google</v-icon>&nbsp;
                                     Google
                                 </v-btn>
                             </v-flex>
@@ -179,16 +179,13 @@
                                     class="px-0 text-capitalize font-weight-regular" 
                                     flat
                                 >
-                                    <v-img src="https://img.icons8.com/color/48/000000/twitter.png" />&nbsp;
+                                    <v-icon color="blue">mdi-twitter</v-icon>&nbsp;
                                     Twitter
                                 </v-btn>
                             </v-flex>
                         </v-layout>
                     </v-container>
                 </v-card>
-                <br />
-                <a href="https://icons8.com/icon/17949/google">Google icon by Icons8</a><br />
-                <a href="https://icons8.com/icon/13963/twitter">Twitter icon by Icons8</a>
             </v-flex>
             <v-flex 
                 xs1 

@@ -1,12 +1,16 @@
 <template>
     <div class="comment level-0">
         <v-card class="mb-4">
-            <v-container justify-center>
+            <v-container 
+                grid-list-md 
+                text-xs-center 
+                justify-center
+            >
                 <v-layout row>
                     <v-flex 
                         xs3 
                         sm2 
-                        class="pt-4 pl-4"
+                        class="pt-4 text-xs-center"
                     >
                         <v-avatar
                             size="60px"
@@ -33,7 +37,16 @@
                                 </template>
                             </v-img>
                         </v-avatar>
-                        <h3 class="body-1 mt-1">{{ getFullname }}</h3>
+                        <h3 class="body-1 mt-1 text-xs-center">{{ getFullname }}</h3>
+                        <v-btn
+                            flat
+                            color="grey"
+                            :to="getUserProfileURL"
+                            @click.native="scrollToTop()"
+                            class="ma-0 mt-1 pa-1"
+                        >
+                            My Profile
+                        </v-btn>
                     </v-flex>
                     <v-flex 
                         xs8 
@@ -129,6 +142,9 @@ export default {
         },
         getProfileImageSrc() {
             return this.$store.state.user.profileImageSrc;
+        },
+        getUserProfileURL() {
+            return '/users/'.concat(this.$store.state.user.userID);
         }
     },
     methods: {
@@ -171,11 +187,23 @@ export default {
         },
         changeCurrentCommentID(commentID) {
             this.$store.commit('changeCurrentCommentID', commentID);
+        },
+        scrollToTop() {
+            this.$nextTick(function() {
+                this.$vuetify.goTo(0);
+            });
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-    
+    $border-width: 5px;
+    $border-style: solid;
+    $write-comment-border-color: #FF6F00;
+
+    .level-0 > div.v-card {
+        border-left: $border-width $border-style;
+        border-color: $write-comment-border-color;
+    }
 </style>

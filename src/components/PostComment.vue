@@ -4,12 +4,12 @@
         :class="['comment', getLevel]"
     >
         <v-card class="mb-4">
-            <v-container grid-list-md>
+            <v-container>
                 <v-layout row>
                     <v-flex 
                         xs3 
                         sm2 
-                        class="pt-4 pl-4"
+                        class="pt-4 text-xs-center"
                     >
                         <v-avatar
                             size="60px"
@@ -36,7 +36,16 @@
                                 </template>
                             </v-img>
                         </v-avatar>
-                        <h3 class="body-1 mt-1">{{ getFullname }}</h3>
+                        <h3 class="body-1 mt-1 text-xs-center">{{ getFullname }}</h3>
+                        <v-btn
+                            flat
+                            color="grey"
+                            :to="getUserProfileURL"
+                            @click.native="scrollToTop()"
+                            class="ma-0 mt-1 pa-1"
+                        >
+                            {{ getProfileButtonText }}
+                        </v-btn>
                     </v-flex>
                     <v-flex 
                         xs8 
@@ -187,6 +196,12 @@ export default {
         getLastReplyID() {
             var repliesLength = this.$props.comment.replies.length;
             return this.$props.comment.replies[repliesLength - 1].commentID;
+        },
+        getUserProfileURL() {
+            return '/users/'.concat(this.$props.comment.createdByUserID);
+        },
+        getProfileButtonText() {
+            return(this.$store.state.user.userID === this.comment.createdByUserID ? 'My Profile' : 'View Profile');
         }
     },
     methods: {
@@ -194,6 +209,11 @@ export default {
             this.$nextTick(function() {
                 this.$vuetify.goTo('#'.concat(ref));                
                 this.goToRef('#'.concat(ref));
+            });
+        },
+        scrollToTop() {
+            this.$nextTick(function() {
+                this.$vuetify.goTo(0);
             });
         },
         goToRef(ref) {
@@ -247,77 +267,77 @@ export default {
     $margin-sub-levels: 15px;
     $margin-sub-levels-xs: 0px;
 
-    .level-0 > div > div > div.layout {
+    .level-0 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-0-border-color;
     }
     .level-1 {
         margin-left: $margin-sub-levels;
     }
-    .level-1 > div > div > div.layout {
+    .level-1 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-1-border-color;
     }
     .level-2 {
         margin-left: $margin-sub-levels;
     }
-    .level-2 > div > div > div.layout {
+    .level-2 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-2-border-color;
     }
     .level-3 {
         margin-left: $margin-sub-levels;
     }
-    .level-3 > div > div > div.layout {
+    .level-3 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-3-border-color;
     }
     .level-4 {
         margin-left: $margin-sub-levels;
     }
-    .level-4 > div > div > div.layout {
+    .level-4 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-4-border-color;
     }
     .level-5 {
         margin-left: $margin-sub-levels;
     }
-    .level-5 > div > div > div.layout {
+    .level-5 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-5-border-color;
     }
     .level-6 {
         margin-left: $margin-sub-levels;
     }
-    .level-6 > div > div > div.layout {
+    .level-6 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-6-border-color;
     }
     .level-7 {
         margin-left: $margin-sub-levels;
     }
-    .level-7 > div > div > div.layout {
+    .level-7 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-7-border-color;
     }
     .level-8 {
         margin-left: $margin-sub-levels;
     }
-    .level-8 > div > div > div.layout {
+    .level-8 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-8-border-color;
     }
     .level-9 {
         margin-left: $margin-sub-levels;
     }
-    .level-9 > div > div > div.layout {
+    .level-9 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-9-border-color;
     }
     .level-10 {
         margin-left: $margin-sub-levels;
     }
-    .level-10 > div > div > div.layout {
+    .level-10 > div.v-card {
         border-left: $border-width $border-style;
         border-color: $level-10-border-color;
     }

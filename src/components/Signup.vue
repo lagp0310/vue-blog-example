@@ -31,7 +31,7 @@
                                     <v-text-field
                                         v-model="name"
                                         :rules="nameRules"
-                                        label="Name"
+                                        label="Name*"
                                         required
                                         @keydown.enter="validate"
                                         @keydown.esc="blurInput($event)"
@@ -40,7 +40,7 @@
                                     <v-text-field
                                         v-model="lastname"
                                         :rules="lastnameRules"
-                                        label="Lastname"
+                                        label="Lastname*"
                                         required
                                         @keydown.enter="validate"
                                         @keydown.esc="blurInput($event)"
@@ -49,7 +49,7 @@
                                     <v-text-field
                                         v-model="email"
                                         :rules="emailRules"
-                                        label="E-mail"
+                                        label="E-mail*"
                                         required
                                         @keydown.enter="validate"
                                         @keydown.esc="blurInput($event)"
@@ -61,7 +61,7 @@
                                         :type="showPassword ? 'text' : 'password'"
                                         v-model="password"
                                         name="password"
-                                        label="Password"
+                                        label="Password*"
                                         hint="At least 8 characters"
                                         value=""
                                         class="input-group--focused"
@@ -76,7 +76,7 @@
                                         :type="showPasswordConfirmation ? 'text' : 'password'"
                                         v-model="passwordConfirmation"
                                         name="passwordConfirmation"
-                                        label="Confirm Password"
+                                        label="Confirm Password*"
                                         hint="At least 8 characters."
                                         value=""
                                         class="input-group--focused"
@@ -84,6 +84,7 @@
                                         @keydown.enter="validate"
                                         @keydown.esc="blurInput($event)"
                                     ></v-text-field>
+                                    <p class="text-xs-left text-capitalize red--text mb-0">* Required Field</p>
                                     <v-container>
                                         <v-layout 
                                             row 
@@ -245,9 +246,9 @@
                         <v-layout justify-center>
                             <v-flex xs12>
                                 <v-img 
-                                    src="/public/images/illustrations/undraw_press_play_bx2d.png" 
+                                    src="/public/images/illustrations/undraw_press_play_bx2d.svg" 
                                     alt="Blog Content Illustration"
-                                    lazy-src="/public/images/illustrations/undraw_press_play_bx2d.png"
+                                    lazy-src="/public/images/illustrations/undraw_press_play_bx2d.svg"
                                     max-height="300px"
                                     contain
                                 >
