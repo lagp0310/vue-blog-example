@@ -5,9 +5,80 @@
     >
         <v-layout>
             <v-flex 
+                sm5
+                class="hidden-xs-only"
+            >
+                <v-img
+                    src="/public/images/illustrations/undraw_contact_us_15o2.svg"
+                    lazy-src="/public/images/illustrations/undraw_contact_us_15o2.svg"
+                    contain
+                    height="400px"
+                >
+                    <template v-slot:placeholder>
+                            <v-layout
+                                fill-height
+                                align-center
+                                justify-center
+                                ma-0
+                            >
+                                <v-progress-circular 
+                                    indeterminate 
+                                    color="grey" 
+                                />
+                            </v-layout>
+                        </template>
+                </v-img>
+                <v-container 
+                    grid-list-md 
+                    text-xs-center
+                >
+                    <v-layout 
+                        row 
+                        wrap 
+                        justify-center
+                    >
+                        <v-flex xs12>
+                            <p class="text-uppercase subheading font-weight-regular">
+                                Be sure to follow us on our Social Media
+                            </p>
+                            <v-btn 
+                                class="px-0 text-capitalize font-weight-regular" 
+                                flat 
+                                round 
+                                icon
+                                @click="openNewTab('https://facebook.com/')"
+                            >
+                                <v-icon color="indigo darken-3">mdi-facebook</v-icon>
+                            </v-btn>
+                            <v-btn 
+                                class="px-0 text-capitalize font-weight-regular" 
+                                flat 
+                                round 
+                                icon
+                                @click="openNewTab('https://twitter.com/')"
+                            >
+                                <v-icon color="blue lighten-1">mdi-twitter</v-icon>
+                            </v-btn>
+                            <v-btn 
+                                class="px-0 text-capitalize font-weight-regular" 
+                                flat 
+                                round 
+                                icon
+                                @click="openNewTab('https://www.instagram.com/')"
+                            >
+                                <v-icon color="pink">mdi-instagram</v-icon>
+                            </v-btn>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-flex>
+            <v-flex 
+                sm2 
+                class="hidden-xs-only"
+            />
+            <v-flex 
                 xs12 
-                sm6 
-                offset-sm3
+                sm5
             >
                 <v-card>
                     <v-img
@@ -29,76 +100,13 @@
                             </v-layout>
                         </template>
                     </v-img>
-                    <v-card-title primary-title>
-                        <div>
-                            <h3 class="headline mb-0">Contact Us!</h3>
-                            <br />
-                            <p class="text-xs-center">
-                                Feel free to contact us for any inquiries.<br />
-                                Fill the following Form describing your situation.
-                                We'll answer as soon as we can.
-                            </p>
-                            <v-container 
-                                grid-list-md 
-                                text-xs-center
-                            >
-                                <v-layout 
-                                    row 
-                                    wrap 
-                                    justify-center
-                                >
-                                    <v-flex xs12>
-                                        <v-form
-                                            ref="form"
-                                            v-model="isFormValid"
-                                            lazy-validation
-                                        >
-                                            <v-text-field
-                                                v-model="fullName"
-                                                :rules="fullNameRules"
-                                                label="Full Name"
-                                                required
-                                                @keydown.enter="validate"
-                                                @keydown.esc="blurInput($event)"
-                                            ></v-text-field>
-                                            <v-text-field
-                                                v-model="email"
-                                                :rules="emailRules"
-                                                label="E-mail"
-                                                required
-                                                @keydown.enter="validate"
-                                                @keydown.esc="blurInput($event)"
-                                            ></v-text-field>
-                                            <v-textarea
-                                                v-model="textareaContact"
-                                                name="textareaContact"
-                                                counter
-                                                label="Contact Reason"
-                                                auto-grow
-                                                value=""
-                                                hint="Reason here."
-                                                persistent-hint
-                                                placeholder="Your reason here."
-                                                :rules="textareaContactRules"
-                                                @keydown.enter="validate"
-                                                @keydown.esc="blurInput($event)"
-                                            ></v-textarea>
-                                            <br />
-                                            <v-btn
-                                                :disabled="!isFormValid"
-                                                color="success"
-                                                block
-                                                @click="validate"
-                                            >
-                                                Submit
-                                            </v-btn>
-                                        </v-form>
-                                    </v-flex>
-                                </v-layout>
-                            </v-container>
-                        </div>
-                    </v-card-title>
-                    <v-card-actions>
+                    <!-- <v-card-title>
+                        <v-card-text>
+                            <p class="headline mb-0">Contact Form</p>
+                        </v-card-text>
+                    </v-card-title> -->
+                    <v-card-text>
+                        <p class="subheading mb-0 mt-3">You can fill in the following form to get in touch with us.</p>
                         <v-container 
                             grid-list-md 
                             text-xs-center
@@ -109,43 +117,103 @@
                                 justify-center
                             >
                                 <v-flex xs12>
-                                    <v-btn 
-                                        class="px-0 text-capitalize font-weight-regular" 
-                                        flat 
-                                        round 
-                                        icon
+                                    <v-form
+                                        ref="form"
+                                        v-model="isFormValid"
+                                        lazy-validation
                                     >
-                                        <v-icon color="indigo darken-3">mdi-facebook</v-icon>
-                                    </v-btn>
-                                    <v-btn 
-                                        class="px-0 text-capitalize font-weight-regular" 
-                                        flat 
-                                        round 
-                                        icon
-                                    >
-                                        <v-icon color="blue lighten-1">mdi-twitter</v-icon>
-                                    </v-btn>
-                                    <v-btn 
-                                        class="px-0 text-capitalize font-weight-regular" 
-                                        flat 
-                                        round 
-                                        icon
-                                    >
-                                        <v-img src="https://img.icons8.com/color/24/000000/instagram-new.png" />
-                                    </v-btn>
+                                        <v-text-field
+                                            v-model="fullName"
+                                            :rules="fullNameRules"
+                                            label="Full Name*"
+                                            required
+                                            @keydown.enter="validate"
+                                            @keydown.esc="blurInput($event)"
+                                        ></v-text-field>
+                                        <v-text-field
+                                            v-model="email"
+                                            :rules="emailRules"
+                                            label="E-mail*"
+                                            required
+                                            @keydown.enter="validate"
+                                            @keydown.esc="blurInput($event)"
+                                        ></v-text-field>
+                                        <v-textarea
+                                            v-model="textareaContact"
+                                            name="textareaContact"
+                                            counter
+                                            label="Contact Reason*"
+                                            auto-grow
+                                            value=""
+                                            hint="Reason here."
+                                            persistent-hint
+                                            placeholder="Your reason here."
+                                            :rules="textareaContactRules"
+                                            @keydown.enter="validate"
+                                            @keydown.esc="blurInput($event)"
+                                        ></v-textarea>
+                                        <br />
+                                        <p class="text-xs-left text-capitalize red--text">* Required Field</p>
+                                        <v-btn
+                                            :disabled="!isFormValid"
+                                            color="success"
+                                            block
+                                            @click="validate"
+                                        >
+                                            Submit
+                                        </v-btn>
+                                    </v-form>
                                 </v-flex>
                             </v-layout>
                         </v-container>
-                    </v-card-actions>
+                    </v-card-text>
                 </v-card>
+                <v-container 
+                    grid-list-md 
+                    text-xs-center
+                    class="hidden-sm-and-up"
+                >
+                    <v-layout 
+                        row 
+                        wrap 
+                        justify-center
+                    >
+                        <v-flex xs12>
+                            <p class="text-uppercase subheading font-weight-regular">
+                                Be sure to follow us on our Social Media
+                            </p>
+                            <v-btn 
+                                class="px-0 text-capitalize font-weight-regular" 
+                                flat 
+                                round 
+                                icon
+                                @click="openNewTab('https://facebook.com/')"
+                            >
+                                <v-icon color="indigo darken-3">mdi-facebook</v-icon>
+                            </v-btn>
+                            <v-btn 
+                                class="px-0 text-capitalize font-weight-regular" 
+                                flat 
+                                round 
+                                icon
+                                @click="openNewTab('https://twitter.com/')"
+                            >
+                                <v-icon color="blue lighten-1">mdi-twitter</v-icon>
+                            </v-btn>
+                            <v-btn 
+                                class="px-0 text-capitalize font-weight-regular" 
+                                flat 
+                                round 
+                                icon
+                                @click="openNewTab('https://www.instagram.com/')"
+                            >
+                                <v-icon color="pink">mdi-instagram</v-icon>
+                            </v-btn>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
             </v-flex>
         </v-layout>
-        <a 
-            href="https://icons8.com/icon/32323/instagram" 
-            class="text-xs-center"
-        >
-            Instagram icon by Icons8
-        </a>
     </v-container>
 </template>
 
@@ -173,6 +241,9 @@ export default {
     methods: {
         blurInput(event) {
             event.target.blur();
+        },
+        openNewTab(url) {
+            return window.open(url, '_blank');
         },
         validate() {
             if(this.$refs.form.validate()) {

@@ -46,10 +46,10 @@
                                 <v-flex xs10>
                                     <span>
                                         <v-img 
-                                            src="/public/images/illustrations/undraw_blogging_vpvv.png" 
+                                            src="/public/images/illustrations/undraw_blogging_vpvv.svg" 
                                             contain 
                                             alt="avatar" 
-                                            lazy-src="/public/images/illustrations/undraw_blogging_vpvv.png"
+                                            lazy-src="/public/images/illustrations/undraw_blogging_vpvv.svg"
                                             max-height="400px"
                                         >
                                             <template v-slot:placeholder>
@@ -98,10 +98,10 @@
                                 <v-flex xs10>
                                     <span>
                                         <v-img 
-                                            src="/public/images/illustrations/undraw_content_vbqo.png" 
+                                            src="/public/images/illustrations/undraw_content_vbqo.svg" 
                                             contain 
                                             alt="avatar" 
-                                            lazy-src="/public/images/illustrations/undraw_content_vbqo.png"
+                                            lazy-src="/public/images/illustrations/undraw_content_vbqo.svg"
                                             max-height="400px"
                                         >
                                             <template v-slot:placeholder>
@@ -150,10 +150,10 @@
                                 <v-flex xs10>
                                     <span>
                                         <v-img 
-                                            src="/public/images/illustrations/undraw_content_creator_xeju.png" 
+                                            src="/public/images/illustrations/undraw_content_creator_xeju.svg" 
                                             contain 
                                             alt="avatar" 
-                                            lazy-src="/public/images/illustrations/undraw_content_creator_xeju.png"
+                                            lazy-src="/public/images/illustrations/undraw_content_creator_xeju.svg"
                                             max-height="400px"
                                         >
                                             <template v-slot:placeholder>
@@ -202,10 +202,10 @@
                                 <v-flex xs10>
                                     <span>
                                         <v-img 
-                                            src="/public/images/illustrations/undraw_about_me_wa29.png" 
+                                            src="/public/images/illustrations/undraw_about_me_wa29.svg" 
                                             contain 
                                             alt="avatar" 
-                                            lazy-src="/public/images/illustrations/undraw_about_me_wa29.png"
+                                            lazy-src="/public/images/illustrations/undraw_about_me_wa29.svg"
                                             max-height="400px"
                                         >
                                             <template v-slot:placeholder>
@@ -254,10 +254,10 @@
                                 <v-flex xs10>
                                     <span>
                                         <v-img 
-                                            src="/public/images/illustrations/undraw_image_post_24iy.png" 
+                                            src="/public/images/illustrations/undraw_image_post_24iy.svg" 
                                             contain 
                                             alt="avatar" 
-                                            lazy-src="/public/images/illustrations/undraw_image_post_24iy.png"
+                                            lazy-src="/public/images/illustrations/undraw_image_post_24iy.svg"
                                             max-height="400px"
                                         >
                                             <template v-slot:placeholder>

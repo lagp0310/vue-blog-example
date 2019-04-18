@@ -1,4 +1,6 @@
 <template>
+    <!-- TODO: First tab needs to be selected when opening this dialog. -->
+    <!-- TODO: Solve help modal problem with the scrollbar. -->
     <v-container>
         <v-layout 
             row 
@@ -25,6 +27,14 @@
                         <v-toolbar-title>New Post</v-toolbar-title>
                         <v-spacer />
                         <v-toolbar-items>
+                            <v-btn
+                                dark
+                                flat
+                                icon
+                                @click.stop="showHelpModal = true"
+                            >
+                                <v-icon>mdi-help-circle-outline</v-icon>
+                            </v-btn>
                             <v-btn 
                                 :disabled="!allFieldsValid" 
                                 dark 
@@ -35,142 +45,169 @@
                             </v-btn>
                         </v-toolbar-items>
                     </v-toolbar>
-                    <v-list 
-                        three-line 
-                        subheader
+                    <v-tabs 
+                        v-model="activeTab"
+                        fixed-tabs
                     >
-                        <v-subheader>Title</v-subheader>
-                        <v-container>
-                            <v-layout 
-                                row 
-                                wrap
-                            >
-                                <v-flex xs12>
-                                    <v-form
-                                        ref="title"
-                                        v-model="isTitleFormValid"
-                                        lazy-validation
-                                    >
-                                        <v-text-field
-                                            v-model="postTitle"
-                                            :rules="postTitleRules"
-                                            label="Post Title"
-                                            required
-                                            @keydown.esc="blurInput($event)"
-                                        ></v-text-field>
-                                    </v-form>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-list>
-                    <v-divider />
-                    <v-list 
-                        three-line 
-                        subheader
-                    >
-                        <v-subheader>Body</v-subheader>
-                        <v-container 
-                            grid-list-md 
-                            text-xs-center
+                        <v-tab 
+                            ripple
+                            href="#tab-0"
+                            @click="activeTab = 'tab-0'"
                         >
-                            <v-layout 
-                                row 
-                                wrap 
-                                justify-center
-                            >
-                                <v-flex 
-                                    xs12 
-                                    md5
-                                >
-                                    <v-form
-                                        ref="body"
-                                        v-model="isBodyFormValid"
-                                        lazy-validation
-                                    >
-                                        <v-textarea
-                                            v-model="postBody"
-                                            name="postBody"
-                                            counter
-                                            label="Body"
-                                            auto-grow
-                                            value=""
-                                            hint="Post Content"
-                                            persistent-hint
-                                            placeholder="Post Body"
-                                            :rules="postBodyRules"
-                                            @keydown.esc="blurInput($event)"
-                                        ></v-textarea>
-                                    </v-form>
-                                </v-flex>
-                                <v-flex md1 />
-                                <v-flex 
-                                    xs12 
-                                    md6
-                                >
-                                    <v-list-tile-sub-title>Post Body Preview</v-list-tile-sub-title>
-                                    <div v-html="compiledMarkdown(postBody)" />
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-list>
-                    <v-list 
-                        three-line 
-                        subheader
-                    >
-                        <v-subheader>Tags</v-subheader>
-                        <v-container 
-                            grid-list-md 
-                            text-xs-center
+                            Write Post
+                        </v-tab>
+                        <v-tab 
+                            ripple
+                            href="#tab-1"
+                            @click="activeTab = 'tab-1'"
                         >
-                            <v-layout 
-                                row 
-                                wrap 
-                                justify-center
+                            Preview Post
+                        </v-tab>
+                    </v-tabs>
+                    <v-tabs-items v-model="activeTab">
+                        <v-tab-item value="tab-0">
+                            <v-list 
+                                three-line 
+                                subheader
                             >
-                                <v-flex 
-                                    xs12 
-                                    md5
-                                >
-                                    <v-form
-                                        ref="tags"
-                                        v-model="isTagsFormValid"
-                                        lazy-validation
+                                <v-subheader>Title</v-subheader>
+                                <v-container>
+                                    <v-layout 
+                                        row 
+                                        wrap
                                     >
-                                        <v-text-field
-                                            v-model="newTag"
-                                            :rules="postTagsRules"
-                                            label="New Tag"
-                                            prefix="#"
-                                            @keydown.enter.prevent="addTag(newTag)"
-                                            @keydown.esc="blurInput($event)"
-                                        ></v-text-field>
-                                        <v-btn
-                                            color="primary"
-                                            @click="addTag(newTag)"
+                                        <v-flex xs12>
+                                            <v-form
+                                                ref="title"
+                                                v-model="isTitleFormValid"
+                                                lazy-validation
+                                            >
+                                                <v-text-field
+                                                    v-model="postTitle"
+                                                    :rules="postTitleRules"
+                                                    label="Post Title"
+                                                    required
+                                                    @keydown.esc="blurInput($event)"
+                                                ></v-text-field>
+                                            </v-form>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-list>
+                            <v-divider />
+                            <v-list 
+                                three-line 
+                                subheader
+                            >
+                                <v-subheader>Body</v-subheader>
+                                <v-container 
+                                    grid-list-md 
+                                    text-xs-center
+                                >
+                                    <v-layout 
+                                        row 
+                                        wrap 
+                                        justify-center
+                                    >
+                                        <v-flex xs12>
+                                            <v-form
+                                                ref="body"
+                                                v-model="isBodyFormValid"
+                                                lazy-validation
+                                            >
+                                                <v-textarea
+                                                    v-model="postBody"
+                                                    name="postBody"
+                                                    counter
+                                                    label="Body"
+                                                    auto-grow
+                                                    value=""
+                                                    hint="Post Content"
+                                                    persistent-hint
+                                                    placeholder="Post Body"
+                                                    :rules="postBodyRules"
+                                                    @keydown.esc="blurInput($event)"
+                                                ></v-textarea>
+                                            </v-form>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-list>
+                            <v-list 
+                                three-line 
+                                subheader
+                            >
+                                <v-subheader>Tags</v-subheader>
+                                <v-container 
+                                    grid-list-md 
+                                    text-xs-center
+                                >
+                                    <v-layout 
+                                        row 
+                                        wrap 
+                                        justify-center
+                                    >
+                                        <v-flex 
+                                            xs12 
+                                            md5
                                         >
-                                            Add Tag
-                                        </v-btn>
-                                    </v-form>
-                                </v-flex>
-                                <v-flex md1 />
-                                <v-flex 
-                                    xs12 
-                                    md6
+                                            <v-form
+                                                ref="tags"
+                                                v-model="isTagsFormValid"
+                                                lazy-validation
+                                            >
+                                                <v-text-field
+                                                    v-model="newTag"
+                                                    :rules="postTagsRules"
+                                                    label="New Tag"
+                                                    prefix="#"
+                                                    @keydown.enter.prevent="addTag(newTag)"
+                                                    @keydown.esc="blurInput($event)"
+                                                ></v-text-field>
+                                                <v-btn
+                                                    color="primary"
+                                                    @click="addTag(newTag)"
+                                                >
+                                                    Add Tag
+                                                </v-btn>
+                                            </v-form>
+                                        </v-flex>
+                                        <v-flex md1 />
+                                        <v-flex 
+                                            xs12 
+                                            md6
+                                        >
+                                            <v-list-tile-sub-title>Post Tags</v-list-tile-sub-title>
+                                            <v-chip 
+                                                v-for="(tag, id) in postTags" 
+                                                :key="id" 
+                                                v-model="tag.show" 
+                                                close
+                                                @input="removeTag(tag)"
+                                            >
+                                                {{ tag.tagName }}
+                                            </v-chip>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-list>
+                        </v-tab-item>
+                        <v-tab-item value="tab-1">
+                            <v-container
+                                grid-list-md 
+                                text-xs-center
+                            >
+                                <v-layout 
+                                    row 
+                                    wrap
                                 >
-                                    <v-list-tile-sub-title>Post Tags</v-list-tile-sub-title>
-                                    <v-chip 
-                                        v-for="(tag, id) in postTags" 
-                                        :key="id" 
-                                        v-model="tag.show" 
-                                        close
-                                        @input="removeTag(tag)"
-                                    >
-                                        {{ tag.tagName }}
-                                    </v-chip>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-list>
+                                    <v-flex xs12>
+                                        <div v-html="compiledMarkdown(postBody)" />
+                                    </v-flex>
+                                </v-layout>
+                            </v-container>
+                        </v-tab-item>
+                    </v-tabs-items>
                 </v-card>
             </v-dialog>
         </v-layout>
@@ -188,17 +225,20 @@
             :snackbar-close-time="6000"
             snackbar-close-text="Close"
         ></Snackbar>
+        <CreatePostHelpModal v-if="showHelpModal" :showHelpModal.sync="showHelpModal"></CreatePostHelpModal>
     </v-container>
 </template>
 
 <script>
 import Snackbar from './Snackbar.vue';
+import CreatePostHelpModal from './CreatePostHelpModal.vue';
 
 import marked from 'marked';
 
 export default {
     components: {
-        Snackbar
+        Snackbar,
+        CreatePostHelpModal
     },
     props: {
         showDialog: {
@@ -230,7 +270,9 @@ export default {
             v => !!v || 'Tag is required.',
             v => (v && v.length < 20) || 'Tags must be less than 20 characters.',
             v => /^[a-z0-9]*$/gi.test(v) || 'Tags contain invalid characters.'
-        ]
+        ],
+        showHelpModal: false,
+        activeTab: 'tab-0'
     }),
     computed: {
         getSidenavElementsColorAccordingTheme() {
@@ -282,13 +324,12 @@ export default {
         },
         validate() {
             if(this.$refs.title.validate() && this.$refs.body.validate()) {
-                // this.$props.post.title = this.$data.postTitle;
-                // this.$props.post.body = this.$data.postBody;
-                // var tags = [];
-                // this.$data.postTags.forEach(function(value) {
-                //     tags.push(value.tagName);
-                // });
-                // this.$props.post.tags = tags;
+                this.$data.postTitle = '';
+                this.$data.postBody = '';
+                this.$data.postTags = [];
+                this.$data.newTag = '';
+                this.$refs.title.resetValidation();
+                this.$refs.body.resetValidation();
                 this.$emit('update:showDialog', false);
                 return true;
             }
