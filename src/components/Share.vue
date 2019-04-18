@@ -11,28 +11,19 @@
                     :key="tile.id"
                     @click="showShare = false"
                 >
-                    <v-list-tile-avatar v-if="tile.src">
+                    <v-list-tile-avatar>
                         <v-avatar 
                             size="32px" 
                             tile
                         >
-                            <v-img 
-                                :src="tile.img" 
-                                :alt="tile.title" 
-                            />
+                            <v-icon :color="tile.iconColor">{{ tile.icon }}</v-icon>
                         </v-avatar>
                     </v-list-tile-avatar>
-                    <v-icon v-if="!tile.src">{{ tile.icon }}</v-icon>
                     <v-list-tile-content>
                         <v-list-tile-title>
                             {{ tile.title }}
                         </v-list-tile-title>
                     </v-list-tile-content>
-                    <v-list-tile-action>
-                        <small>
-                            <a :href="tile.icons8Link">Check this icon on icons8!</a>
-                        </small>
-                    </v-list-tile-action>
                 </v-list-tile>
             </v-list>
         </v-bottom-sheet>
@@ -52,34 +43,29 @@ export default {
             showShare: this.show,
             tiles: [
                 { 
-                    src: true, 
-                    img: 'https://img.icons8.com/material/96/000000/multiply.png', 
+                    icon: 'mdi-close', 
                     title: 'Close',
-                    icons8Link: 'https://icons8.com/icon/1510/multiply'
+                    iconColor: 'black'
                 },
                 { 
-                    src: true, 
-                    img: 'https://img.icons8.com/color/48/000000/instagram-new.png', 
+                    icon: 'mdi-instagram', 
                     title: 'Instagram',
-                    icons8Link: 'https://icons8.com/icon/32323/instagram' 
+                    iconColor: 'pink'
                 },
                 { 
-                    src: true, 
-                    img: 'https://img.icons8.com/color/96/000000/facebook.png', 
+                    icon: 'mdi-facebook', 
                     title: 'Facebook',
-                    icons8Link: 'https://icons8.com/icon/13912/facebook' 
+                    iconColor: 'indigo darken-3'
                 },
                 { 
-                    src: true, 
-                    img: 'https://img.icons8.com/color/96/000000/facebook-messenger.png', 
+                    icon: 'mdi-facebook-messenger', 
                     title: 'Messenger',
-                    icons8Link: 'https://icons8.com/icon/20419/facebook-messenger' 
+                    iconColor: 'blue darken-1' 
                 },
                 { 
-                    src: true, 
-                    img: 'https://img.icons8.com/color/96/000000/twitter.png', 
+                    icon: 'mdi-twitter', 
                     title: 'Twitter',
-                    icons8Link: 'https://icons8.com/icon/13963/twitter' 
+                    iconColor: 'blue'
                 }
             ]
         }

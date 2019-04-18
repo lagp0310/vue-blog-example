@@ -3,8 +3,11 @@
 ![Bloggy Logo](public/images/logos/2/facebook_cover_photo_1.png)
 
 ## Content:
-- [About.](#about)
-- [Screenshots.](#screenshots)
+- [About.](#about)  
+- [Acknowledgments.](#acknowledgments)  
+- [Screenshots.](#screenshots)  
+  - [Light Theme](#light-theme)  
+  - [Dark Theme](#dark-theme)  
 - [How to build.](#how-to-build)
   - [Using Docker.](#how-to-build-docker)
   - [Without using Docker.](#how-to-build-without-docker)
@@ -15,23 +18,25 @@
 ## <a id="about"></a> About.
 An example blog I made using Vue, Vue Router and Vuex.
 
+## <a id="acknowledgments"></a> Acknowledgments.
+- Thanks to [Katerina Limpitsouni](https://twitter.com/ninalimpi) for all the awesome illustrations. Be sure to check them out: [Undraw - Illustrations](https://undraw.co/illustrations).  
+
 ## <a id="screenshots"></a> Screenshots.
-- ### Desktop.
+- ###  <a id="light-theme"></a> Light Theme.
 ![About - Bloggy Screenshot](/screenshots/about.png "About")  
 ![Articles - Bloggy Screenshot](/screenshots/articles.png "Articles")  
 ![Contact - Bloggy Screenshot](/screenshots/contact.png "Contact")  
-![Signup - Bloggy Screenshot](/screenshots/signup_1.png "Signup - Fist Form")  
-![Signup - Bloggy Screenshot](/screenshots/signup_3.png "Signup - Third Form")  
-![Signup - Bloggy Screenshot](/screenshots/signup_4.png "Signup - Fourth Form")  
 ![Login - Bloggy Screenshot](/screenshots/login.png "Login Form")  
 ![Post - Bloggy Screenshot](/screenshots/post.png "Post")  
-![Editing Post - Bloggy Screenshot](/screenshots/post_edit.png "Editing Post")  
-![Sharing Post - Bloggy Screenshot](/screenshots/post_share.png "Sharing Post")  
-
-- ### Mobile.
 ![Articles in Mobile - Bloggy Screenshot](/screenshots/articles_mobile.png "Articles in Mobile")  
 ![Sidenav in Mobile - Bloggy Screenshot](/screenshots/sidenav_mobile.png "Sidenav in Mobile")  
-![Login in Mobile - Bloggy Screenshot](/screenshots/login_mobile.png "Login in Mobile")  
+
+- ###  <a id="dark-theme"></a> Dark Theme.
+![About - Bloggy Screenshot (Dark)](/screenshots/about-dark.png "About (Dark)")  
+![Articles - Bloggy Screenshot (Dark)](/screenshots/articles-dark.png "Articles (Dark)")  
+![Contact - Bloggy Screenshot (Dark)](/screenshots/contact-dark.png "Contact (Dark)")  
+![Login - Bloggy Screenshot (Dark)](/screenshots/login-dark.png "Login Form (Dark)")  
+![Post - Bloggy Screenshot (Dark)](/screenshots/post-dark.png "Post (Dark)")  
 
 ## <a id="how-to-build"></a> How to build.
 
@@ -47,7 +52,7 @@ Check that the container is running in the background with:
 ```bash
 docker ps
 ```
-Go to ```<your_container_address>:8080```.
+Go to `<your_container_address>:8080`.
 
 ### <a id="how-to-build-without-docker"></a> Without using Docker.  
 To install dependencies run:
@@ -66,7 +71,7 @@ Or, if you prefer, run the application in development mode:
 ```bash
 npm run start:dev
 ```
-Go to ```localhost:8080```.
+Go to `localhost:8080`.
 
 ## <a id="testing"></a> Testing.
 Just run: 

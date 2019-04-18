@@ -8,11 +8,11 @@
             <v-flex xs12>
                 <v-layout fill-height>
                     <v-img 
-                        src="/public/images/illustrations/undraw_empty_xct9.png" 
+                        src="/public/images/illustrations/undraw_empty_xct9.svg" 
                         alt="404 Page Not Found Illustration" 
                         contain 
                         max-height="450px"
-                        lazy-src="/public/images/illustrations/undraw_empty_xct9.png"
+                        lazy-src="/public/images/illustrations/undraw_empty_xct9.svg"
                     >
                         <template v-slot:placeholder>
                             <v-layout

@@ -36,6 +36,7 @@ describe('Contact', () => {
     it('has required methods', () => {
         expect(Contact.methods).toEqual({
             blurInput: expect.any(Function),
+            openNewTab: expect.any(Function),
             validate: expect.any(Function)
         });
     });

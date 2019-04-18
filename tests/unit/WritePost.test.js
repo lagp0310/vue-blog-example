@@ -4,6 +4,7 @@ import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import WritePost from '../../src/components/WritePost.vue';
 import Snackbar from '../../src/components/Snackbar.vue';
+import PostHelp from '../../src/components/PostHelp.vue';
 
 // Store.
 import store from '../Store.js';
@@ -56,7 +57,9 @@ describe('WritePost', () => {
             postBodyRules: expect.any(Array),
             newTag: expect.any(String),
             postTags: expect.any(Array),
-            postTagsRules: expect.any(Array)
+            postTagsRules: expect.any(Array),
+            showHelpModal: expect.any(Boolean),
+            activeTabIndex: expect.any(Number)
         });
     });
 
@@ -66,7 +69,8 @@ describe('WritePost', () => {
 
     it('has required computed functions', () => {
         expect(WritePost.computed).toEqual({
-            getSidenavElementsColorAccordingTheme: expect.any(Function)
+            getSidenavElementsColorAccordingTheme: expect.any(Function),
+            isPostBodyEmpty: expect.any(Function)
         });
     });
 
@@ -93,7 +97,8 @@ describe('WritePost', () => {
 
     it('has correct components', () => {
         expect(WritePost.components).toEqual({
-            Snackbar
+            Snackbar,
+            PostHelp
         });
     });
 
