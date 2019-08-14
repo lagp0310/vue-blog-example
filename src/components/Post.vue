@@ -1,6 +1,4 @@
 <template>
-    <!-- TODO: Navigation Guards for routes. -->
-    <!-- TODO: Better loading state. -->
     <div>
         <div v-if="loading" class="d-flex justify-center">
             <v-progress-circular
@@ -169,7 +167,6 @@ import {
     getRandomAuthor, 
     getPostById, 
     getCommentsForPost,
-    getAuthorById,
     getRandomLoremIpsumMarkdown
 } from '../utils/util.js';
 
@@ -274,7 +271,7 @@ export default {
         writeComment() {
             if(!this.isLoggedIn) {
                 this.goToRef(
-                    '/login?redirect=/posts/'
+                    '#/login?redirect=#/posts/'
                     .concat(this.$router.currentRoute.params.postId)
                     .concat('&section=write-post-comment')
                 );

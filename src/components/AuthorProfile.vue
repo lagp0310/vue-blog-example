@@ -230,12 +230,6 @@ export default {
     components: {
         Snackbar
     },
-    props: {
-        author: {
-            type: Object,
-            required: true
-        }
-    },
     data: () => ({
         showChangePasswordDialog: false,
         showProfileUpdatedSnackbar: false,
@@ -285,7 +279,7 @@ export default {
     },
     mounted() {
         // If no filled author Object was provided, get a random one using https://randomuser.me/api/.
-        if(_.isEmpty(this.$props.author)) {
+        if(!this.$store.state.isLoggedIn) {
             axios.get('https://randomuser.me/api/')
             .then((response) => {
                 this.name = response.data.results[0].name.first;
@@ -301,13 +295,12 @@ export default {
             return;
         }
 
-        // Set some attributes only, but remember the author props Object contain all of them.
         // Check https://randomuser.me/api/ for details.
-        this.name = this.$props.author.name.first;
-        this.lastname = this.$props.author.name.last;
-        this.email = this.$props.author.email;
-        this.gender = this.$props.author.gender;
-        this.profileImageSrc = this.$props.author.picture.large;
+        this.name = this.$store.state.author.name.first;
+        this.lastname = this.$store.state.author.name.last;
+        this.email = this.$store.state.author.email;
+        this.gender = this.$store.state.author.gender;
+        this.profileImageSrc = this.$store.state.author.picture.large;
     },
     methods: {
         blurInput(event) {

@@ -22,7 +22,7 @@ import 'vuetify/dist/vuetify.min.css';
 import '@mdi/font/css/materialdesignicons.css';
 
 // Utils.
-import { getRandomAuthor, getRandomPost } from './utils/util';
+import { getRandomAuthor } from './utils/util';
 
 Vue.use(Vuetify, {
     iconfont: 'mdi'
@@ -36,7 +36,6 @@ const store = new Vuex.Store({
         isLoggedIn: false,
         // Author information to use for my profile.
         // User generated with https://randomuser.me/ API.
-        // TODO: Problem here. author is typeof is Promise, no Object.
         author: getRandomAuthor().then((author) => {
             store.state.author = author;
         }),
@@ -83,10 +82,18 @@ const routes = [
     { path: '/about', component: About },
     { path: '/contact', component: Contact },
     { path: '/terms', component: TermsOfServiceModal },
-    { path: '/signup', component: Signup },
-    { path: '/login', component: Login },
-    // TODO: Handle 404 when no post was found.
-    // TODO: Problem when reloading post/postid.
+    { 
+        path: '/signup', component: Signup,
+        beforeEnter: (to, from, next) => {
+            return store.state.isLoggedIn ? next({ path: '/' }) : next();
+        }
+    },
+    { 
+        path: '/login', component: Login,
+        beforeEnter: (to, from, next) => {
+            return store.state.isLoggedIn ? next({ path: '/' }) : next();
+        }
+    },
     {
         path: '/posts/:postId', component: Post, props: (route) => ({
             postId: route.params.postId,
@@ -274,21 +281,14 @@ const routes = [
         //     // }
         // }
     },
-    // TODO: Got Promise instead of Object. Promise value not resolved before entering this route (state).
     {
         path: '/my-profile', component: AuthorProfile,
-        props: {
-            author: store.state.author
-        },
         beforeEnter: (to, from, next) => {
             return store.state.isLoggedIn ? next() : next({ path: '/login?redirect=/my-profile' });
         }
     },
     {
-        path: '/authors/:authorId', component: AuthorProfile,
-        props: {
-            author: {}
-        }
+        path: '/authors/:authorId', component: AuthorProfile
     }
 ];
 
@@ -298,7 +298,7 @@ const routes = [
 const router = new VueRouter({
     // https://router.vuejs.org/api/#mode
     // https://stackoverflow.com/questions/34623833/how-to-remove-hashbang-from-url
-    mode: 'history',
+    // mode: 'history',
     routes
 });
 

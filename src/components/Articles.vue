@@ -41,7 +41,6 @@ export default {
         });
     },
     data: () => ({
-        // TODO: Auto-load older posts (infinite scrolling).
         articles: [
             {
                 articleLink: '/posts/1',

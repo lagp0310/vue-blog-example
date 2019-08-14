@@ -1,5 +1,3 @@
-// TODO: Remove params parameter where not required.
-
 import axios from 'axios';
 
 /**
@@ -9,7 +7,7 @@ import axios from 'axios';
  * 
  * @param params - 
  */
-export const getRandomAuthor = async (params = {}) => {
+export const getRandomAuthor = async () => {
     try {
         const promise = await axios.get('https://randomuser.me/api/');
         return promise.data.results[0];
@@ -19,23 +17,8 @@ export const getRandomAuthor = async (params = {}) => {
     }
 };
 
-// /**
-//  * 
-//  */
-// export const getRandomPost = async (params = {}) => {
-//     try {
-//         const promise = await axios.get(
-//             'https://jsonplaceholder.typicode.com/posts/'.concat(Math.floor(Math.random() * 100))
-//         );
-//         return promise.data;
-//     } catch (error) {
-//         console.error(error);
-//         return {};
-//     }
-// };
-
 /**
- * 
+ * Get a Post by its ID.
  */
 export const getPostById = async (postId) => {
     try {
@@ -44,7 +27,11 @@ export const getPostById = async (postId) => {
         );
         return promise.data;
     } catch (error) {
-        console.error(error);
+        // Show te ViewNotFound component in this case (404 Error from the API).
+        if(error.toString().includes('404')) {
+            location.href = '#/not-found';
+        }
+
         return {};
     }
 };
@@ -54,7 +41,7 @@ export const getPostById = async (postId) => {
  * 
  * Check out: https://jaspervdj.be/lorem-markdownum/
  */
-export const getRandomLoremIpsumMarkdown = async (params = {}) => {
+export const getRandomLoremIpsumMarkdown = async () => {
     try {
         const promise = await axios.get('https://jaspervdj.be/lorem-markdownum/markdown.txt');
         return promise.data;
@@ -74,19 +61,6 @@ export const getCommentsForPost = async (postId) => {
         const promise = await axios.get(
             'https://jsonplaceholder.typicode.com/comments?postId='.concat(postId)
         );
-        return promise.data;
-    } catch (error) {
-        console.error(error);
-        return {};
-    }
-};
-
-/**
- * Get author information using its id.
- */
-export const getAuthorById = async (authorId) => {
-    try {
-        const promise = await axios.get('https://jsonplaceholder.typicode.com/users/'.concat(authorId));
         return promise.data;
     } catch (error) {
         console.error(error);

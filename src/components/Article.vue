@@ -70,37 +70,54 @@
                                 </div>
                             </div>
                         </v-card-title>
-                        <!-- TODO: Tooltips for these buttons. -->
                         <v-card-actions>
-                            <v-btn 
-                                :disabled="article.loading"
-                                flat 
-                                icon 
-                                color="pink darken-1"
-                                @click="likeArticle = !likeArticle"
-                            >
-                                <v-icon v-if="!likeArticle">mdi-heart-outline</v-icon>
-                                <v-icon v-if="likeArticle">mdi-heart</v-icon>
-                            </v-btn>
-                            <v-btn 
-                                :disabled="article.loading"
-                                flat 
-                                icon 
-                                color="green darken-1"
-                                @click="showShare = !showShare"
-                            >
-                                <v-icon>mdi-share-variant</v-icon>
-                            </v-btn>
-                            <v-btn 
-                                :disabled="article.loading"
-                                flat 
-                                icon 
-                                color="grey darken-1"
-                                :to="article.articleLink"
-                                @click.native="scrollToTop()"
-                            >
-                                <v-icon>mdi-dots-horizontal</v-icon>
-                            </v-btn>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn 
+                                        :disabled="article.loading"
+                                        flat 
+                                        icon 
+                                        color="pink darken-1"
+                                        v-on="on"
+                                        @click="likeArticle = !likeArticle"
+                                    >
+                                        <v-icon v-if="!likeArticle">mdi-heart-outline</v-icon>
+                                        <v-icon v-if="likeArticle">mdi-heart</v-icon>
+                                    </v-btn>
+                                </template>
+                                <span>Like</span>
+                            </v-tooltip>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn 
+                                        :disabled="article.loading"
+                                        flat 
+                                        icon 
+                                        color="green darken-1"
+                                        v-on="on"
+                                        @click="showShare = !showShare"
+                                    >
+                                        <v-icon>mdi-share-variant</v-icon>
+                                    </v-btn>
+                                </template>
+                                <span>Share</span>
+                            </v-tooltip>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn 
+                                        :disabled="article.loading"
+                                        flat 
+                                        icon 
+                                        color="grey darken-1"
+                                        :to="article.articleLink"
+                                        v-on="on"
+                                        @click.native="scrollToTop()"
+                                    >
+                                        <v-icon>mdi-dots-horizontal</v-icon>
+                                    </v-btn>
+                                </template>
+                                <span>Read More</span>
+                            </v-tooltip>
                             <v-spacer />
                         </v-card-actions>
                     </v-card>
