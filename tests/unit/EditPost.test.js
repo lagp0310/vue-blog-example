@@ -25,172 +25,52 @@ describe('EditPost', () => {
             },
             propsData: {
                 post: {
-                    postID: 1,
-                    title: 'Ut mattis dignissim convallis. Maecenas non magna imperdiet arcu accumsan pulvinar non.',
-                    body: '\
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed sollicitudin pharetra quam eu fermentum.\
-                    Fusce nunc ex, faucibus sit amet augue ac, molestie rutrum eros.Cras semper, libero eu porta \
-                    facilisis, ex arcu lacinia ante, eu molestie tellus ipsum sit amet erat.Aenean commodo vehicula sapien \
-                    non auctor.Nullam et velit magna.Nunc sed velit eget nisl mollis vehicula vel at metus.Fusce elit \
-                    sapien, luctus eget sapien nec, accumsan ultrices ante.Maecenas sapien nulla, fringilla sed nisi quis, \
-                    tempus imperdiet velit.Aliquam ac diam neque.\
-                    Pellentesque lacinia, metus at semper volutpat, odio purus sagittis elit, non sollicitudin sem felis \
-                    et odio. Proin vitae facilisis est, nec iaculis libero.Suspendisse congue facilisis magna, id \
-                    condimentum dui blandit et.Etiam magna lorem, pulvinar quis sapien vel, ullamcorper gravida nisl.\
-                    Pellentesque ligula mauris, interdum in luctus vel, luctus nec ex.Nam quis sagittis justo.Aliquam \
-                    viverra lacus at erat sollicitudin ultrices.Nulla porta sed eros ornare rhoncus.Aliquam nec aliquet \
-                    massa, eu efficitur leo.Nulla facilisi.Duis quis diam eu augue semper aliquam nec a lectus.\
-                    Praesent semper malesuada pellentesque.Nam placerat id erat eget placerat.Donec ac ipsum ac ex \
-                    aliquet aliquam.Etiam hendrerit magna fermentum est viverra, vitae interdum augue tempor.Lorem \
-                    ipsum dolor sit amet, consectetur adipiscing elit.Vivamus interdum efficitur tellus, nec egestas \
-                    justo posuere in.In finibus non nisl quis mollis.Donec fringilla, lacus non pulvinar tempor, nisl \
-                    odio aliquet ex, non viverra sem libero et sem.Vivamus eget sollicitudin felis, non sollicitudin \
-                    orci.Donec ligula augue, laoreet ac tristique nec, tempor et arcu.Nulla in rutrum quam, nec feugiat \
-                    nunc.Integer eu pulvinar tortor, a ullamcorper mi.Fusce aliquet vulputate lacus, eget maximus felis \
-                    convallis nec.Proin non tortor dolor.Suspendisse potenti.\
-                    Ut dolor libero, commodo tincidunt diam nec, pretium consectetur quam.Duis tempus iaculis tellus, \
-                    sed sodales ligula eleifend quis.Donec vel ligula id nisl gravida bibendum tincidunt varius massa.\
-                    Suspendisse potenti.Pellentesque vel bibendum quam.Cras a finibus lacus, nec semper risus.Quisque \
-                    placerat, dolor non pretium aliquam, nibh arcu porta massa, in fringilla mauris diam tempor libero.\
-                    Proin fermentum mauris placerat orci feugiat eleifend.\
-                    Praesent eget suscipit turpis, eget mattis erat.Nulla dictum dolor et tellus cursus euismod.\
-                    Nam quis mi sed enim luctus dapibus.Sed aliquet gravida ligula sed placerat.Aenean ac facilisis \
-                    metus.Praesent congue feugiat consequat.Suspendisse lobortis vel ipsum vel suscipit.Integer \
-                    consequat rhoncus velit ut sodales.Suspendisse elementum finibus lacus, et vulputate ipsum pulvinar \
-                    vitae.Cras ut porta nunc.Maecenas elementum augue libero, eget hendrerit velit feugiat quis.\
-                    Pellentesque tempor interdum pulvinar.Nullam aliquet bibendum turpis, vitae imperdiet ligula \
-                    commodo et.Praesent id turpis et augue interdum tempus.Duis eleifend finibus justo, ac gravida \
-                    lorem pharetra id.Duis dapibus nunc at eros vestibulum auctor.Proin maximus laoreet pellentesque.\
-                    Nulla dictum sapien in eros mattis, eget blandit arcu iaculis.Suspendisse eu tortor id tortor tempus \
-                    tincidunt.Nullam accumsan nunc a lectus sagittis fringilla.Donec consequat ante metus, a convallis \
-                    justo rhoncus quis.Phasellus vel dolor a mi congue tempus.\
-                    ',
-                    comments: [
+                    "userId": 1,
+                    "id": 1,
+                    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                    "body": "# Suam quod non ruricolae eras\n\n## Et absentem unica\n\nLorem markdownum cognoscere in [adoratis\nturpe](http://potenteminproba.io/astris) esse Helicon\n[hastam](http://www.suoque.com/constitit.html), auditur, amari Tirynthius\nliquidas femineo volvitur **est vite**. Monilia isdem ait carpere alios excidit\nspectant umero verbere volant. Erroresque tamen, Albula de credere utraque\nsumma, interea telum sanctasque isto exhortanturque mitra. Dubitant uvis modo\ncur quantum calido, hos est tantae suisque.\n\nSub numina dignas lunae. Hylen esset arma gurgite omnia mora: tam dumque\nThreiciis thalamoque phocus pyra. Dabit laedor uterque avellit non partis pinu.\nEt nec cremata plenos ad hominem auras, nec illa nam trames.\n\nIn magno reddidit miserabile vosne vires dat leti rapax unco Inachis ramos fera\ncinctum. Pro versum laqueis exspes *est nec* fidae, est ego, non putabat integer\nnon sinit certaminis pudici. Tune aera maerens temptant silva, sed vidit per\ndeciderant quoque ungula os saltus proque viget. Orsa generoso ipse proprias\ngentis habet gramen lactis! Non saxis ex tenuere et veris subdit, praeterit\ncardine videri qui altis Actaeon umida et hastam undam umbrosum.\n\n## Nubes tamen vidit domus certo\n\nTot petentes cervix. Ad fatus, esset regno laurus cursus axem, lugebat!\n\n1. Iove hic quatiens portus tum\n2. Voce illa urbes\n3. Tenuavit prius capillos aera\n4. Operique nec terga cyclopum victa\n5. Genetricis nec alios Atlante trepidantes memorata\n6. Pruinas illum Parcite perfida tremula exitus\n\nInfectas iamque. Qua reddita natus accessit maledictaque nurus, somno ad\n[lacrimas quod](http://undis.org/adveniens) mutatus inque tamen primas!\nViolentaque parte de auras foresque inemptum. Sonitum ferarum pretiumque manat\nnumerum caespite, digna exilibus.\n\n## Quosque bellicus o furta Amphrysos\n\nAdnuerat mater cupidi ausus alter! Et rauco, nec otia, si stupri in Ledam.\nLanguida quo teste attonitoque, male iacet, attonitamque voxque ait candida\nagmine. Dis ilia an nefandis Astraea. Pars deorum.\n\nEgo natura corpus postquam neu a freta educere geruntur tunc divitior servantes\nconstitit arma est. Hoc ortus humo ignes tum, est et leporem illas, ut aetas.\nAut vive dant argolico caelaverat remis. Nemus locum quod quaeque: mortale suo\nexpulit ex vincere caelesti habuit; in vicem? Contingere aethere per aequor\nsuperest *nisi* et **Hyperione**, visaque sive subiectis poma oculis, et dixerat\niuvenes?\n\nNon pace natura frater, si viro haut cum paulum paratae est: sua. Est obscura\nmaturo fieri; deos comas feroque frondibus nunc. Alii cibos, *haec* et, resonat\nsive non iam excussit agebat. Non inmitem silvas Thracesque dracones visaque.\nMiserere fatorum subito demittitur funes humo\n[Hectoreis](http://trabibus.org/caesariem-cultis), gerit, frondescere civilibus\n[deponunt ut](http://infantemque-strymone.com/oneris-missa), pro mei.\n",
+                    "comments": [
                         {
-                            user: {
-                                userID: 1,
-                                name: 'Test',
-                                lastname: 'Tested',
-                                profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                            },
-                            createdByUserID: 1,
-                            commentID: 'c1',
-                            postId: 567,
-                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dolor ligula, tincidunt.',
-                            likes: 44,
-                            replies: [],
-                            createdAt: '1552435492020',
-                            updatedAt: '1552435492020'
+                            "postId": 1,
+                            "id": 1,
+                            "name": "id labore ex et quam laborum",
+                            "email": "Eliseo@gardner.biz",
+                            "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
+                            "likes": 13
                         },
                         {
-                            user: {
-                                userID: 2,
-                                name: 'Test',
-                                lastname: 'Tested',
-                                profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                            },
-                            createdByUserID: 2,
-                            commentID: 'c2',
-                            postId: 567,
-                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
-                        consectetur consectetur. Pellentesque vel leo lacinia.',
-                            likes: 4,
-                            replies: [
-                                {
-                                    user: {
-                                        userID: 3,
-                                        name: 'User1',
-                                        lastname: 'Replied',
-                                        profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                                    },
-                                    createdByUserID: 3,
-                                    replyToId: 'c2',
-                                    commentID: 'c3',
-                                    postId: 567,
-                                    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
-                                consectetur consectetur. Pellentesque vel leo lacinia.',
-                                    likes: 1,
-                                    replies: [],
-                                    createdAt: '1552435603459',
-                                    updatedAt: '1552435603459'
-                                },
-                                {
-                                    user: {
-                                        userID: 4,
-                                        name: 'User2',
-                                        lastname: 'Replied',
-                                        profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                                    },
-                                    createdByUserID: 4,
-                                    replyToId: 'c2',
-                                    commentID: 'c4',
-                                    postId: 567,
-                                    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
-                                consectetur consectetur. Pellentesque vel leo lacinia.',
-                                    likes: 3,
-                                    replies: [
-                                        {
-                                            user: {
-                                                userID: 5,
-                                                name: 'User1',
-                                                lastname: 'Replied',
-                                                profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                                            },
-                                            createdByUserID: 5,
-                                            replyToId: 'c4',
-                                            commentID: 'c5',
-                                            postId: 567,
-                                            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
-                                        consectetur consectetur. Pellentesque vel leo lacinia.',
-                                            likes: 1,
-                                            replies: [],
-                                            createdAt: '1552435546827',
-                                            updatedAt: '1552435546827'
-                                        }
-                                    ],
-                                    createdAt: '1552435630766',
-                                    updatedAt: '1552435630766'
-                                }
-                            ],
-                            createdAt: '1552435511192',
-                            updatedAt: '1552435511192'
+                            "postId": 1,
+                            "id": 2,
+                            "name": "quo vero reiciendis velit similique earum",
+                            "email": "Jayne_Kuhic@sydney.com",
+                            "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et",
+                            "likes": 26
                         },
                         {
-                            user: {
-                                userID: 1,
-                                name: 'Test',
-                                lastname: 'Tested',
-                                profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                            },
-                            createdByUserID: 1,
-                            commentID: 'c6',
-                            postId: 567,
-                            content: 'Lorem ipsum dolor sit amet.',
-                            likes: 0,
-                            replies: [],
-                            createdAt: '1552435558863',
-                            updatedAt: '1552435558863'
+                            "postId": 1,
+                            "id": 3,
+                            "name": "odio adipisci rerum aut animi",
+                            "email": "Nikita@garfield.biz",
+                            "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
+                            "likes": 7
                         },
                         {
-                            user: {
-                                userID: 1,
-                                name: 'Test',
-                                lastname: 'Tested',
-                                profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                            },
-                            createdByUserID: 1,
-                            commentID: 'c7',
-                            postId: 567,
-                            content: 'Lorem ipsum dolor.',
-                            likes: 12,
-                            replies: [],
-                            createdAt: '1552435558870',
-                            updatedAt: '1552435558870'
+                            "postId": 1,
+                            "id": 4,
+                            "name": "alias odio sit",
+                            "email": "Lew@alysha.tv","body":"non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati",
+                            "likes": 26
+                        },
+                        {
+                            "postId": 1,
+                            "id": 5,
+                            "name": "vero eaque aliquid doloribus et culpa",
+                            "email": "Hayden@althea.biz","body":"harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et",
+                            "likes":1
                         }
                     ],
-                    postImageSrc: 'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
-                    tags: ['#dev', '#test', '#info'],
-                    likes: 45
+                    "likes":7,
+                    "tags": ["sunt", "aut", "facere"]
                 },
                 showDialog: true
             }

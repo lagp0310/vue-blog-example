@@ -53,8 +53,9 @@ describe('Navbar', () => {
     it('has required computed functions', () => {
         expect(Navbar.computed).toEqual({
             isLoggedIn: expect.any(Function),
-            usersName: expect.any(Function),
-            usersProfilePictureSrc: expect.any(Function),
+            authorsName: expect.any(Function),
+            authorsProfilePictureSrc: expect.any(Function),
+            getAuthorsProfileURL: expect.any(Function),
             getNavbarColorAccordingTheme: expect.any(Function),
             getEnableDisableDarkModeText: expect.any(Function),
             isDarkThemeEnabled: expect.any(Function)

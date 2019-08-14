@@ -20,125 +20,240 @@ describe('WriteComment', () => {
             propsData: {
                 postComments: [
                     {
-                        user: {
-                            userID: 1,
-                            name: 'Test',
-                            lastname: 'Tested',
-                            profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                        },
-                        createdByUserID: 1,
-                        commentID: 'c1',
-                        postId: 567,
-                        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dolor ligula, tincidunt.',
-                        likes: 44,
-                        replies: [],
-                        createdAt: '1552435492020',
-                        updatedAt: '1552435492020'
-                    },
-                    {
-                        user: {
-                            userID: 2,
-                            name: 'Test',
-                            lastname: 'Tested',
-                            profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                        },
-                        createdByUserID: 2,
-                        commentID: 'c2',
-                        postId: 567,
-                        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
-                        consectetur consectetur. Pellentesque vel leo lacinia.',
-                        likes: 4,
-                        replies: [
-                            {
-                                user: {
-                                    userID: 3,
-                                    name: 'User1',
-                                    lastname: 'Replied',
-                                    profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                                },
-                                createdByUserID: 3,
-                                replyToId: 'c2',
-                                commentID: 'c3',
-                                postId: 567,
-                                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
-                                consectetur consectetur. Pellentesque vel leo lacinia.',
-                                likes: 1,
-                                replies: [],
-                                createdAt: '1552435603459',
-                                updatedAt: '1552435603459'
+                        author: {
+                            "gender": "female",
+                            "name": {
+                                "title": "miss",
+                                "first": "afra",
+                                "last": "leerentveld"
                             },
-                            {
-                                user: {
-                                    userID: 4,
-                                    name: 'User2',
-                                    lastname: 'Replied',
-                                    profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
+                            "location": {
+                                "street": "7553 herenstraat",
+                                "city": "loppersum",
+                                "state": "zuid-holland",
+                                "postcode": 20040,
+                                "coordinates": {
+                                    "latitude": "43.2735",
+                                    "longitude": "70.6235"
                                 },
-                                createdByUserID: 4,
-                                replyToId: 'c2',
-                                commentID: 'c4',
-                                postId: 567,
-                                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
-                                consectetur consectetur. Pellentesque vel leo lacinia.',
-                                likes: 3,
-                                replies: [
-                                    {
-                                        user: {
-                                            userID: 5,
-                                            name: 'User1',
-                                            lastname: 'Replied',
-                                            profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
-                                        },
-                                        createdByUserID: 5,
-                                        replyToId: 'c4',
-                                        commentID: 'c5',
-                                        postId: 567,
-                                        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan ex vel \
-                                        consectetur consectetur. Pellentesque vel leo lacinia.',
-                                        likes: 1,
-                                        replies: [],
-                                        createdAt: '1552435546827',
-                                        updatedAt: '1552435546827'
-                                    }
-                                ],
-                                createdAt: '1552435630766',
-                                updatedAt: '1552435630766'
-                            }
-                        ],
-                        createdAt: '1552435511192',
-                        updatedAt: '1552435511192'
+                                "timezone": {
+                                    "offset": "-5:00",
+                                    "description": "Eastern Time (US & Canada), Bogota, Lima"
+                                }
+                            },
+                            "email": "afra.leerentveld@example.com",
+                            "login": {
+                                "uuid": "0613c48f-1db8-4bf7-9f2f-7b3ed7861c67",
+                                "username": "yellowkoala741",
+                                "password": "birgit",
+                                "salt": "2TGS9BY7",
+                                "md5": "a722903dceac9190837772af9e0e5d00",
+                                "sha1": "5a1340e3a5fc11df5cc417360d882abf1570c17e",
+                                "sha256": "9a083d8d6509b16bccefd5d41138ae383408bbb38c863535d565b065259c3a73"
+                            },
+                            "dob": {
+                                "date": "1956-07-05T19:47:32Z",
+                                "age": 63
+                            },
+                            "registered": {
+                                "date": "2017-04-18T09:00:06Z",
+                                "age": 2
+                            },
+                            "phone": "(453)-073-4451",
+                            "cell": "(519)-754-8161",
+                            "id": {
+                                "name": "BSN",
+                                "value": "54918938"
+                            },
+                            "picture": {
+                                "large": "https://randomuser.me/api/portraits/women/82.jpg",
+                                "medium": "https://randomuser.me/api/portraits/med/women/82.jpg",
+                                "thumbnail": "https://randomuser.me/api/portraits/thumb/women/82.jpg"
+                            },
+                            "nat": "NL"
+                        },
+                        "postId": 1,
+                        "id": 1,
+                        "name": "id labore ex et quam laborum",
+                        "email": "Eliseo@gardner.biz",
+                        "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
                     },
                     {
-                        user: {
-                            userID: 1,
-                            name: 'Test',
-                            lastname: 'Tested',
-                            profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
+                        author: {
+                            "gender": "female",
+                            "name": {
+                                "title": "miss",
+                                "first": "afra",
+                                "last": "leerentveld"
+                            },
+                            "location": {
+                                "street": "7553 herenstraat",
+                                "city": "loppersum",
+                                "state": "zuid-holland",
+                                "postcode": 20040,
+                                "coordinates": {
+                                    "latitude": "43.2735",
+                                    "longitude": "70.6235"
+                                },
+                                "timezone": {
+                                    "offset": "-5:00",
+                                    "description": "Eastern Time (US & Canada), Bogota, Lima"
+                                }
+                            },
+                            "email": "afra.leerentveld@example.com",
+                            "login": {
+                                "uuid": "0613c48f-1db8-4bf7-9f2f-7b3ed7861c67",
+                                "username": "yellowkoala741",
+                                "password": "birgit",
+                                "salt": "2TGS9BY7",
+                                "md5": "a722903dceac9190837772af9e0e5d00",
+                                "sha1": "5a1340e3a5fc11df5cc417360d882abf1570c17e",
+                                "sha256": "9a083d8d6509b16bccefd5d41138ae383408bbb38c863535d565b065259c3a73"
+                            },
+                            "dob": {
+                                "date": "1956-07-05T19:47:32Z",
+                                "age": 63
+                            },
+                            "registered": {
+                                "date": "2017-04-18T09:00:06Z",
+                                "age": 2
+                            },
+                            "phone": "(453)-073-4451",
+                            "cell": "(519)-754-8161",
+                            "id": {
+                                "name": "BSN",
+                                "value": "54918938"
+                            },
+                            "picture": {
+                                "large": "https://randomuser.me/api/portraits/women/82.jpg",
+                                "medium": "https://randomuser.me/api/portraits/med/women/82.jpg",
+                                "thumbnail": "https://randomuser.me/api/portraits/thumb/women/82.jpg"
+                            },
+                            "nat": "NL"
                         },
-                        createdByUserID: 1,
-                        commentID: 'c6',
-                        postId: 567,
-                        content: 'Lorem ipsum dolor sit amet.',
-                        likes: 0,
-                        replies: [],
-                        createdAt: '1552435558863',
-                        updatedAt: '1552435558863'
+                        "postId": 1,
+                        "id": 2,
+                        "name": "quo vero reiciendis velit similique earum",
+                        "email": "Jayne_Kuhic@sydney.com",
+                        "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"
                     },
                     {
-                        user: {
-                            userID: 1,
-                            name: 'Test',
-                            lastname: 'Tested',
-                            profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
+                        author: {
+                            "gender": "female",
+                            "name": {
+                                "title": "miss",
+                                "first": "afra",
+                                "last": "leerentveld"
+                            },
+                            "location": {
+                                "street": "7553 herenstraat",
+                                "city": "loppersum",
+                                "state": "zuid-holland",
+                                "postcode": 20040,
+                                "coordinates": {
+                                    "latitude": "43.2735",
+                                    "longitude": "70.6235"
+                                },
+                                "timezone": {
+                                    "offset": "-5:00",
+                                    "description": "Eastern Time (US & Canada), Bogota, Lima"
+                                }
+                            },
+                            "email": "afra.leerentveld@example.com",
+                            "login": {
+                                "uuid": "0613c48f-1db8-4bf7-9f2f-7b3ed7861c67",
+                                "username": "yellowkoala741",
+                                "password": "birgit",
+                                "salt": "2TGS9BY7",
+                                "md5": "a722903dceac9190837772af9e0e5d00",
+                                "sha1": "5a1340e3a5fc11df5cc417360d882abf1570c17e",
+                                "sha256": "9a083d8d6509b16bccefd5d41138ae383408bbb38c863535d565b065259c3a73"
+                            },
+                            "dob": {
+                                "date": "1956-07-05T19:47:32Z",
+                                "age": 63
+                            },
+                            "registered": {
+                                "date": "2017-04-18T09:00:06Z",
+                                "age": 2
+                            },
+                            "phone": "(453)-073-4451",
+                            "cell": "(519)-754-8161",
+                            "id": {
+                                "name": "BSN",
+                                "value": "54918938"
+                            },
+                            "picture": {
+                                "large": "https://randomuser.me/api/portraits/women/82.jpg",
+                                "medium": "https://randomuser.me/api/portraits/med/women/82.jpg",
+                                "thumbnail": "https://randomuser.me/api/portraits/thumb/women/82.jpg"
+                            },
+                            "nat": "NL"
                         },
-                        createdByUserID: 1,
-                        commentID: 'c7',
-                        postId: 567,
-                        content: 'Lorem ipsum dolor.',
-                        likes: 12,
-                        replies: [],
-                        createdAt: '1552435558870',
-                        updatedAt: '1552435558870'
+                        "postId": 1,
+                        "id": 3,
+                        "name": "odio adipisci rerum aut animi",
+                        "email": "Nikita@garfield.biz",
+                        "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione"
+                    },
+                    {
+                        author: {
+                            "gender": "female",
+                            "name": {
+                                "title": "miss",
+                                "first": "afra",
+                                "last": "leerentveld"
+                            },
+                            "location": {
+                                "street": "7553 herenstraat",
+                                "city": "loppersum",
+                                "state": "zuid-holland",
+                                "postcode": 20040,
+                                "coordinates": {
+                                    "latitude": "43.2735",
+                                    "longitude": "70.6235"
+                                },
+                                "timezone": {
+                                    "offset": "-5:00",
+                                    "description": "Eastern Time (US & Canada), Bogota, Lima"
+                                }
+                            },
+                            "email": "afra.leerentveld@example.com",
+                            "login": {
+                                "uuid": "0613c48f-1db8-4bf7-9f2f-7b3ed7861c67",
+                                "username": "yellowkoala741",
+                                "password": "birgit",
+                                "salt": "2TGS9BY7",
+                                "md5": "a722903dceac9190837772af9e0e5d00",
+                                "sha1": "5a1340e3a5fc11df5cc417360d882abf1570c17e",
+                                "sha256": "9a083d8d6509b16bccefd5d41138ae383408bbb38c863535d565b065259c3a73"
+                            },
+                            "dob": {
+                                "date": "1956-07-05T19:47:32Z",
+                                "age": 63
+                            },
+                            "registered": {
+                                "date": "2017-04-18T09:00:06Z",
+                                "age": 2
+                            },
+                            "phone": "(453)-073-4451",
+                            "cell": "(519)-754-8161",
+                            "id": {
+                                "name": "BSN",
+                                "value": "54918938"
+                            },
+                            "picture": {
+                                "large": "https://randomuser.me/api/portraits/women/82.jpg",
+                                "medium": "https://randomuser.me/api/portraits/med/women/82.jpg",
+                                "thumbnail": "https://randomuser.me/api/portraits/thumb/women/82.jpg"
+                            },
+                            "nat": "NL"
+                        },
+                        "postId": 1,
+                        "id": 4,
+                        "name": "alias odio sit",
+                        "email": "Lew@alysha.tv",
+                        "body": "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati"
                     }
                 ]
             }
@@ -190,7 +305,7 @@ describe('WriteComment', () => {
         expect(WriteComment.computed).toEqual({
             getFullname: expect.any(Function),
             getProfileImageSrc: expect.any(Function),
-            getUserProfileURL: expect.any(Function)
+            getAuthorProfileURL: expect.any(Function)
         });
     });
 

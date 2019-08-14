@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
-import UserProfile from '../../src/components/UserProfile.vue';
+import AuthorProfile from '../../src/components/AuthorProfile.vue';
 import Snackbar from '../../src/components/Snackbar.vue';
 
 // Store.
@@ -11,9 +11,9 @@ import store from '../Store.js';
 Vue.use(VueRouter);
 Vue.use(Vuetify);
 
-describe('UserProfile', () => {
+describe('AuthorProfile', () => {
     it('is a Vue instance', () => {
-        const wrapper = shallowMount(UserProfile, {
+        const wrapper = shallowMount(AuthorProfile, {
             mocks: {
                 $store: store
             }
@@ -22,11 +22,11 @@ describe('UserProfile', () => {
     });
 
     it('is data a function', () => {
-        expect(typeof UserProfile.data).toBe('function');
+        expect(typeof AuthorProfile.data).toBe('function');
     });
 
     it('has data correct data types', () => {
-        expect(UserProfile.data()).toEqual({
+        expect(AuthorProfile.data()).toEqual({
             showChangePasswordDialog: expect.any(Boolean),
             showProfileUpdatedSnackbar: expect.any(Boolean),
             loading: expect.any(Boolean),
@@ -49,39 +49,39 @@ describe('UserProfile', () => {
     });
 
     it('is mounted a function', () => {
-        expect(typeof UserProfile.mounted).toBe('function');
+        expect(typeof AuthorProfile.mounted).toBe('function');
     });
 
     it('is methods an Object', () => {
-        expect(typeof UserProfile.methods).toBe('object');
+        expect(typeof AuthorProfile.methods).toBe('object');
     });
 
     it('has required methods', () => {
-        expect(UserProfile.methods).toEqual({
+        expect(AuthorProfile.methods).toEqual({
             blurInput: expect.any(Function),
             doPasswordsMatch: expect.any(Function),
             changePassword: expect.any(Function),
             checkPasswordChange: expect.any(Function),
-            updateUsersProfile: expect.any(Function)
+            updateAuthorsProfile: expect.any(Function)
         });
     });
 
     it('is watch an Object', () => {
-        expect(typeof UserProfile.watch).toBe('object');
+        expect(typeof AuthorProfile.watch).toBe('object');
     });
 
     it('has watch required functions', () => {
-        expect(UserProfile.watch).toEqual({
+        expect(AuthorProfile.watch).toEqual({
             loader: expect.any(Function)
         });
     });
 
     it('is components an Object', () => {
-        expect(typeof UserProfile.components).toBe('object');
+        expect(typeof AuthorProfile.components).toBe('object');
     });
 
     it('has correct components', () => {
-        expect(UserProfile.components).toEqual({
+        expect(AuthorProfile.components).toEqual({
             Snackbar
         });
     });
