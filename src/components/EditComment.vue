@@ -140,10 +140,10 @@ export default {
     }),
     computed: {
         getFullname() {
-            return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
+            return this.$store.state.author.name + ' ' + this.$store.state.author.lastname;
         },
         getProfileImageSrc() {
-            return this.$store.state.user.profileImageSrc;
+            return this.$store.state.author.profileImageSrc;
         }
     },
     mounted() {

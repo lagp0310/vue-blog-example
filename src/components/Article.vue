@@ -10,6 +10,7 @@
             >
                 <v-hover>
                     <v-card 
+                        :loading="article.loading"
                         slot-scope="{ hover }" 
                         :class="`elevation-${hover ? 12 : 2}`"
                     >
@@ -35,16 +36,19 @@
                         <v-card-title primary-title>
                             <div>
                                 <div class="headline">{{ article.title }}</div>
-                                <div class="text-xs-left grey--text">
+                                <div 
+                                    v-if="!article.loading"
+                                    class="text-xs-left grey--text"
+                                >
                                     <v-avatar
                                         size="30px"
                                         color="grey lighten-4"
                                     >
                                         <v-img 
-                                            :src="article.profileImageSrc" 
+                                            :src="article.author.picture.large" 
                                             contain 
                                             alt="avatar" 
-                                            :lazy-src="article.profileImageSrc"
+                                            :lazy-src="article.author.picture.large"
                                         >
                                             <template v-slot:placeholder>
                                                 <v-layout
@@ -62,37 +66,58 @@
                                             </template>
                                         </v-img>
                                     </v-avatar>
-                                    {{ article.author }}
+                                    {{ getAuthorsFullName }}
                                 </div>
                             </div>
                         </v-card-title>
                         <v-card-actions>
-                            <v-btn 
-                                flat 
-                                icon 
-                                color="pink darken-1"
-                                @click="likeArticle = !likeArticle"
-                            >
-                                <v-icon v-if="!likeArticle">mdi-heart-outline</v-icon>
-                                <v-icon v-if="likeArticle">mdi-heart</v-icon>
-                            </v-btn>
-                            <v-btn 
-                                flat 
-                                icon 
-                                color="green darken-1"
-                                @click="showShare = !showShare"
-                            >
-                                <v-icon>mdi-share-variant</v-icon>
-                            </v-btn>
-                            <v-btn 
-                                flat 
-                                icon 
-                                color="grey darken-1"
-                                :to="article.articleLink"
-                                @click.native="scrollToTop()"
-                            >
-                                <v-icon>mdi-dots-horizontal</v-icon>
-                            </v-btn>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn 
+                                        :disabled="article.loading"
+                                        flat 
+                                        icon 
+                                        color="pink darken-1"
+                                        v-on="on"
+                                        @click="likeArticle = !likeArticle"
+                                    >
+                                        <v-icon v-if="!likeArticle">mdi-heart-outline</v-icon>
+                                        <v-icon v-if="likeArticle">mdi-heart</v-icon>
+                                    </v-btn>
+                                </template>
+                                <span>Like</span>
+                            </v-tooltip>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn 
+                                        :disabled="article.loading"
+                                        flat 
+                                        icon 
+                                        color="green darken-1"
+                                        v-on="on"
+                                        @click="showShare = !showShare"
+                                    >
+                                        <v-icon>mdi-share-variant</v-icon>
+                                    </v-btn>
+                                </template>
+                                <span>Share</span>
+                            </v-tooltip>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn 
+                                        :disabled="article.loading"
+                                        flat 
+                                        icon 
+                                        color="grey darken-1"
+                                        :to="article.articleLink"
+                                        v-on="on"
+                                        @click.native="scrollToTop()"
+                                    >
+                                        <v-icon>mdi-dots-horizontal</v-icon>
+                                    </v-btn>
+                                </template>
+                                <span>Read More</span>
+                            </v-tooltip>
                             <v-spacer />
                         </v-card-actions>
                     </v-card>
@@ -120,6 +145,11 @@ export default {
         showShare: false,
         likeArticle: false
     }),
+    computed: {
+        getAuthorsFullName() {
+            return this.$props.article.author.name.first + ' ' + this.$props.article.author.name.last;
+        }
+    },
     methods: {
         scrollToTop() {
             this.$nextTick(function() {

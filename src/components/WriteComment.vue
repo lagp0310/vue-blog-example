@@ -41,7 +41,7 @@
                         <v-btn
                             flat
                             color="grey"
-                            :to="getUserProfileURL"
+                            :to="getAuthorProfileURL"
                             @click.native="scrollToTop()"
                             class="ma-0 mt-1 pa-1"
                         >
@@ -138,13 +138,13 @@ export default {
     }),
     computed: {
         getFullname() {
-            return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
+            return this.$store.state.author.name.first + ' ' + this.$store.state.author.name.last;
         },
         getProfileImageSrc() {
-            return this.$store.state.user.profileImageSrc;
+            return this.$store.state.author.picture.large;
         },
-        getUserProfileURL() {
-            return '/users/'.concat(this.$store.state.user.userID);
+        getAuthorProfileURL() {
+            return '/my-profile';
         }
     },
     methods: {
@@ -153,15 +153,15 @@ export default {
         },
         validate() {
             if(this.$refs.form.validate()) {
-                const user = this.$store.state.user;
+                const author = this.$store.state.author;
                 const commentText = this.$data.textareaComment;
 
                 this.$store.commit('incrementLastWrittenCommentID');
                 const commentID = 'c'.concat(this.$store.state.lastWrittenCommentID);
 
                 const commentObject = {
-                    user,
-                    createdByUserID: user.userID,
+                    author,
+                    createdByAuthorID: author.authorID,
                     commentID: commentID,
                     postId: 567,
                     content: commentText,

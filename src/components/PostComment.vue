@@ -3,7 +3,14 @@
         :id="comment.commentID" 
         :class="['comment', getLevel]"
     >
-        <v-card class="mb-4">
+        <div v-if="loading" class="d-flex justify-center">
+            <v-progress-circular
+            :size="35"
+            color="primary"
+            indeterminate
+            ></v-progress-circular>
+        </div>
+        <v-card v-if="author" class="mb-4">
             <v-container>
                 <v-layout row>
                     <v-flex 
@@ -16,10 +23,10 @@
                             color="grey lighten-4"
                         >
                             <v-img 
-                                :src="comment.user.profileImageSrc" 
+                                :src="author.picture.large" 
                                 contain 
                                 alt="avatar" 
-                                :lazy-src="comment.user.profileImageSrc"
+                                :lazy-src="author.picture.large"
                             >
                                 <template v-slot:placeholder>
                                     <v-layout
@@ -40,7 +47,7 @@
                         <v-btn
                             flat
                             color="grey"
-                            :to="getUserProfileURL"
+                            :to="getAuthorProfileURL"
                             @click.native="scrollToTop()"
                             class="ma-0 mt-1 pa-1"
                         >
@@ -65,7 +72,7 @@
                             </div>
                         </router-link>
                         <div class="font-weight-regular body-1">
-                            {{ comment.content }}
+                            {{ comment.body }}
                         </div>
                         <br />
                         <v-divider />
@@ -84,16 +91,16 @@
                                     <v-icon v-if="likeComment">mdi-heart</v-icon>&nbsp;
                                     {{ comment.likes }}&nbsp;
                                 </v-btn>
-                                <v-btn 
+                                <!-- <v-btn 
                                     round 
                                     flat 
                                     color="blue darken-1"
-                                    @click="addReplyFor(comment.commentID)"
+                                    @click="writeComment()"
                                 >
                                     <v-icon>mdi-message-reply-text</v-icon>&nbsp;{{ comment.replies.length }}&nbsp;
-                                </v-btn>
+                                </v-btn> -->
                                 <v-btn 
-                                    v-if="showEditComment(comment.createdByUserID)" 
+                                    v-if="showEditComment(comment.createdByAuthorID)" 
                                     round 
                                     flat 
                                     color="grey darken-1"
@@ -154,6 +161,8 @@ import WriteReply from './WriteReply.vue';
 import EditComment from './EditComment.vue';
 import Snackbar from './Snackbar.vue';
 
+import { getRandomAuthor } from '../utils/util.js';
+
 export default {
     // For Recursive Components.
     name: 'PostComment',
@@ -177,11 +186,13 @@ export default {
         editCommentContent: '',
         showEditCommentData: false,
         showEditedCommentSnackbar: false,
-        showPostedReplySnackbar: false
+        showPostedReplySnackbar: false,
+        author: null,
+        loading: true
     }),
     computed: {
         getFullname() {
-            return this.$props.comment.user.name + ' ' + this.$props.comment.user.lastname;
+            return this.author.name.first + ' ' + this.author.name.last;
         },
         getCommentID() {
             return this.$props.comment.replyToID;
@@ -193,16 +204,33 @@ export default {
             var nextLevel = this.$props.level;
             return ((++nextLevel) > 10 ? 0 : nextLevel);
         },
-        getLastReplyID() {
-            var repliesLength = this.$props.comment.replies.length;
-            return this.$props.comment.replies[repliesLength - 1].commentID;
-        },
-        getUserProfileURL() {
-            return '/users/'.concat(this.$props.comment.createdByUserID);
+        // getLastReplyID() {
+        //     var repliesLength = this.$props.comment.replies.length;
+        //     return this.$props.comment.replies[repliesLength - 1].commentID;
+        // },
+        getAuthorProfileURL() {
+            return ((this.author.login.uuid === this.$store.state.author.login.uuid) 
+                    && this.$store.state.isLoggedIn) 
+                ? '/my-profile' 
+                : '/authors/'.concat(this.author.login.uuid);
         },
         getProfileButtonText() {
-            return(this.$store.state.user.userID === this.comment.createdByUserID ? 'My Profile' : 'View Profile');
+            return((this.$store.state.author.login.uuid === this.comment.createdByAuthorID) && 
+                    (this.$store.state.isLoggedIn) 
+                ? 'My Profile' 
+                : 'View Profile');
+        },
+        isLoggedIn() {
+            return this.$store.state.isLoggedIn;
         }
+    },
+    created() {
+        this.$props.comment.likes = Math.floor(Math.random() * 50);
+        
+        getRandomAuthor().then((author) => {
+            this.author = author;
+            this.loading = false;
+        });
     },
     methods: {
         scrollTo(ref) {
@@ -235,8 +263,8 @@ export default {
         showCommentEqualID(commentID) {
             return this.$store.state.currentCommentID === commentID;
         },
-        showEditComment(createdByUserID) {
-            return this.$store.state.user.userID === createdByUserID;
+        showEditComment(createdByAuthorID) {
+            return this.$store.state.author.login.uuid === createdByAuthorID;
         },
         editComment(commentID) {
             this.$store.commit('changeCurrentCommentID', commentID);
@@ -245,6 +273,21 @@ export default {
         },
         changeCurrentCommentID(commentID) {
             this.$store.commit('changeCurrentCommentID', commentID);
+        },
+        writeComment() {
+            if(!this.isLoggedIn) {
+                this.goToRef(
+                    '/login?redirect=/posts/'
+                    .concat(this.$router.currentRoute.params.postId)
+                    .concat('&section=write-post-comment')
+                );
+                
+                return;
+            }
+
+            this.$vuetify.goTo('#'.concat(this.$props.comment.commentID));
+            this.goToRef('#'.concat(this.$props.comment.commentID));
+            this.addReplyFor(this.$props.comment.commentID);
         }
     }
 };

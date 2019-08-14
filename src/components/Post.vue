@@ -1,6 +1,13 @@
 <template>
     <div>
-        <v-container>
+        <div v-if="loading" class="d-flex justify-center">
+            <v-progress-circular
+            :size="50"
+            color="primary"
+            indeterminate
+            ></v-progress-circular>
+        </div>
+        <v-container v-if="post && author">
             <v-layout 
                 row 
                 wrap
@@ -37,10 +44,10 @@
                                             color="grey lighten-4"
                                         >
                                             <v-img 
-                                                :src="author.profileImageSrc" 
+                                                :src="author.picture.large" 
                                                 contain 
                                                 alt="avatar" 
-                                                :lazy-src="author.profileImageSrc"
+                                                :lazy-src="author.picture.large"
                                             >
                                                 <template v-slot:placeholder>
                                                     <v-layout
@@ -62,10 +69,10 @@
                                         xs8 
                                         offset-xs1
                                     >
-                                        <h3 class="title mb-0">{{ getUserFullname }}</h3>
+                                        <h3 class="title mb-0">{{ getAuthorFullname }}</h3>
                                         <br />
                                         <div class="font-weight-regular body-1">
-                                            About Me: {{ author.biography }}
+                                            About Me: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                             <br />
                                             Contact me: {{ author.email }}
                                         </div>
@@ -95,7 +102,7 @@
                                             flat 
                                             round 
                                             color="blue darken-1" 
-                                            @click="$vuetify.goTo('#write-post-comment'), goToRef('#write-post-comment')"
+                                            @click="writeComment()"
                                         >
                                             <v-icon>mdi-message-reply-text</v-icon>&nbsp;
                                             {{ post.comments.length }}
@@ -141,6 +148,7 @@
             </v-layout>
         </v-container>
         <EditPost 
+            v-if="!loading"
             :post.sync="post" 
             :show-dialog.sync="showEditPostModal" 
         />
@@ -154,7 +162,15 @@ import Share from './Share.vue';
 import WriteComment from './WriteComment.vue';
 import EditPost from './EditPost.vue';
 
+import DOMPurify from 'dompurify';
 import marked from 'marked';
+
+import { 
+    getRandomAuthor, 
+    getPostById, 
+    getCommentsForPost,
+    getRandomLoremIpsumMarkdown
+} from '../utils/util.js';
 
 export default {
     components: {
@@ -164,12 +180,8 @@ export default {
         EditPost
     },
     props: {
-        author: {
-            type: Object,
-            required: true
-        },
-        post: {
-            type: Object,
+        postId: {
+            type: String,
             required: true
         },
         startingCommentLevel: {
@@ -180,46 +192,97 @@ export default {
     data: () => ({
         showSharePost: false,
         likePost: false,
-        showEditPostModal: false
+        showEditPostModal: false,
+        loading: true,
+        post: null,
+        author: null
     }),
     computed: {
         isLoggedIn() {
             return this.$store.state.isLoggedIn;
         },
-        getUserFullname() {
-            return this.$props.author.name + ' ' + this.$props.author.lastname;
+        getAuthorFullname() {
+            return this.author.name.first + ' ' + this.author.name.last;
         }
+    },
+    // https://router.vuejs.org/guide/advanced/data-fetching.html
+    mounted() {
+        if(this.$router.currentRoute.query.section) {
+            this.$vuetify.goTo('#'.concat(this.$router.currentRoute.query.section));
+            this.goToRef('#'.concat(this.$router.currentRoute.query.section));
+        }
+
+        // Get Post data.
+        getPostById(this.$props.postId).then((post) => {
+            this.post = post;
+
+            getRandomAuthor().then((author) => {
+                this.author = author;
+            });
+
+            getCommentsForPost(post.id).then((comments) => {
+                this.post.comments = comments;
+            });
+
+            getRandomLoremIpsumMarkdown().then((text) => {
+                this.post.body = text;
+                this.post.likes = Math.floor(Math.random() * 50);
+                if(this.post.title.split(" ").length > 3) {
+                    this.post.tags = this.post.title.split(" ").slice(0, 3);
+                } else {
+                    // Last argument for slice is not inclusive.
+                    let array = this.post.title.split(" ");
+                    this.post.tags = array.slice(0, array.length);
+                }
+                this.loading = false;
+            });
+        });
     },
     methods: {
         scrollToLastPostedComment() {
             this.$nextTick(function() {
-                this.$vuetify.goTo('#'.concat(this.$props.post.comments[0].commentID));                
-                this.goToRef('#'.concat(this.$props.post.comments[0].commentID));
+                this.$vuetify.goTo('#'.concat(this.post.comments[0].commentID));                
+                this.goToRef('#'.concat(this.post.comments[0].commentID));
             });
         },
         incrementLikesCounter() {
             if(this.likePost) {
-                this.$props.post.likes--;
+                this.post.likes--;
             } else {
-                this.$props.post.likes++;
+                this.post.likes++;
             }
 
             this.likePost = !this.likePost;
         },
         updatePostComments(newComment) {
-            this.$props.post.comments.unshift(newComment);
+            this.post.comments.unshift(newComment);
         },
         goToRef(ref) {
             location.href = ref;
         },
         showEditPost(authorID) {
-            return this.$store.state.isLoggedIn && (this.$store.state.user.userID === authorID);
+            return this.$store.state.isLoggedIn && (this.$store.state.author.login.uuid === authorID);
         },
         editPost(postID) {
             this.$data.showEditPostModal = true;
         },
         compiledMarkdown(markdown) {
-            return marked(markdown, { sanitize: true });
+            const sanitizedMarkdown = DOMPurify.sanitize(markdown);
+            return marked(sanitizedMarkdown);
+        },
+        writeComment() {
+            if(!this.isLoggedIn) {
+                this.goToRef(
+                    '#/login?redirect=#/posts/'
+                    .concat(this.$router.currentRoute.params.postId)
+                    .concat('&section=write-post-comment')
+                );
+
+                return;
+            }
+
+            this.$vuetify.goTo('#write-post-comment');
+            this.goToRef('#write-post-comment');
         }
     }
 };
