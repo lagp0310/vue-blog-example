@@ -23,20 +23,10 @@ An example blog I made using Vue, Vue Router and Vuex.
 
 ## <a id="screenshots"></a> Screenshots.
 - ###  <a id="light-theme"></a> Light Theme.
-![About - Bloggy Screenshot](/screenshots/about.png "About")  
-![Articles - Bloggy Screenshot](/screenshots/articles.png "Articles")  
-![Contact - Bloggy Screenshot](/screenshots/contact.png "Contact")  
-![Login - Bloggy Screenshot](/screenshots/login.png "Login Form")  
-![Post - Bloggy Screenshot](/screenshots/post.png "Post")  
-![Articles in Mobile - Bloggy Screenshot](/screenshots/articles_mobile.png "Articles in Mobile")  
-![Sidenav in Mobile - Bloggy Screenshot](/screenshots/sidenav_mobile.png "Sidenav in Mobile")  
+![Articles (Light)](/screenshots/articles-light.png "Articles (Light)")  
 
 - ###  <a id="dark-theme"></a> Dark Theme.
-![About - Bloggy Screenshot (Dark)](/screenshots/about-dark.png "About (Dark)")  
-![Articles - Bloggy Screenshot (Dark)](/screenshots/articles-dark.png "Articles (Dark)")  
-![Contact - Bloggy Screenshot (Dark)](/screenshots/contact-dark.png "Contact (Dark)")  
-![Login - Bloggy Screenshot (Dark)](/screenshots/login-dark.png "Login Form (Dark)")  
-![Post - Bloggy Screenshot (Dark)](/screenshots/post-dark.png "Post (Dark)")  
+![Articles (Dark)](/screenshots/articles-dark.png "Articles (Dark)")  
 
 ## <a id="how-to-build"></a> How to build.
 

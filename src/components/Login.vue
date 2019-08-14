@@ -161,7 +161,12 @@
                                     class="px-0 text-capitalize font-weight-regular" 
                                     flat
                                 >
-                                    <v-icon color="orange darken-1">mdi-google</v-icon>&nbsp;
+                                    <v-img 
+                                        src="https://img.icons8.com/color/48/000000/google-logo.png"
+                                        alt="Google's Logo"
+                                        contain
+                                        height="24"
+                                    />&nbsp;
                                     Google
                                 </v-btn>
                             </v-flex>
@@ -184,6 +189,23 @@
                                 </v-btn>
                             </v-flex>
                         </v-layout>
+                        <hr />
+                        <br />
+                        <v-layout 
+                            row 
+                            wrap 
+                            justify-center
+                        >
+                            <v-flex xs12>
+                                Doesn't have an account yet? 
+                                <router-link 
+                                    tag="a" 
+                                    to="/signup"
+                                >
+                                    <b>Sign up!</b>
+                                </router-link>
+                            </v-flex>
+                        </v-layout>
                     </v-container>
                 </v-card>
             </v-flex>
@@ -192,6 +214,8 @@
                 class="hidden-md-and-up" 
             />
         </v-layout>
+        <br />
+        <a href="https://icons8.com/icon/17949/google">Google icon by Icons8</a>
     </v-container>
 </template>
 
@@ -229,7 +253,21 @@ export default {
         validate() {
             if(this.$refs.form.validate()) {
                 this.$store.commit('changeLoggedInStatus');
-                this.$router.replace('/');
+
+                /**
+                 * Returns the URL to be redirected after Login, i.e. when redirecting to a post after login.
+                 */
+                const url = (redirect, section = '') => {
+                    return redirect 
+                        ? redirect.concat('?section=').concat(section)
+                        : null;
+                };
+
+                this.$router.replace(
+                    url(this.$router.currentRoute.query.redirect, this.$router.currentRoute.query.section) || 
+                    '/'
+                );
+
                 return true;
             }
         }

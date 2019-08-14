@@ -19,13 +19,11 @@ describe('Article', () => {
             },
             propsData: {
                 article: {
-                    articleLink: '/articles/1',
-                    show: false,
-                    title: 'Lorem ipsum dolor.',
-                    articleImageSrc: 'https://picsum.photos/500/?image=0',
-                    likes: 45,
-                    author: 'Me',
-                    profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
+                    articleLink: '/posts/1',
+                    title: null,
+                    articleImageSrc: 'https://picsum.photos/500/',
+                    author: null,
+                    loading: true
                 }
             }
         });
@@ -49,25 +47,21 @@ describe('Article', () => {
             },
             propsData: {
                 article: {
-                    articleLink: '/articles/1',
-                    show: false,
-                    title: 'Lorem ipsum dolor.',
-                    articleImageSrc: 'https://picsum.photos/500/?image=0',
-                    likes: 45,
-                    author: 'Me',
-                    profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
+                    articleLink: '/posts/1',
+                    title: null,
+                    articleImageSrc: 'https://picsum.photos/500/',
+                    author: null,
+                    loading: true
                 }
             }
         });
         expect(wrapper.props()).toEqual({
             article: {
-                articleLink: '/articles/1',
-                show: false,
-                title: 'Lorem ipsum dolor.',
-                articleImageSrc: 'https://picsum.photos/500/?image=0',
-                likes: 45,
-                author: 'Me',
-                profileImageSrc: 'https://randomuser.me/api/portraits/men/86.jpg'
+                articleLink: '/posts/1',
+                title: null,
+                articleImageSrc: 'https://picsum.photos/500/',
+                author: null,
+                loading: true
             }
         });
     });

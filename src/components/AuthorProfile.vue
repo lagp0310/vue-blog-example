@@ -45,6 +45,7 @@
                         </v-avatar>
                     </v-layout>
                     <v-layout 
+                        v-if="isAllowedToUpdate"
                         row 
                         justify-center
                     >
@@ -69,25 +70,25 @@
                         <v-text-field
                             v-model="name"
                             :rules="nameRules"
-                            label="Name"
+                            label="Name:"
                             required
-                            @keydown.enter="updateUsersProfile()"
+                            @keydown.enter="updateAuthorsProfile()"
                             @keydown.esc="blurInput($event)"
                         ></v-text-field>
                         <v-text-field
                             v-model="lastname"
                             :rules="lastnameRules"
-                            label="Lastname"
+                            label="Lastname:"
                             required
-                            @keydown.enter="updateUsersProfile()"
+                            @keydown.enter="updateAuthorsProfile()"
                             @keydown.esc="blurInput($event)"
                         ></v-text-field>
                         <v-text-field
                             v-model="email"
                             :rules="emailRules"
-                            label="E-mail"
+                            label="E-mail:"
                             required
-                            @keydown.enter="updateUsersProfile()"
+                            @keydown.enter="updateAuthorsProfile()"
                             @keydown.esc="blurInput($event)"
                         ></v-text-field>
                         <v-radio-group 
@@ -107,7 +108,10 @@
                             />
                         </v-radio-group>
                         <v-divider />
-                        <v-layout justify-center>
+                        <v-layout 
+                            v-if="isAllowedToUpdate"
+                            justify-center
+                        >
                             <v-btn 
                                 flat 
                                 @click="showChangePasswordDialog = !showChangePasswordDialog"
@@ -118,9 +122,10 @@
                         </v-layout>
                     </v-form>
                     <v-btn 
+                        v-if="isAllowedToUpdate"
                         color="info" 
                         block 
-                        @click="updateUsersProfile()"
+                        @click="updateAuthorsProfile()"
                     >
                         Update Profile
                     </v-btn>
@@ -216,6 +221,9 @@
 </template>
 
 <script>
+import axios from 'axios';
+import lodash from 'lodash';
+
 import Snackbar from './Snackbar.vue';
 
 export default {
@@ -230,12 +238,12 @@ export default {
         name: '',
         nameRules: [
             v => !!v || 'Name is required',
-            v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+            v => (v && v.length <= 20) || 'Name must be less than 20 characters'
         ],
         lastname: '',
         lastnameRules: [
             v => !!v || 'Lastname is required',
-            v => (v && v.length <= 10) || 'Lastname must be less than 10 characters'
+            v => (v && v.length <= 20) || 'Lastname must be less than 20 characters'
         ],
         email: '',
         emailRules: [
@@ -256,6 +264,11 @@ export default {
         },
         profileImageSrc: ''
     }),
+    computed: {
+        isAllowedToUpdate() {
+            return this.$store.state.isLoggedIn && this.$store.state.author.login.uuid === 'c0c644c3-cdf7-43e8-ab7f-dc5b83a8bbc0';
+        }
+    },
     watch: {
         loader() {
             const l = this.loader;
@@ -265,11 +278,29 @@ export default {
         }
     },
     mounted() {
-        this.name = this.$store.state.user.name;
-        this.lastname = this.$store.state.user.lastname;
-        this.email = this.$store.state.user.email;
-        this.gender = this.$store.state.user.gender;
-        this.profileImageSrc = this.$store.state.user.profileImageSrc;
+        // If no filled author Object was provided, get a random one using https://randomuser.me/api/.
+        if(!this.$store.state.isLoggedIn) {
+            axios.get('https://randomuser.me/api/')
+            .then((response) => {
+                this.name = response.data.results[0].name.first;
+                this.lastname = response.data.results[0].name.last;
+                this.email = response.data.results[0].email;
+                this.gender = response.data.results[0].gender;
+                this.profileImageSrc = response.data.results[0].picture.large;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+            return;
+        }
+
+        // Check https://randomuser.me/api/ for details.
+        this.name = this.$store.state.author.name.first;
+        this.lastname = this.$store.state.author.name.last;
+        this.email = this.$store.state.author.email;
+        this.gender = this.$store.state.author.gender;
+        this.profileImageSrc = this.$store.state.author.picture.large;
     },
     methods: {
         blurInput(event) {
@@ -295,14 +326,14 @@ export default {
 
             return true;
         },
-        updateUsersProfile() {
-            this.$store.commit('updateUsersProfile', {
-                name: this.name,
-                lastname: this.lastname,
-                email: this.email,
-                gender: this.gender,
-                profileImageSrc: this.profileImageSrc,
-            });
+        updateAuthorsProfile() {
+            let currentAuthor = this.$store.state.author;
+            currentAuthor.name.first = this.name;
+            currentAuthor.name.last = this.lastname;
+            currentAuthor.email = this.email;
+            currentAuthor.gender = this.gender;
+            currentAuthor.profileImageSrc = this.profileImageSrc;
+            this.$store.commit('updateAuthorsProfile', currentAuthor);
             this.$data.showProfileUpdatedSnackbar = true;
         }
     }
