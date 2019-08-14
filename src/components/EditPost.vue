@@ -291,6 +291,7 @@
 import Snackbar from './Snackbar.vue';
 import PostHelp from './PostHelp.vue';
 
+import DOMPurify from 'dompurify';
 import marked from 'marked';
 
 export default {
@@ -347,9 +348,8 @@ export default {
     mounted() {
         this.$data.postTitle = this.$props.post.title;
         this.$data.postBody = this.$props.post.body;
-        var that = this;
-        this.$props.post.tags.forEach(function(value) {
-            that.$data.postTags.push({
+        this.$props.post.tags.forEach((value) => {
+            this.$data.postTags.push({
                 tagName: value,
                 show: true
             });
@@ -403,7 +403,7 @@ export default {
                 this.$props.post.title = this.$data.postTitle;
                 this.$props.post.body = this.$data.postBody;
                 var tags = [];
-                this.$data.postTags.forEach(function(value) {
+                this.$data.postTags.forEach((value) => {
                     tags.push(value.tagName);
                 });
                 this.$props.post.tags = tags;
@@ -417,16 +417,16 @@ export default {
             this.$data.postTitle = this.$props.post.title;
             this.$data.postBody = this.$props.post.body;
             this.$data.postTags = [];
-            var that = this;
-            this.$props.post.tags.forEach(function(value) {
-                that.$data.postTags.push({
+            this.$props.post.tags.forEach((value) => {
+                this.$data.postTags.push({
                     tagName: value,
                     show: true
                 });
             });
         },
         compiledMarkdown(markdown) {
-            return marked(markdown, { sanitize: true });
+            const sanitizedMarkdown = DOMPurify.sanitize(markdown);
+            return marked(sanitizedMarkdown);
         }
     }
 };

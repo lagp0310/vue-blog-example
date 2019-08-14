@@ -291,6 +291,7 @@
 import Snackbar from './Snackbar.vue';
 import PostHelp from './PostHelp.vue';
 
+import DOMPurify from 'dompurify';
 import marked from 'marked';
 
 export default {
@@ -398,7 +399,8 @@ export default {
             return false;
         },
         compiledMarkdown(markdown) {
-            return marked(markdown, { sanitize: true });
+            const sanitizedMarkdown = DOMPurify.sanitize(markdown);
+            return marked(sanitizedMarkdown);
         }
     }
 };

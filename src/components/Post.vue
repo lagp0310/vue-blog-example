@@ -147,10 +147,11 @@
                 </v-flex>
             </v-layout>
         </v-container>
-        <!-- <EditPost 
+        <EditPost 
+            v-if="!loading"
             :post.sync="post" 
             :show-dialog.sync="showEditPostModal" 
-        /> -->
+        />
         <Share :show.sync="showSharePost" />
     </div>
 </template>
@@ -161,6 +162,7 @@ import Share from './Share.vue';
 import WriteComment from './WriteComment.vue';
 import EditPost from './EditPost.vue';
 
+import DOMPurify from 'dompurify';
 import marked from 'marked';
 
 import { 
@@ -178,14 +180,6 @@ export default {
         EditPost
     },
     props: {
-        // author: {
-        //     type: Object,
-        //     required: true
-        // },
-        // post: {
-        //     type: Object,
-        //     required: true
-        // },
         postId: {
             type: String,
             required: true
@@ -233,6 +227,13 @@ export default {
             getRandomLoremIpsumMarkdown().then((text) => {
                 this.post.body = text;
                 this.post.likes = Math.floor(Math.random() * 50);
+                if(this.post.title.split(" ").length > 3) {
+                    this.post.tags = this.post.title.split(" ").slice(0, 3);
+                } else {
+                    // Last argument for slice is not inclusive.
+                    let array = this.post.title.split(" ");
+                    this.post.tags = array.slice(0, array.length);
+                }
                 this.loading = false;
             });
         });
@@ -266,7 +267,8 @@ export default {
             this.$data.showEditPostModal = true;
         },
         compiledMarkdown(markdown) {
-            return marked(markdown, { sanitize: true });
+            const sanitizedMarkdown = DOMPurify.sanitize(markdown);
+            return marked(sanitizedMarkdown);
         },
         writeComment() {
             if(!this.isLoggedIn) {
