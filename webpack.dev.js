@@ -22,6 +22,6 @@ module.exports = merge(common, {
         // The path you want webpack-dev-server to use for serving files
         publicPath: '/',
         // Reload for code changes to static assets.
-        watchContentBase: true,
+        watchContentBase: true
     }
 });

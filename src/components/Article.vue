@@ -10,6 +10,7 @@
             >
                 <v-hover>
                     <v-card 
+                        :loading="article.loading"
                         slot-scope="{ hover }" 
                         :class="`elevation-${hover ? 12 : 2}`"
                     >
@@ -35,16 +36,19 @@
                         <v-card-title primary-title>
                             <div>
                                 <div class="headline">{{ article.title }}</div>
-                                <div class="text-xs-left grey--text">
+                                <div 
+                                    v-if="!article.loading"
+                                    class="text-xs-left grey--text"
+                                >
                                     <v-avatar
                                         size="30px"
                                         color="grey lighten-4"
                                     >
                                         <v-img 
-                                            :src="article.profileImageSrc" 
+                                            :src="article.author.picture.large" 
                                             contain 
                                             alt="avatar" 
-                                            :lazy-src="article.profileImageSrc"
+                                            :lazy-src="article.author.picture.large"
                                         >
                                             <template v-slot:placeholder>
                                                 <v-layout
@@ -62,12 +66,14 @@
                                             </template>
                                         </v-img>
                                     </v-avatar>
-                                    {{ article.author }}
+                                    {{ getAuthorsFullName }}
                                 </div>
                             </div>
                         </v-card-title>
+                        <!-- TODO: Tooltips for these buttons. -->
                         <v-card-actions>
                             <v-btn 
+                                :disabled="article.loading"
                                 flat 
                                 icon 
                                 color="pink darken-1"
@@ -77,6 +83,7 @@
                                 <v-icon v-if="likeArticle">mdi-heart</v-icon>
                             </v-btn>
                             <v-btn 
+                                :disabled="article.loading"
                                 flat 
                                 icon 
                                 color="green darken-1"
@@ -85,6 +92,7 @@
                                 <v-icon>mdi-share-variant</v-icon>
                             </v-btn>
                             <v-btn 
+                                :disabled="article.loading"
                                 flat 
                                 icon 
                                 color="grey darken-1"
@@ -120,6 +128,11 @@ export default {
         showShare: false,
         likeArticle: false
     }),
+    computed: {
+        getAuthorsFullName() {
+            return this.$props.article.author.name.first + ' ' + this.$props.article.author.name.last;
+        }
+    },
     methods: {
         scrollToTop() {
             this.$nextTick(function() {

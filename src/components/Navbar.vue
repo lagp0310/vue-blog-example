@@ -97,10 +97,10 @@
                             color="grey lighten-4"
                         >
                             <v-img 
-                                :src="usersProfilePictureSrc" 
+                                :src="authorsProfilePictureSrc" 
                                 contain 
                                 alt="avatar" 
-                                :lazy-src="usersProfilePictureSrc"
+                                :lazy-src="authorsProfilePictureSrc"
                             >
                                 <template v-slot:placeholder>
                                     <v-layout
@@ -123,17 +123,17 @@
                             <v-list-tile avatar>
                                 <v-list-tile-avatar>
                                     <v-img 
-                                        :src="usersProfilePictureSrc" 
-                                        alt="User Profile Picture" 
+                                        :src="authorsProfilePictureSrc" 
+                                        alt="Author Profile Picture" 
                                     />
                                 </v-list-tile-avatar>
                                 <v-list-tile-content>
-                                    <v-list-tile-title>{{ usersName }}</v-list-tile-title>
+                                    <v-list-tile-title>{{ authorsName }}</v-list-tile-title>
                                 </v-list-tile-content>
                                 <v-list-tile-action>
                                     <v-btn
                                         icon
-                                        @click="goToRoute('/users/1'), menu = false"
+                                        @click="goToRoute(getAuthorsProfileURL), menu = false"
                                     >
                                         <v-icon>mdi-settings</v-icon>
                                     </v-btn>
@@ -187,11 +187,11 @@ export default {
         isLoggedIn() {
             return this.$store.state.isLoggedIn;
         },
-        usersName() {
-            return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
+        authorsName() {
+            return this.$store.state.author.name.first + ' ' + this.$store.state.author.name.last;
         },
-        usersProfilePictureSrc() {
-            return this.$store.state.user.profileImageSrc;
+        authorsProfilePictureSrc() {
+            return this.$store.state.author.picture.large;
         },
         getNavbarColorAccordingTheme() {
             return(this.$store.state.theme === 'dark' ? 'grey darken-3' : 'primary');
@@ -201,6 +201,9 @@ export default {
         },
         isDarkThemeEnabled() {
             return(this.$store.state.theme === 'dark');
+        },
+        getAuthorsProfileURL() {
+            return '/my-profile';
         }
     },
     watch: {

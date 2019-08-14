@@ -15,9 +15,9 @@
                         >
                             <v-list-tile-avatar>
                                 <v-img 
-                                    :src="usersProfilePictureSrc" 
-                                    alt="User Profile Picture" 
-                                    :lazy-src="usersProfilePictureSrc"
+                                    :src="authorsProfilePictureSrc" 
+                                    alt="Author Profile Picture" 
+                                    :lazy-src="authorsProfilePictureSrc"
                                 >
                                     <template v-slot:placeholder>
                                         <v-layout
@@ -35,12 +35,12 @@
                                 </v-img>
                             </v-list-tile-avatar>
                             <v-list-tile-content>
-                                <v-list-tile-title>{{ usersName }}</v-list-tile-title>
+                                <v-list-tile-title>{{ authorsName }}</v-list-tile-title>
                             </v-list-tile-content>
                             <v-list-tile-action>
                                 <v-btn 
                                     icon 
-                                    @click="goToRoute('/users/1'), showSidenav = false"
+                                    @click="goToRoute(getAuthorsProfileURL), showSidenav = false"
                                 >
                                     <v-icon>mdi-settings</v-icon>
                                 </v-btn>
@@ -203,11 +203,11 @@ export default {
         isLoggedIn() {
             return this.$store.state.isLoggedIn;
         },
-        usersName() {
-            return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
+        authorsName() {
+            return this.$store.state.author.name + ' ' + this.$store.state.author.lastname;
         },
-        usersProfilePictureSrc() {
-            return this.$store.state.user.profileImageSrc;
+        authorsProfilePictureSrc() {
+            return this.$store.state.author.profileImageSrc;
         },
         getCurrentTheme() {
             return this.$store.state.theme;
@@ -223,6 +223,9 @@ export default {
         },
         isDarkThemeEnabled() {
             return(this.$store.state.theme === 'dark');
+        },
+        getAuthorsProfileURL() {
+            return '/my-profile';
         }
     },
     watch: {

@@ -135,10 +135,10 @@ export default {
             return this.$props.level;
         },
         getFullname() {
-            return this.$store.state.user.name + ' ' + this.$store.state.user.lastname;
+            return this.$store.state.author.name.first + ' ' + this.$store.state.author.name.last;
         },
         getProfileImageSrc() {
-            return this.$store.state.user.profileImageSrc;
+            return this.$store.state.author.picture.large;
         }
     },
     methods: {
@@ -147,7 +147,7 @@ export default {
         },
         validate() {
             if(this.$refs.form.validate()) {
-                const user = this.$store.state.user;
+                const author = this.$store.state.author;
                 const replyText = this.$data.textareaReply;
 
                 this.$store.commit('incrementLastWrittenCommentID');
@@ -156,8 +156,8 @@ export default {
                 const replyToID = this.$props.comment.commentID;
 
                 const replyObject = {
-                    user,
-                    createdByUserID: user.userID,
+                    author,
+                    createdByauthorID: author.authorID,
                     replyToID: replyToID,
                     commentID: commentID,
                     postId: 567,
