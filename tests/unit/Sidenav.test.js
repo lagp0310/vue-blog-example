@@ -68,8 +68,9 @@ describe('Sidenav', () => {
     it('has required computed functions', () => {
         expect(Sidenav.computed).toEqual({
             isLoggedIn: expect.any(Function),
-            usersName: expect.any(Function),
-            usersProfilePictureSrc: expect.any(Function),
+            authorsName: expect.any(Function),
+            authorsProfilePictureSrc: expect.any(Function),
+            getAuthorsProfileURL: expect.any(Function),
             getCurrentTheme: expect.any(Function),
             getSidenavElementsColorAccordingTheme: expect.any(Function),
             getEnableDisableDarkModeText: expect.any(Function),
