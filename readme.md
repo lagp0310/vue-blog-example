@@ -55,11 +55,11 @@ npm run build
 ```
 Finally, run the application on the production server:
 ```bash
-npm run start:prod
+npm run prod
 ```
 Or, if you prefer, run the application in development mode:
 ```bash
-npm run start:dev
+npm run dev
 ```
 Go to `localhost:8080`.
 
